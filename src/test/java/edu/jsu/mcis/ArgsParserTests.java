@@ -13,15 +13,24 @@ public class ArgsParserTests{
 		 ap = new ArgsParser(args);
 		
 	}
+	//@Test
+	//public void checkIfArgsParserGetsArgs(){
+		
+		//for (int i=0;i<args.length;i++){
+			//assertEquals( args[i],[i]);
+		//}
+		
+		
+	//}
 	
 	@Test
 	public void ParseStringToFloat(){
 		
 		float[] floatargs= new float[3];
-		//floatargs = ap.parseFloat(args);
+		floatargs = ap.parseFloat();
 		for (int i=0;i<args.length;i++){
 			
-			assertEquals( Float.parseFloat(args[i]),floatargs[i]);
+			assertEquals( Float.parseFloat(args[i]),floatargs[i],0.1);
 			
 		}
 		
