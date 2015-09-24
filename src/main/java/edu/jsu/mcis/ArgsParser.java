@@ -1,37 +1,27 @@
 package edu.jsu.mcis;
 
+import java.util.*;
+
 public class ArgsParser{
-	private String args[];
+	private List<String> argumentNames;
+	private List<String> argumentValues;
 	
-	public ArgsParser(String s[])
+	public ArgsParser()
 	{
-		args= new String[s.length];
-		for(int i =0;i<s.length;i++)
-		{
-			args[i]=s[i];
-			
-		}
-		
-		
-	}
-	
-	public  float[] parseFloat(){
-		float[] temp= new float[3];
-		for(int i =0;i<args.length;i++)
-		{
-			temp[i]= Float.parseFloat(args[i]);
-			
-		}
-		
-		
-		
-		return temp;
-		
+		argumentNames = new ArrayList<String>();
+		argumentValues = new ArrayList<String>();
 	}
 
+	public void addArgumentName(String name) {
+		
+		argumentNames.add(name);
+		argumentValues.add("");
+	}
 	
-	
-	
+	public String getArgumentValue(String name) {
+		int index = argumentNames.indexOf(name);
+		return argumentValues.get(index);
+	}	
 	
 	
 }

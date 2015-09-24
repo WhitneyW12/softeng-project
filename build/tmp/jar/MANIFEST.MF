@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Implementation-Title: ArgParser
+Implementation-Title: Tic Tac Toe
 Implementation-Version: 1.0
-Main-Class: ArgParser
+Main-Class: edu.jsu.mcis.ArgsParser
 

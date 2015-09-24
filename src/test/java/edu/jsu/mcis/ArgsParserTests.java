@@ -3,39 +3,32 @@ import org.junit.*;
 import static org.junit.Assert.*;
 public class ArgsParserTests{
 	private ArgsParser ap;
-	private String args[];
+
 	@Before
-	public void before()
-	{    args = new String[3];
-		args[0]="7";
-		args[1]="5";
-		args[2]="2";
-		 ap = new ArgsParser(args);
-		
+	public void setup()
+	{
+		ap = new ArgsParser();		
+	}
+	
+	@Test 
+	public void checkArgumentNames()
+	{
+		ap.addArgumentName("length");
+		ap.addArgumentName("width");
+		ap.addArgumentName("heigth");
+		assertEquals("", ap.getArgumentValue("length"));
+		assertEquals("", ap.getArgumentValue("width"));
+		assertEquals("", ap.getArgumentValue("heigth"));		
 	}
 	//@Test
-	//public void checkIfArgsParserGetsArgs(){
-		
-		//for (int i=0;i<args.length;i++){
-			//assertEquals( args[i],[i]);
-		//}
-		
-		
-	//}
-	
-	@Test
-	public void ParseStringToFloat(){
-		
-		float[] floatargs= new float[3];
-		floatargs = ap.parseFloat();
-		for (int i=0;i<args.length;i++){
-			
-			assertEquals( Float.parseFloat(args[i]),floatargs[i],0.1);
-			
-		}
-		
+	public void checkIfArgsParserGetsArgs(){
 		
 	}
 	
+	//@Test
+	public void parseStringToFloat(){		
+		
+	}
+
 	
 }
