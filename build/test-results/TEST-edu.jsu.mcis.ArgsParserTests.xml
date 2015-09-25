@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.jsu.mcis.ArgsParserTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2015-09-24T22:06:35" hostname="MSI" time="0.001">
+<testsuite name="edu.jsu.mcis.ArgsParserTests" tests="5" skipped="0" failures="0" errors="0" timestamp="2015-09-25T17:13:38" hostname="MSI" time="0.002">
   <properties/>
-  <testcase name="checkArgumentNames" classname="edu.jsu.mcis.ArgsParserTests" time="0.001"/>
+  <testcase name="checkIfDashHPrintsTheDescriptions" classname="edu.jsu.mcis.ArgsParserTests" time="0.001"/>
+  <testcase name="checkArgumentDescription" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
+  <testcase name="checkArgumentNames" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
+  <testcase name="checkIfArgsParserGetsArgs" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
+  <testcase name="checkArgumentValues" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
