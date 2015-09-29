@@ -6,35 +6,45 @@ public class ArgsParser{
 	private List<String> argumentNames;
 	private List<String> argumentValues;
 	private List<String> argumentDescriptions;
-	private List<Float>  floatArgumentValues;
-	String programName;
-	String programDescription;
+	private List<Double>  doubleArgumentValues;
+	private String premessage;
+	private String helpMessage;
+	private String programName;
+	private String programDescription;
 	
 	public ArgsParser()
 	{
 		argumentNames = new ArrayList<String>();
 		argumentValues = new ArrayList<String>();
 		argumentDescriptions = new ArrayList<String>();
-		floatArgumentValues = new ArrayList<Float>();
-		programName="";
-		programDescription="";
+		doubleArgumentValues = new ArrayList<Double>();
+		programName = "";
+		programDescription = "";
+		helpMessage = "";
+		premessage = "";
 	}
 
 	public void addArgument(String name, String description) {
 		
 		argumentNames.add(name);
 		argumentValues.add("");
-		floatArgumentValues.add(0);
+		doubleArgumentValues.add(0.0);
 		argumentDescriptions.add(description);
+		setPremessage();
 	}
 	public void setValue (String name, String value){
+		if(value.equals("-h")){
+			System.out.print(helpMessage);
+			System.exit(0);
+			
+		}
 		int index = argumentNames.indexOf(name);
 		argumentValues.set(index,value);
-		floatArgumentValues.set(index,Float.parseFloat(value));
+		doubleArgumentValues.set(index,Double.parseDouble(value));
 	}
-	public float getFloatValue(String name){
+	public double getDoubleValue(String name){
 		int index = argumentNames.indexOf(name);
-		return floatArgumentValues.get(index);
+		return doubleArgumentValues.get(index);
 	}
 	
 	public String getArgumentValue(String name) {
@@ -44,9 +54,7 @@ public class ArgsParser{
 	public void addProgram(String name,String description){
 		programName = name;
 		programDescription = description;
-		
-		
-		
+		setPremessage();
 	}
 	public String getDescription(String name)
 	{
@@ -55,18 +63,29 @@ public class ArgsParser{
 		
 		
 	}
-	public String getHelpText(){
-		String helptext = "usage: java "+programName+" ";
-		for(int i =0; i<argumentDescriptions.size();i++){
-			helptext += argumentNames.get(i)+" ";
-		}
-		helptext+="\n"+programDescription+"\npositional arguments:\n";
+	private void setHelpMessage(){
+		helpMessage = premessage;
+		helpMessage += "\n"+programDescription+"\npositional arguments:\n";
 		for(int i =0; i<argumentDescriptions.size();i++)
 		{
-			helptext += argumentNames.get(i)+" "+argumentDescriptions.get(i)+"\n ";
+			helpMessage += argumentNames.get(i)+" "+argumentDescriptions.get(i)+"\n ";
 			
 		}
-		return helptext;
+		
+		
+	}
+	private void setPremessage(){
+		premessage = "usage: java "+programName+" ";
+		for(int i = 0; i < argumentDescriptions.size();i++){
+			premessage += argumentNames.get(i)+" ";
+		}
+		
+	}  
+	
+
+	public String getHelpMessage(){
+		setHelpMessage();
+		return helpMessage;
 		
 	}
 	
