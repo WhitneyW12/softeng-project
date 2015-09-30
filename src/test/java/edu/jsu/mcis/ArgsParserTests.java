@@ -16,9 +16,9 @@ public class ArgsParserTests{
 		ap.addArgument("length","the length of the box");
 		ap.addArgument("width","the width of the box");
 		ap.addArgument("heigth","the heigth of the box");
-		assertEquals("", ap.getArgumentValue("length"));
-		assertEquals("", ap.getArgumentValue("width"));
-		assertEquals("", ap.getArgumentValue("heigth"));		
+		assertEquals("", ap.getStringValue("length"));
+		assertEquals("", ap.getStringValue("width"));
+		assertEquals("", ap.getStringValue("heigth"));		
 	}
 	@Test
 	public void checkArgumentValues()
@@ -29,9 +29,9 @@ public class ArgsParserTests{
 		ap.setValue("length","7");
 		ap.setValue("width","5");
 		ap.setValue("heigth","2");
-		assertEquals("7", ap.getArgumentValue("length"));
-		assertEquals("5", ap.getArgumentValue("width"));
-		assertEquals("2", ap.getArgumentValue("heigth"));
+		assertEquals("7", ap.getStringValue("length"));
+		assertEquals("5", ap.getStringValue("width"));
+		assertEquals("2", ap.getStringValue("heigth"));
 		
 	}
 	
@@ -74,6 +74,19 @@ public class ArgsParserTests{
 		assertEquals(7,ap.getDoubleValue("length"),.1);
 		assertEquals(5,ap.getDoubleValue("width"),.1);
 		assertEquals(2,ap.getDoubleValue("heigth"),.1);
+	}
+	@Test 
+	public void forceNumberFormatException()
+	{
+		ap.addArgument("length","the length of the box");
+		ap.addArgument("width","the width of the box");
+		ap.addArgument("heigth","the heigth of the box");
+		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
+		ap.setValue("length","7");
+		ap.setValue("width","something");
+		ap.setValue("heigth","2");
+		assertEquals("usage: java VolumeCalculator length width heigth \nVolumecalculator.java: error: argument width invalid double value: something",ap.errorMessage);
+		
 	}
 	
 }
