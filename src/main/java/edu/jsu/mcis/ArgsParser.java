@@ -34,20 +34,21 @@ public class ArgsParser{
 		argumentDescriptions.add(description);
 		setPremessage();
 	}
-	public void setValue (String name, String value){
-		if(value.equals("-h")){
+	public void parseValues (String[] values){
+		for(int i=0;i<argumentNames.size();i++){
+		if(values[i].equals("-h")){
 			System.out.print(helpMessage);
 			System.exit(0);
 			
 		}
-		int index = argumentNames.indexOf(name);
-		argumentValues.set(index,value);
+		argumentValues.set(i,values[i]);
 		try{
-		parseDouble(index,value);
+		parseDouble(i,values[i]);
 		}
 		catch(NumberFormatException e){
-			errorMessage = premessage+"\n"+programName+".java: error: argument "+name+" invalid double value: "+value;
+			errorMessage = premessage+"\n"+programName+".java: error: argument "+argumentNames.get(i)+" invalid double value: "+values[i];
 			throw new NumberFormatException(errorMessage);
+		}
 		}
 		
 	}
