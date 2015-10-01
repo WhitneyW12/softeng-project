@@ -5,11 +5,11 @@ public class ArgsParserKeywords {
 	private ArgsParser ap;
 	/*
 	public void startVolumeCacluatorWithArguments(String[] args) {
-		p = new ArgsParser();
-		p.addArg("length");
-		p.addArg("width");
+		ap = new ArgsParser();
+		ap.addArgument("length");
+		ap.addArgument("width");
 		...
-		p.parse(args);
+		ap.parseValues(args);
 		
 	}
 	
