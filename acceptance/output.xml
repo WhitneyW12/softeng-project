@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 2.9 (Jython 2.7.0 on java1.8.0_60)" generated="20150930 11:48:20.139">
+<suite source="C:\Users\Whitney Wood\Documents\GitHub\softeng-project\acceptance\ArgsParserTests.txt" name="ArgsParserTests" id="s1">
+<test name="Test Volume Calculator Normal Function" id="s1-t1">
+<kw name="Start Volume Cacluator With Arguments">
+<arguments>
+<arg>7</arg>
+<arg>5</arg>
+<arg>2</arg>
+</arguments>
+<msg level="FAIL" timestamp="20150930 11:48:20.957">No keyword with name 'Start Volume Cacluator With Arguments' found.</msg>
+<status endtime="20150930 11:48:20.959" starttime="20150930 11:48:20.954" status="FAIL"></status>
+</kw>
+<status critical="yes" endtime="20150930 11:48:20.964" starttime="20150930 11:48:20.901" status="FAIL">No keyword with name 'Start Volume Cacluator With Arguments' found.</status>
+</test>
+<test name="Test Unrecognized Argument" id="s1-t2">
+<kw name="Start Volume Cacluator With Arguments">
+<arguments>
+<arg>7</arg>
+<arg>5</arg>
+<arg>2</arg>
+<arg>43</arg>
+</arguments>
+<msg level="FAIL" timestamp="20150930 11:48:21.049">No keyword with name 'Start Volume Cacluator With Arguments' found.</msg>
+<status endtime="20150930 11:48:21.050" starttime="20150930 11:48:21.041" status="FAIL"></status>
+</kw>
+<status critical="yes" endtime="20150930 11:48:21.058" starttime="20150930 11:48:20.994" status="FAIL">No keyword with name 'Start Volume Cacluator With Arguments' found.</status>
+</test>
+<test name="Test Absurd Program Normal Function" id="s1-t3">
+<kw name="Start Absurd Program With Arguments">
+<arguments>
+<arg>dog</arg>
+<arg>2</arg>
+<arg>true</arg>
+<arg>3.5</arg>
+</arguments>
+<msg level="FAIL" timestamp="20150930 11:48:21.124">No keyword with name 'Start Absurd Program With Arguments' found.</msg>
+<status endtime="20150930 11:48:21.125" starttime="20150930 11:48:21.121" status="FAIL"></status>
+</kw>
+<status critical="yes" endtime="20150930 11:48:21.130" starttime="20150930 11:48:21.085" status="FAIL">No keyword with name 'Start Absurd Program With Arguments' found.</status>
+</test>
+<test name="Test Usage Message" id="s1-t4">
+<kw name="Start Program With Arguments">
+<arguments>
+<arg>-h</arg>
+</arguments>
+<msg level="FAIL" timestamp="20150930 11:48:21.224">No keyword with name 'Start Program With Arguments' found.</msg>
+<status endtime="20150930 11:48:21.226" starttime="20150930 11:48:21.222" status="FAIL"></status>
+</kw>
+<status critical="yes" endtime="20150930 11:48:21.243" starttime="20150930 11:48:21.164" status="FAIL">No keyword with name 'Start Program With Arguments' found.</status>
+</test>
+<status endtime="20150930 11:48:21.275" starttime="20150930 11:48:20.181" status="FAIL"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="4">Critical Tests</stat>
+<stat pass="0" fail="4">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="4" name="ArgsParserTests" id="s1">ArgsParserTests</stat>
+</suite>
+</statistics>
+<errors>
+<msg level="ERROR" timestamp="20150930 11:48:20.817">Error in file 'C:\Users\Whitney Wood\Documents\GitHub\softeng-project\acceptance\ArgsParserTests.txt': Importing test library 'ArgsParserKeywords' failed: ImportError: No module named ArgsParserKeywords
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  C:\RobotFramework\Lib
+  C:\RobotFramework\robotframework-2.9.jar\Lib
+  __classpath__
+  __pyclasspath__/
+CLASSPATH:
+  .
+  C:\RobotFramework\swinglibrary-1.9.4.jar
+  ..\build\classes\main
+  C:\RobotFramework\robotframework-2.9.jar</msg>
+</errors>
+</robot>
