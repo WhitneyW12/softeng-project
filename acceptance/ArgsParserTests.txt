@@ -16,7 +16,7 @@ Library           ArgsParserKeywords
 |                                        | Should Be Equal                       | ${output}          | 70           |            |            |
 | Test Unrecognized Argument             | Start Volume Cacluator With Arguments | 7                  | 5            | 2          | 43         |
 |                                        | ${output}=                            | Get Program Output |              |            |            |
-|                                        | Should Be Equal                       | ${output}          | 70           |            |            |
+|                                        | Should Be Equal                       | ${output}          | ${expected}  |            |            |
 | Test Absurd Program Normal Function    | Start Absurd Program With Arguments   | dog                | 2            | true       | 3.5        |
 |                                        | ${pet}=                               | Get Pet            |              |            |            |
 |                                        | Should Be Equal                       | dog                | ${pet}       |            |            |
@@ -28,7 +28,7 @@ Library           ArgsParserKeywords
 |                                        | Should Be Equal                       | 3.5                | ${bathrooms} |            |            |
 
 | *Variable*  | *Value*                                                                                                                                                                                                                                   |
-| ${expected} | usage: java VolumeCalculator length width height\nCalcuate the volume of a box.\npositional arguments:\n   length the length of the box (float)\n   width the width of the box(float)\n   height the height of the box(float) |
+| ${expected} | usage: java VolumeCalculator length width heigth \nCalculate the volume of a box\npositional arguments:\nlength the length of the box\n width the width of the box\n heigth the heigth of the box\n |
 
 | *Test Case*        | *Action*                     | *Argument*         | *Argument*  |
 | Test Usage Message | Start Program With Arguments | -h                 |             |
