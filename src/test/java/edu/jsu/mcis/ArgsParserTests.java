@@ -79,9 +79,13 @@ public class ArgsParserTests{
 		ap.addArgument("width","the width of the box");
 		ap.addArgument("heigth","the heigth of the box");
 		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
+		try{
 		ap.parseValues(args);
-		assertEquals("usage: java VolumeCalculator length width heigth \nVolumecalculator.java: error: argument width invalid double value: something",ap.errorMessage);
-		
+		assertTrue(false);
+		}
+		catch(NumberFormatException e){
+		assertTrue(true);
+		}
 	}
 	
 }

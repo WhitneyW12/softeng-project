@@ -11,7 +11,7 @@ public class ArgsParser{
 	private String helpMessage;
 	private String programName;
 	private String programDescription;
-	public String errorMessage;
+	
 	
 	public ArgsParser()
 	{
@@ -23,7 +23,7 @@ public class ArgsParser{
 		programDescription = "";
 		helpMessage = "";
 		premessage = "";
-		errorMessage = "";
+	
 	}
 
 	public void addArgument(String name, String description) {
@@ -42,13 +42,8 @@ public class ArgsParser{
 			
 		}
 		argumentValues.set(i,values[i]);
-		try{
+		
 		parseDouble(i,values[i]);
-		}
-		catch(NumberFormatException e){
-			errorMessage = premessage+"\n"+programName+".java: error: argument "+argumentNames.get(i)+" invalid double value: "+values[i];
-			throw new NumberFormatException(errorMessage);
-		}
 		}
 		
 	}
@@ -99,6 +94,7 @@ public class ArgsParser{
 		
 	}
 	private void parseDouble(int index,String value)throws NumberFormatException {
+		
 		doubleArgumentValues.set(index,Double.parseDouble(value));
 		
 	}
