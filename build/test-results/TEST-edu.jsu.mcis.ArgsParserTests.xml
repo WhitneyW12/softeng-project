@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.jsu.mcis.ArgsParserTests" tests="6" skipped="0" failures="0" errors="0" timestamp="2015-10-01T21:27:14" hostname="MSI" time="0.005">
+<testsuite name="edu.jsu.mcis.ArgsParserTests" tests="8" skipped="0" failures="0" errors="0" timestamp="2015-10-01T23:13:51" hostname="MSI" time="0.007">
   <properties/>
-  <testcase name="checkArgumentCreation" classname="edu.jsu.mcis.ArgsParserTests" time="0.004"/>
+  <testcase name="parseStringToInt" classname="edu.jsu.mcis.ArgsParserTests" time="0.004"/>
+  <testcase name="checkArgumentCreation" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
   <testcase name="forceNumberFormatException" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
-  <testcase name="checkIfDashHPrintsTheDescriptions" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
+  <testcase name="checkIfDashHPrintsTheDescriptions" classname="edu.jsu.mcis.ArgsParserTests" time="0.001"/>
   <testcase name="checkArgumentDescription" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
-  <testcase name="parseStringargsToDoubleArgs" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
+  <testcase name="parseStringToBool" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
   <testcase name="checkArgumentValues" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
+  <testcase name="parseStringargsToDouble" classname="edu.jsu.mcis.ArgsParserTests" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

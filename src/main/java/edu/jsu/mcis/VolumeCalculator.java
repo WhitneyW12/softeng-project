@@ -1,5 +1,5 @@
 //Unit tests
-package edu.jsu.mcis;
+/**package edu.jsu.mcis;
 
 
 import java.util.InputMismatchException;
@@ -18,7 +18,7 @@ import java.util.List;
        
        
         try{
-         
+         /**
         /**
         Scanner scan = new Scanner(System.in);
         System.out.println("enter the length, width, height");
@@ -35,16 +35,16 @@ import java.util.List;
         
         height = scan.nextFloat();
         int.add(height);    
-         **/   
+           
             
             
-        parser.addArgument("length", "This is the length of the arguement");
-        System.out.println(parser.AddArgument);    
+        //arser.addArgument("length", "This is the length of the arguement");
+        //System.out.println(parser.AddArgument);    
     
             
            
         
-        } catch (InputMismatchException e) {
+        }// //catch (InputMismatchException e) {
         	//
             System.out.println("Error, please enter a valid float.");
             
@@ -65,4 +65,4 @@ import java.util.List;
             //return true if full or false if not
             return i;
         }
-}
+}**/
