@@ -35,7 +35,18 @@ public class ArgsParser{
 		setPremessage();
 	}
 	public void parseValues (String[] values){
-		for(int i=0;i<argumentNames.size();i++){
+		for(int i=0;i<values.length;i++){
+			if(values.length != argumentNames.size()){
+				if(values.length > argumentNames.size()){
+					
+				}
+					
+				else{
+					
+				}
+				
+				
+			}
 		if(values[i].equals("-h")){
 			System.out.print(helpMessage);
 			System.exit(0);
