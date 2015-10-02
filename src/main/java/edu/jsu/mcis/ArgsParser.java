@@ -54,9 +54,7 @@ public class ArgsParser{
 			if(values[i].equals("-h")){
 			System.out.print(helpMessage);
 			argumentValues.set(i,values[i]);
-			i=100;
-			break;
-			//System.exit(0);
+			
 			
 		}
 		else if(values.length != argumentNames.size()){
@@ -64,16 +62,16 @@ public class ArgsParser{
 					errorMessage = premessage+"\n"+programName+".java: error: unrecognized arguments: "+values[i];
 					error=true;
 					System.out.print(errorMessage);
-					//System.exit(0);
+					
 				} 
 					
 				else{
 					errorMessage = premessage+"\n"+programName+".java: error: the following arguments are required: ";
-					for(int j=i;j<argumentNames.size();j++)
+					for(int j=i+1;j<argumentNames.size();j++)
 						errorMessage+=argumentNames.get(j)+" ";
 					error=true;
 					System.out.print(errorMessage);
-					//System.exit(0);
+				
 				}
 				
 				

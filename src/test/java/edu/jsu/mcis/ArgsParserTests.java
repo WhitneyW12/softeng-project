@@ -99,6 +99,18 @@ public class ArgsParserTests{
 		assertEquals("usage: java VolumeCalculator length width height \nVolumeCalculator.java: error: unrecognized arguments: 43",ap.getErrorMessage());
 		
 	}
+	@Test
+	public void forceTooFewArguments(){
+		String[] args = new String[] {"7","5"};
+		ap.addArgument("length","the length of the box",ArgsParser.Type.DOUBLE);
+		ap.addArgument("width","the width of the box",ArgsParser.Type.DOUBLE);
+		ap.addArgument("height","the height of the box",ArgsParser.Type.DOUBLE);
+		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
+		ap.parseValues(args);
+		assertTrue(ap.getError());
+		assertEquals("usage: java VolumeCalculator length width height \nVolumeCalculator.java: error: the following arguments are required: height ",ap.getErrorMessage());
+		
+	}
 	
 	@Test
 	public void forceNumberFormatException(){

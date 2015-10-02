@@ -54,127 +54,125 @@ public class ArgsParser{
 <span class="pc bpc" id="L54" title="1 of 2 branches missed.">			if(values[i].equals(&quot;-h&quot;)){</span>
 <span class="nc" id="L55">			System.out.print(helpMessage);</span>
 <span class="nc" id="L56">			argumentValues.set(i,values[i]);</span>
-<span class="nc" id="L57">			i=100;</span>
-<span class="nc" id="L58">			break;</span>
-			//System.exit(0);
+			
 			
 		}
-<span class="fc bfc" id="L62" title="All 2 branches covered.">		else if(values.length != argumentNames.size()){</span>
-<span class="pc bpc" id="L63" title="1 of 2 branches missed.">				if(values.length &gt; argumentNames.size()){</span>
-<span class="fc" id="L64">					errorMessage = premessage+&quot;\n&quot;+programName+&quot;.java: error: unrecognized arguments: &quot;+values[i];</span>
-<span class="fc" id="L65">					error=true;</span>
-<span class="fc" id="L66">					System.out.print(errorMessage);</span>
-					//System.exit(0);
+<span class="fc bfc" id="L60" title="All 2 branches covered.">		else if(values.length != argumentNames.size()){</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">				if(values.length &gt; argumentNames.size()){</span>
+<span class="fc" id="L62">					errorMessage = premessage+&quot;\n&quot;+programName+&quot;.java: error: unrecognized arguments: &quot;+values[i];</span>
+<span class="fc" id="L63">					error=true;</span>
+<span class="fc" id="L64">					System.out.print(errorMessage);</span>
+					
 				} 
 					
 				else{
-<span class="nc" id="L71">					errorMessage = premessage+&quot;\n&quot;+programName+&quot;.java: error: the following arguments are required: &quot;;</span>
-<span class="nc bnc" id="L72" title="All 2 branches missed.">					for(int j=i;j&lt;argumentNames.size();j++)</span>
-<span class="nc" id="L73">						errorMessage+=argumentNames.get(j)+&quot; &quot;;</span>
-<span class="nc" id="L74">					error=true;</span>
-<span class="nc" id="L75">					System.out.print(errorMessage);</span>
-					//System.exit(0);
+<span class="fc" id="L69">					errorMessage = premessage+&quot;\n&quot;+programName+&quot;.java: error: the following arguments are required: &quot;;</span>
+<span class="fc bfc" id="L70" title="All 2 branches covered.">					for(int j=i+1;j&lt;argumentNames.size();j++)</span>
+<span class="fc" id="L71">						errorMessage+=argumentNames.get(j)+&quot; &quot;;</span>
+<span class="fc" id="L72">					error=true;</span>
+<span class="fc" id="L73">					System.out.print(errorMessage);</span>
+				
 				}
 				
 				
 			}
 		else{
-<span class="fc bfc" id="L82" title="All 2 branches covered.">		if(argumentType.get(i)==Type.STRING){</span>
-<span class="fc" id="L83">			argumentValues.set(i,values[i]);</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">		if(argumentType.get(i)==Type.STRING){</span>
+<span class="fc" id="L81">			argumentValues.set(i,values[i]);</span>
 		}
-<span class="fc bfc" id="L85" title="All 2 branches covered.">		else if(argumentType.get(i)==Type.DOUBLE){</span>
+<span class="fc bfc" id="L83" title="All 2 branches covered.">		else if(argumentType.get(i)==Type.DOUBLE){</span>
 			try{
-<span class="fc" id="L87">				parseDouble(i,values[i]);</span>
+<span class="fc" id="L85">				parseDouble(i,values[i]);</span>
 			}
-<span class="fc" id="L89">			catch(NumberFormatException e){</span>
-<span class="fc" id="L90">				errorMessage = premessage+&quot;\n&quot;+programName+&quot;.java: error: argument &quot;+argumentNames.get(i)+&quot;: invalid double value: &quot;+values[i];</span>
-<span class="fc" id="L91">				error=true;</span>
-<span class="fc" id="L92">			}</span>
+<span class="fc" id="L87">			catch(NumberFormatException e){</span>
+<span class="fc" id="L88">				errorMessage = premessage+&quot;\n&quot;+programName+&quot;.java: error: argument &quot;+argumentNames.get(i)+&quot;: invalid double value: &quot;+values[i];</span>
+<span class="fc" id="L89">				error=true;</span>
+<span class="fc" id="L90">			}</span>
 		}
-<span class="fc bfc" id="L94" title="All 2 branches covered.">		else if(argumentType.get(i)==Type.INTEGER){</span>
-<span class="fc" id="L95">			parseInteger(i,values[i]);</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">		else if(argumentType.get(i)==Type.INTEGER){</span>
+<span class="fc" id="L93">			parseInteger(i,values[i]);</span>
 		}
 		else{
-<span class="fc" id="L98">			parseBoolean(i,values[i]);</span>
+<span class="fc" id="L96">			parseBoolean(i,values[i]);</span>
 			
 		}
 		
 	}
 	}
-<span class="fc" id="L104">	}</span>
+<span class="fc" id="L102">	}</span>
 	public double getDoubleValue(String name){
-<span class="fc" id="L106">		int index = argumentNames.indexOf(name);</span>
-<span class="fc" id="L107">		return doubleArgumentValues.get(index);</span>
+<span class="fc" id="L104">		int index = argumentNames.indexOf(name);</span>
+<span class="fc" id="L105">		return doubleArgumentValues.get(index);</span>
 	}
 	
 	
 	public String getStringValue(String name) {
-<span class="fc" id="L112">		int index = argumentNames.indexOf(name);</span>
-<span class="fc" id="L113">		return argumentValues.get(index);</span>
+<span class="fc" id="L110">		int index = argumentNames.indexOf(name);</span>
+<span class="fc" id="L111">		return argumentValues.get(index);</span>
 	}	
 	public void addProgram(String name,String description){
-<span class="fc" id="L116">		programName = name;</span>
-<span class="fc" id="L117">		programDescription = description;</span>
-<span class="fc" id="L118">		setPremessage();</span>
-<span class="fc" id="L119">	}</span>
+<span class="fc" id="L114">		programName = name;</span>
+<span class="fc" id="L115">		programDescription = description;</span>
+<span class="fc" id="L116">		setPremessage();</span>
+<span class="fc" id="L117">	}</span>
 	public String getDescription(String name)
 	{
-<span class="fc" id="L122">		int index = argumentNames.indexOf(name);</span>
-<span class="fc" id="L123">		return argumentDescriptions.get(index);</span>
+<span class="fc" id="L120">		int index = argumentNames.indexOf(name);</span>
+<span class="fc" id="L121">		return argumentDescriptions.get(index);</span>
 		
 		
 	}
 	private void setHelpMessage(){
-<span class="fc" id="L128">		helpMessage = premessage;</span>
-<span class="fc" id="L129">		helpMessage += &quot;\n&quot;+programDescription+&quot;\npositional arguments:\n&quot;;</span>
-<span class="fc bfc" id="L130" title="All 2 branches covered.">		for(int i =0; i&lt;argumentDescriptions.size();i++)</span>
+<span class="fc" id="L126">		helpMessage = premessage;</span>
+<span class="fc" id="L127">		helpMessage += &quot;\n&quot;+programDescription+&quot;\npositional arguments:\n&quot;;</span>
+<span class="fc bfc" id="L128" title="All 2 branches covered.">		for(int i =0; i&lt;argumentDescriptions.size();i++)</span>
 		{
-<span class="fc" id="L132">			helpMessage += argumentNames.get(i)+&quot; &quot;+argumentDescriptions.get(i)+&quot;\n&quot;;</span>
+<span class="fc" id="L130">			helpMessage += argumentNames.get(i)+&quot; &quot;+argumentDescriptions.get(i)+&quot;\n&quot;;</span>
 			
 		}
 		
 		
-<span class="fc" id="L137">	}</span>
+<span class="fc" id="L135">	}</span>
 	private void setPremessage(){
-<span class="fc" id="L139">		premessage = &quot;usage: java &quot;+programName+&quot; &quot;;</span>
-<span class="fc bfc" id="L140" title="All 2 branches covered.">		for(int i = 0; i &lt; argumentDescriptions.size();i++){</span>
-<span class="fc" id="L141">			premessage += argumentNames.get(i)+&quot; &quot;;</span>
+<span class="fc" id="L137">		premessage = &quot;usage: java &quot;+programName+&quot; &quot;;</span>
+<span class="fc bfc" id="L138" title="All 2 branches covered.">		for(int i = 0; i &lt; argumentDescriptions.size();i++){</span>
+<span class="fc" id="L139">			premessage += argumentNames.get(i)+&quot; &quot;;</span>
 		}
 		
-<span class="fc" id="L144">	}  </span>
+<span class="fc" id="L142">	}  </span>
 	
 
 	public String getHelpMessage(){
-<span class="fc" id="L148">		setHelpMessage();</span>
-<span class="fc" id="L149">		return helpMessage;</span>
+<span class="fc" id="L146">		setHelpMessage();</span>
+<span class="fc" id="L147">		return helpMessage;</span>
 		
 	}
 	public int getIntValue(String name){
-<span class="fc" id="L153">		int index = argumentNames.indexOf(name);</span>
-<span class="fc" id="L154">		return integerArgumentValues.get(index);</span>
+<span class="fc" id="L151">		int index = argumentNames.indexOf(name);</span>
+<span class="fc" id="L152">		return integerArgumentValues.get(index);</span>
 	}
 	public boolean getBoolValue(String name){
-<span class="fc" id="L157">		int index = argumentNames.indexOf(name);</span>
-<span class="fc" id="L158">		return booleanArgumentValues.get(index);</span>
+<span class="fc" id="L155">		int index = argumentNames.indexOf(name);</span>
+<span class="fc" id="L156">		return booleanArgumentValues.get(index);</span>
 	}
 	private void parseDouble(int index,String value)throws NumberFormatException {
 		
 		
-<span class="fc" id="L163">		doubleArgumentValues.set(index,Double.parseDouble(value));</span>
+<span class="fc" id="L161">		doubleArgumentValues.set(index,Double.parseDouble(value));</span>
 		
 		
-<span class="fc" id="L166">	}</span>
+<span class="fc" id="L164">	}</span>
 	private void parseInteger(int index,String value){
-<span class="fc" id="L168">		integerArgumentValues.set(index,Integer.parseInt(value));</span>
-<span class="fc" id="L169">	}</span>
+<span class="fc" id="L166">		integerArgumentValues.set(index,Integer.parseInt(value));</span>
+<span class="fc" id="L167">	}</span>
 	private void parseBoolean(int index,String value){
-<span class="fc" id="L171">		booleanArgumentValues.set(index,Boolean.parseBoolean(value));</span>
-<span class="fc" id="L172">	}</span>
+<span class="fc" id="L169">		booleanArgumentValues.set(index,Boolean.parseBoolean(value));</span>
+<span class="fc" id="L170">	}</span>
 	public String getErrorMessage(){
-<span class="fc" id="L174">		return errorMessage;</span>
+<span class="fc" id="L172">		return errorMessage;</span>
 	}
 	public boolean getError(){
-<span class="fc" id="L177">		return error;</span>
+<span class="fc" id="L175">		return error;</span>
 	}
 	
 }
