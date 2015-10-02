@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ArgsParser.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">softeng-project</a> &gt; <a href="index.source.html" class="el_package">edu.jsu.mcis</a> &gt; <span class="el_source">ArgsParser.java</span></div><h1>ArgsParser.java</h1><pre class="source lang-java linenums">package edu.jsu.mcis;
+
+import java.util.*;
+import java.lang.*;
+
+public class ArgsParser{
+	private List&lt;String&gt; argumentNames;
+	private List&lt;String&gt; argumentValues;
+	private List&lt;String&gt; argumentDescriptions;
+	private List&lt;Double&gt;  doubleArgumentValues;
+	private List&lt;Boolean&gt; booleanArgumentValues;
+	private List&lt;Integer&gt; integerArgumentValues;
+<span class="pc" id="L13">	public enum Type {DOUBLE, INTEGER, STRING, BOOLEAN};</span>
+	private List&lt;Type&gt; argumentType;
+	private String premessage;
+	private String helpMessage;
+	private String programName;
+	private String programDescription;
+	private String errorMessage;
+	private boolean error;
+	
+	
+	public ArgsParser()
+<span class="fc" id="L24">	{</span>
+<span class="fc" id="L25">		argumentNames = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L26">		argumentValues = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L27">		argumentDescriptions = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L28">		doubleArgumentValues = new ArrayList&lt;Double&gt;();</span>
+<span class="fc" id="L29">		booleanArgumentValues = new ArrayList&lt;Boolean&gt;();</span>
+<span class="fc" id="L30">		integerArgumentValues = new ArrayList&lt;Integer&gt;();</span>
+<span class="fc" id="L31">		argumentType = new ArrayList&lt;Type&gt;();</span>
+<span class="fc" id="L32">		programName = &quot;&quot;;</span>
+<span class="fc" id="L33">		programDescription = &quot;&quot;;</span>
+<span class="fc" id="L34">		helpMessage = &quot;&quot;;</span>
+<span class="fc" id="L35">		premessage = &quot;&quot;;</span>
+<span class="fc" id="L36">		errorMessage = &quot;&quot;;</span>
+<span class="fc" id="L37">		error = false;</span>
+	
+<span class="fc" id="L39">	}</span>
+
+	public void addArgument(String name, String description, Type t) {
+		
+<span class="fc" id="L43">		argumentNames.add(name);</span>
+<span class="fc" id="L44">		argumentValues.add(&quot;&quot;);</span>
+<span class="fc" id="L45">		doubleArgumentValues.add(0.0);</span>
+<span class="fc" id="L46">		integerArgumentValues.add(0);</span>
+<span class="fc" id="L47">		booleanArgumentValues.add(false);</span>
+<span class="fc" id="L48">		argumentType.add(t);</span>
+<span class="fc" id="L49">		argumentDescriptions.add(description);</span>
+<span class="fc" id="L50">		setPremessage();</span>
+<span class="fc" id="L51">	}</span>
+	public void parseValues (String[] values){
+<span class="fc bfc" id="L53" title="All 2 branches covered.">		for(int i=0;i&lt;values.length;i++){</span>
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">			if(values[i].equals(&quot;-h&quot;)){</span>
+<span class="nc" id="L55">			System.out.print(helpMessage);</span>
+<span class="nc" id="L56">			argumentValues.set(i,values[i]);</span>
+<span class="nc" id="L57">			i=100;</span>
+<span class="nc" id="L58">			break;</span>
+			//System.exit(0);
+			
+		}
+<span class="fc bfc" id="L62" title="All 2 branches covered.">		else if(values.length != argumentNames.size()){</span>
+<span class="pc bpc" id="L63" title="1 of 2 branches missed.">				if(values.length &gt; argumentNames.size()){</span>
+<span class="fc" id="L64">					errorMessage = premessage+&quot;\n&quot;+programName+&quot;.java: error: unrecognized arguments: &quot;+values[i];</span>
+<span class="fc" id="L65">					error=true;</span>
+<span class="fc" id="L66">					System.out.print(errorMessage);</span>
+					//System.exit(0);
+				} 
+					
+				else{
+<span class="nc" id="L71">					errorMessage = premessage+&quot;\n&quot;+programName+&quot;.java: error: the following arguments are required: &quot;;</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">					for(int j=i;j&lt;argumentNames.size();j++)</span>
+<span class="nc" id="L73">						errorMessage+=argumentNames.get(j)+&quot; &quot;;</span>
+<span class="nc" id="L74">					error=true;</span>
+<span class="nc" id="L75">					System.out.print(errorMessage);</span>
+					//System.exit(0);
+				}
+				
+				
+			}
+		else{
+<span class="fc bfc" id="L82" title="All 2 branches covered.">		if(argumentType.get(i)==Type.STRING){</span>
+<span class="fc" id="L83">			argumentValues.set(i,values[i]);</span>
+		}
+<span class="fc bfc" id="L85" title="All 2 branches covered.">		else if(argumentType.get(i)==Type.DOUBLE){</span>
+			try{
+<span class="fc" id="L87">				parseDouble(i,values[i]);</span>
+			}
+<span class="fc" id="L89">			catch(NumberFormatException e){</span>
+<span class="fc" id="L90">				errorMessage = premessage+&quot;\n&quot;+programName+&quot;.java: error: argument &quot;+argumentNames.get(i)+&quot;: invalid double value: &quot;+values[i];</span>
+<span class="fc" id="L91">				error=true;</span>
+<span class="fc" id="L92">			}</span>
+		}
+<span class="fc bfc" id="L94" title="All 2 branches covered.">		else if(argumentType.get(i)==Type.INTEGER){</span>
+<span class="fc" id="L95">			parseInteger(i,values[i]);</span>
+		}
+		else{
+<span class="fc" id="L98">			parseBoolean(i,values[i]);</span>
+			
+		}
+		
+	}
+	}
+<span class="fc" id="L104">	}</span>
+	public double getDoubleValue(String name){
+<span class="fc" id="L106">		int index = argumentNames.indexOf(name);</span>
+<span class="fc" id="L107">		return doubleArgumentValues.get(index);</span>
+	}
+	
+	
+	public String getStringValue(String name) {
+<span class="fc" id="L112">		int index = argumentNames.indexOf(name);</span>
+<span class="fc" id="L113">		return argumentValues.get(index);</span>
+	}	
+	public void addProgram(String name,String description){
+<span class="fc" id="L116">		programName = name;</span>
+<span class="fc" id="L117">		programDescription = description;</span>
+<span class="fc" id="L118">		setPremessage();</span>
+<span class="fc" id="L119">	}</span>
+	public String getDescription(String name)
+	{
+<span class="fc" id="L122">		int index = argumentNames.indexOf(name);</span>
+<span class="fc" id="L123">		return argumentDescriptions.get(index);</span>
+		
+		
+	}
+	private void setHelpMessage(){
+<span class="fc" id="L128">		helpMessage = premessage;</span>
+<span class="fc" id="L129">		helpMessage += &quot;\n&quot;+programDescription+&quot;\npositional arguments:\n&quot;;</span>
+<span class="fc bfc" id="L130" title="All 2 branches covered.">		for(int i =0; i&lt;argumentDescriptions.size();i++)</span>
+		{
+<span class="fc" id="L132">			helpMessage += argumentNames.get(i)+&quot; &quot;+argumentDescriptions.get(i)+&quot;\n&quot;;</span>
+			
+		}
+		
+		
+<span class="fc" id="L137">	}</span>
+	private void setPremessage(){
+<span class="fc" id="L139">		premessage = &quot;usage: java &quot;+programName+&quot; &quot;;</span>
+<span class="fc bfc" id="L140" title="All 2 branches covered.">		for(int i = 0; i &lt; argumentDescriptions.size();i++){</span>
+<span class="fc" id="L141">			premessage += argumentNames.get(i)+&quot; &quot;;</span>
+		}
+		
+<span class="fc" id="L144">	}  </span>
+	
+
+	public String getHelpMessage(){
+<span class="fc" id="L148">		setHelpMessage();</span>
+<span class="fc" id="L149">		return helpMessage;</span>
+		
+	}
+	public int getIntValue(String name){
+<span class="fc" id="L153">		int index = argumentNames.indexOf(name);</span>
+<span class="fc" id="L154">		return integerArgumentValues.get(index);</span>
+	}
+	public boolean getBoolValue(String name){
+<span class="fc" id="L157">		int index = argumentNames.indexOf(name);</span>
+<span class="fc" id="L158">		return booleanArgumentValues.get(index);</span>
+	}
+	private void parseDouble(int index,String value)throws NumberFormatException {
+		
+		
+<span class="fc" id="L163">		doubleArgumentValues.set(index,Double.parseDouble(value));</span>
+		
+		
+<span class="fc" id="L166">	}</span>
+	private void parseInteger(int index,String value){
+<span class="fc" id="L168">		integerArgumentValues.set(index,Integer.parseInt(value));</span>
+<span class="fc" id="L169">	}</span>
+	private void parseBoolean(int index,String value){
+<span class="fc" id="L171">		booleanArgumentValues.set(index,Boolean.parseBoolean(value));</span>
+<span class="fc" id="L172">	}</span>
+	public String getErrorMessage(){
+<span class="fc" id="L174">		return errorMessage;</span>
+	}
+	public boolean getError(){
+<span class="fc" id="L177">		return error;</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

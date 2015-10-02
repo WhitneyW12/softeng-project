@@ -87,20 +87,29 @@ public class ArgsParserTests{
 		ap.parseValues(args);
 		assertTrue(ap.getBoolValue("length"));
 	}
-	//@Test
-	public void forceNumberFormatException()
-	{   String[] args = new String[] {"7","something","2"};
+	@Test
+	public void forceTooManyArguments(){
+		String[] args = new String[] {"7","5","2","43"};
 		ap.addArgument("length","the length of the box",ArgsParser.Type.DOUBLE);
 		ap.addArgument("width","the width of the box",ArgsParser.Type.DOUBLE);
 		ap.addArgument("height","the height of the box",ArgsParser.Type.DOUBLE);
 		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
-		try{
 		ap.parseValues(args);
-		assertTrue(false);
-		}
-		catch(NumberFormatException e){
-		assertTrue(true);
-		}
+		assertTrue(ap.getError());
+		assertEquals("usage: java VolumeCalculator length width height \nVolumeCalculator.java: error: unrecognized arguments: 43",ap.getErrorMessage());
+		
+	}
+	
+	@Test
+	public void forceNumberFormatException(){
+		String[] args = new String[] {"7","something","2"};
+		ap.addArgument("length","the length of the box",ArgsParser.Type.DOUBLE);
+		ap.addArgument("width","the width of the box",ArgsParser.Type.DOUBLE);
+		ap.addArgument("height","the height of the box",ArgsParser.Type.DOUBLE);
+		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
+		ap.parseValues(args);
+		assertTrue(ap.getError());
+		assertEquals("usage: java VolumeCalculator length width height \nVolumeCalculator.java: error: argument width: invalid double value: something",ap.getErrorMessage());
 	}
 	
 }
