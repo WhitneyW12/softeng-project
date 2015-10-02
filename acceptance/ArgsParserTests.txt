@@ -1,8 +1,8 @@
 *** Settings ***
 Library           ArgsParserKeywords
 
-| *Variable*  | *Value*                                                                                                   |
-| ${expected} | usage: java VolumeCalculator length width height\nVolumeCalcultor.java: error: unrecognized arguments: 43 |
+| *Variable*  | *Value*                                                                                                    |
+| ${expected} | usage: java VolumeCalculator length width height \nVolumeCalculator.java: error: unrecognized arguments: 43 |
 
 | *Test Case*                            | *Action*                              | *Argument*         | *Argument*   | *Argument* | *Argument* |
 | Test Volume Calculator Normal Function | Start Volume Cacluator With Arguments | 7                  | 5            | 2          |            |
@@ -13,7 +13,7 @@ Library           ArgsParserKeywords
 |                                        | ${height}=                            | Get Height         |              |            |            |
 |                                        | Should Be Equal                       | 2                  | ${height}    |            |            |
 |                                        | ${output}=                            | Get Program Output |              |            |            |
-|                                        | Should Be Equal                       | ${output}          | 70           |            |            |
+|                                        | Should Be Equal                       | ${output}          | 70.0         |            |            |
 | Test Unrecognized Argument             | Start Volume Cacluator With Arguments | 7                  | 5            | 2          | 43         |
 |                                        | ${output}=                            | Get Program Output |              |            |            |
 |                                        | Should Be Equal                       | ${output}          | ${expected}  |            |            |
@@ -28,17 +28,17 @@ Library           ArgsParserKeywords
 |                                        | Should Be Equal                       | 3.5                | ${bathrooms} |            |            |
 
 | *Variable*  | *Value*                                                                                                                                                                                                                                   |
-| ${expected} | usage: java VolumeCalculator length width heigth \nCalculate the volume of a box\npositional arguments:\nlength the length of the box\n width the width of the box\n heigth the heigth of the box\n |
+| ${expect} | usage: java VolumeCalculator length width height \nCalculate the volume of a box\npositional arguments:\nlength the length of the box\nwidth the width of the box\nheight the height of the box\n |
 
 | *Test Case*        | *Action*                     | *Argument*         | *Argument*  |
 | Test Usage Message | Start Program With Arguments | -h                 |             |
 |                    | ${output}=                   | Get Program Output |             |
-|                    | Should Be Equal              | ${expected}        | ${output}   |
+|                    | Should Be Equal              | ${expect}          | ${output}   |
 
 | *Variable*  | *Value*                                                                                                                       |
-| ${expected} | usage: java VolumeCalculator length width height\nVolumeCalcultor.java: error: argument width: invalid float value: something |
+| ${exp} | usage: java VolumeCalculator length width height \nVolumeCalculator.java: error: argument width: invalid double value: something |
 
 | *Test Case*                     | *Action*                     | *Argument*         | *Argument*  | *Argument*  |
 | Test Incorrect Datatype Message | Start Program With Arguments | 7                  | something   | 2           |
 |                                 | ${output}=                   | Get Program Output |             |             |
-|                                 | Should Be Equal              | ${output}          | ${expected} |             |
+|                                 | Should Be Equal              | ${output}          | ${exp}      |             |
