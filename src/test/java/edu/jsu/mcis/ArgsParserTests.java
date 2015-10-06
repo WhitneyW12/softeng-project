@@ -48,7 +48,7 @@ public class ArgsParserTests{
 	
 	@Test
 	public void checkIfDashHPrintsTheDescriptions()
-	{
+	{    String[] args = new String[] {"-h","5","2"};
 		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
 		ap.addArgument("length","the length of the box",ArgsParser.Type.STRING);
 		ap.addArgument("width","the width of the box",ArgsParser.Type.STRING);
@@ -122,6 +122,15 @@ public class ArgsParserTests{
 		ap.parseValues(args);
 		assertTrue(ap.getError());
 		assertEquals("usage: java VolumeCalculator length width height \nVolumeCalculator.java: error: argument width: invalid double value: something",ap.getErrorMessage());
+	}
+	@Test
+	public void CheckForDoubleDashType(){
+		String[] args = new String[] {"--type"};
+		ap.addArgument("length","the length of the box",ArgsParser.Type.DOUBLE);
+		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
+		ap.parseValues(args);
+		assertTrue(ap.getError());
+		
 	}
 	
 }

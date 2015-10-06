@@ -51,13 +51,21 @@ public class ArgsParser{
 	}
 	public void parseValues (String[] values){
 		for(int i=0;i<values.length;i++){
+			if(values[i].equals("--type")){
+				
+				error = true;
+				
+				
+				
+			}
+			else{
 			if(values[i].equals("-h")){
 			System.out.print(helpMessage);
 			argumentValues.set(i,values[i]);
 			
 			
-		}
-		else if(values.length != argumentNames.size()){
+			}
+			else if(values.length != argumentNames.size()){
 				if(values.length > argumentNames.size()){
 					errorMessage = premessage+"\n"+programName+".java: error: unrecognized arguments: "+values[i];
 					error=true;
@@ -76,14 +84,14 @@ public class ArgsParser{
 				
 				
 			}
-		else{
-		if(argumentType.get(i)==Type.STRING){
-			argumentValues.set(i,values[i]);
-		}
-		else if(argumentType.get(i)==Type.DOUBLE){
-			try{
-				parseDouble(i,values[i]);
-			}
+			else{
+				if(argumentType.get(i)==Type.STRING){
+				argumentValues.set(i,values[i]);
+				}
+				else if(argumentType.get(i) == Type.DOUBLE){
+				try{
+					parseDouble(i,values[i]);
+				}
 			catch(NumberFormatException e){
 				errorMessage = premessage+"\n"+programName+".java: error: argument "+argumentNames.get(i)+": invalid double value: "+values[i];
 				error=true;
@@ -97,6 +105,7 @@ public class ArgsParser{
 			
 		}
 		
+	}
 	}
 	}
 	}
@@ -156,11 +165,7 @@ public class ArgsParser{
 		return booleanArgumentValues.get(index);
 	}
 	private void parseDouble(int index,String value)throws NumberFormatException {
-		
-		
 		doubleArgumentValues.set(index,Double.parseDouble(value));
-		
-		
 	}
 	private void parseInteger(int index,String value){
 		integerArgumentValues.set(index,Integer.parseInt(value));
