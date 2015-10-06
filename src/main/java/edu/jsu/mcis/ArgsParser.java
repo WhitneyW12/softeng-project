@@ -12,6 +12,7 @@ public class ArgsParser{
 	private List<Integer> integerArgumentValues;
 	public enum Type {DOUBLE, INTEGER, STRING, BOOLEAN};
 	private List<Type> argumentType;
+	private List<String> namedArguments;
 	private String premessage;
 	private String helpMessage;
 	private String programName;
@@ -29,6 +30,7 @@ public class ArgsParser{
 		booleanArgumentValues = new ArrayList<Boolean>();
 		integerArgumentValues = new ArrayList<Integer>();
 		argumentType = new ArrayList<Type>();
+		namedArguments = new ArrayList<String>();
 		programName = "";
 		programDescription = "";
 		helpMessage = "";
@@ -37,7 +39,11 @@ public class ArgsParser{
 		error = false;
 	
 	}
-
+	public void addNamedArgument(String name){
+		namedArguments.add(name);
+		
+		
+	}
 	public void addArgument(String name, String description, Type t) {
 		
 		argumentNames.add(name);
@@ -51,14 +57,17 @@ public class ArgsParser{
 	}
 	public void parseValues (String[] values){
 		for(int i=0;i<values.length;i++){
-			if(values[i].equals("--type")){
+			for(int j=0;j<namedArguments.size();j++){
+				if(values[i].equals(namedArguments.get(j))){
 				
-				error = true;
+					int index = argumentNames.indexOf("--type");
+					argumentValues.set(index,values[i+1]);
+					i++;
 				
 				
-				
+				}
 			}
-			else{
+			
 			if(values[i].equals("-h")){
 			System.out.print(helpMessage);
 			argumentValues.set(i,values[i]);
@@ -108,7 +117,7 @@ public class ArgsParser{
 	}
 	}
 	}
-	}
+	
 	public double getDoubleValue(String name){
 		int index = argumentNames.indexOf(name);
 		return doubleArgumentValues.get(index);

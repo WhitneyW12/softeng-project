@@ -125,11 +125,11 @@ public class ArgsParserTests{
 	}
 	@Test
 	public void CheckForDoubleDashType(){
-		String[] args = new String[] {"--type"};
-		ap.addArgument("length","the length of the box",ArgsParser.Type.DOUBLE);
-		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
+		String[] args = new String[] {"--type","ellipsoid"};
+		ap.addArgument("--type","the length of the box",ArgsParser.Type.STRING);
+		ap.addNamedArgument("--type");
 		ap.parseValues(args);
-		assertTrue(ap.getError());
+		assertEquals("ellipsoid",ap.getStringValue("--type"));
 		
 	}
 	

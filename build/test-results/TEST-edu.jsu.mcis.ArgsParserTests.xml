@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.jsu.mcis.ArgsParserTests" tests="11" skipped="0" failures="0" errors="0" timestamp="2015-10-05T17:16:48" hostname="MSI" time="0.007">
+<testsuite name="edu.jsu.mcis.ArgsParserTests" tests="11" skipped="0" failures="0" errors="0" timestamp="2015-10-06T21:30:51" hostname="MSI" time="0.012">
   <properties/>
-  <testcase name="parseStringToInt" classname="edu.jsu.mcis.ArgsParserTests" time="0.003"/>
+  <testcase name="parseStringToInt" classname="edu.jsu.mcis.ArgsParserTests" time="0.007"/>
   <testcase name="checkArgumentCreation" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
   <testcase name="forceNumberFormatException" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
   <testcase name="checkIfDashHPrintsTheDescriptions" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
   <testcase name="forceTooManyArguments" classname="edu.jsu.mcis.ArgsParserTests" time="0.001"/>
   <testcase name="checkArgumentDescription" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
-  <testcase name="CheckForDoubleDashType" classname="edu.jsu.mcis.ArgsParserTests" time="0.001"/>
+  <testcase name="CheckForDoubleDashType" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
   <testcase name="parseStringToBool" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
   <testcase name="checkArgumentValues" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
-  <testcase name="forceTooFewArguments" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
-  <testcase name="parseStringargsToDouble" classname="edu.jsu.mcis.ArgsParserTests" time="0.001"/>
+  <testcase name="forceTooFewArguments" classname="edu.jsu.mcis.ArgsParserTests" time="0.001"/>
+  <testcase name="parseStringargsToDouble" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
   <system-out><![CDATA[usage: java VolumeCalculator length width height 
 VolumeCalculator.java: error: unrecognized arguments: 7usage: java VolumeCalculator length width height 
 VolumeCalculator.java: error: unrecognized arguments: 5usage: java VolumeCalculator length width height 
 VolumeCalculator.java: error: unrecognized arguments: 2usage: java VolumeCalculator length width height 
-VolumeCalculator.java: error: unrecognized arguments: 43usage: java VolumeCalculator length width height 
+VolumeCalculator.java: error: unrecognized arguments: 43usage: java  --type 
+.java: error: unrecognized arguments: ellipsoidusage: java VolumeCalculator length width height 
 VolumeCalculator.java: error: the following arguments are required: width height usage: java VolumeCalculator length width height 
 VolumeCalculator.java: error: the following arguments are required: height ]]></system-out>
   <system-err><![CDATA[]]></system-err>
