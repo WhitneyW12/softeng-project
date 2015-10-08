@@ -13,32 +13,32 @@ public class ArgsParserTests{
 	@Test 
 	public void checkArgumentCreation()
 	{
-		ap.addArgument("length","the length of the box",ArgsParser.Type.STRING);
-		ap.addArgument("width","the width of the box",ArgsParser.Type.STRING);
-		ap.addArgument("height","the height of the box",ArgsParser.Type.STRING);
-		assertEquals("", ap.getStringValue("length"));
-		assertEquals("", ap.getStringValue("width"));
-		assertEquals("", ap.getStringValue("height"));		
+		ap.addArgument("length","the length of the box",Argument.Type.STRING);
+		ap.addArgument("width","the width of the box",Argument.Type.STRING);
+		ap.addArgument("height","the height of the box",Argument.Type.STRING);
+		assertEquals("", ap.getValue("length"));
+		assertEquals("", ap.getValue("width"));
+		assertEquals("", ap.getValue("height"));		
 	}
 	@Test
 	public void checkArgumentValues()
 	{	
 		String[] args = new String[] {"7","5","2"};
-		ap.addArgument("length","the length of the box",ArgsParser.Type.STRING);
-		ap.addArgument("width","the width of the box",ArgsParser.Type.STRING);
-		ap.addArgument("height","the height of the box",ArgsParser.Type.STRING);
+		ap.addArgument("length","the length of the box",Argument.Type.STRING);
+		ap.addArgument("width","the width of the box",Argument.Type.STRING);
+		ap.addArgument("height","the height of the box",Argument.Type.STRING);
 		ap.parseValues(args);
-		assertEquals("7", ap.getStringValue("length"));
-		assertEquals("5", ap.getStringValue("width"));
-		assertEquals("2", ap.getStringValue("height"));
+		assertEquals("7", ap.getValue("length"));
+		assertEquals("5", ap.getValue("width"));
+		assertEquals("2", ap.getValue("height"));
 		
 	}
 	
 	@Test   
 	public void checkArgumentDescription(){   
- 		ap.addArgument("length","the length of the box",ArgsParser.Type.STRING);
-		ap.addArgument("width","the width of the box",ArgsParser.Type.STRING);
-		ap.addArgument("height","the height of the box",ArgsParser.Type.STRING); 
+ 		ap.addArgument("length","the length of the box",Argument.Type.STRING);
+		ap.addArgument("width","the width of the box",Argument.Type.STRING);
+		ap.addArgument("height","the height of the box",Argument.Type.STRING); 
  		assertEquals("the length of the box", ap.getDescription("length"));  
  		assertEquals("the width of the box", ap.getDescription("width"));  
  		assertEquals("the height of the box", ap.getDescription("height"));  
@@ -50,9 +50,9 @@ public class ArgsParserTests{
 	public void checkIfDashHPrintsTheDescriptions()
 	{    String[] args = new String[] {"-h","5","2"};
 		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
-		ap.addArgument("length","the length of the box",ArgsParser.Type.STRING);
-		ap.addArgument("width","the width of the box",ArgsParser.Type.STRING);
-		ap.addArgument("height","the height of the box",ArgsParser.Type.STRING);
+		ap.addArgument("length","the length of the box",Argument.Type.STRING);
+		ap.addArgument("width","the width of the box",Argument.Type.STRING);
+		ap.addArgument("height","the height of the box",Argument.Type.STRING);
 		
 		assertEquals("usage: java VolumeCalculator length width height \nCalculate the volume of a box\npositional arguments:\nlength the length of the box\nwidth the width of the box\nheight the height of the box\n",
 					 ap.getHelpMessage());
@@ -64,35 +64,39 @@ public class ArgsParserTests{
 	@Test
 	public void parseStringargsToDouble(){
 		String[] args = new String[] {"7","5","2"};
-		ap.addArgument("length","the length of the box",ArgsParser.Type.DOUBLE);
-		ap.addArgument("width","the width of the box",ArgsParser.Type.DOUBLE);
-		ap.addArgument("height","the height of the box",ArgsParser.Type.DOUBLE);
+		ap.addArgument("length","the length of the box",Argument.Type.DOUBLE);
+		ap.addArgument("width","the width of the box",Argument.Type.DOUBLE);
+		ap.addArgument("height","the height of the box",Argument.Type.DOUBLE);
 		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
 		ap.parseValues(args);
-		assertEquals(7,ap.getDoubleValue("length"),.1);
-		assertEquals(5,ap.getDoubleValue("width"),.1);
-		assertEquals(2,ap.getDoubleValue("height"),.1);
+		double length = ap.getValue("length");
+		double width = ap.getValue("width");
+		double height = ap.getValue("height");
+		assertEquals(7,length,.1);
+		assertEquals(5,width,.1);
+		assertEquals(2,height,.1);
 	}
 	@Test
 	public void parseStringToInt(){
 		String[] args = new String[] {"7"};
-		ap.addArgument("length","the length of the box",ArgsParser.Type.INTEGER);
+		ap.addArgument("length","the length of the box",Argument.Type.INTEGER);
 		ap.parseValues(args);
-		assertEquals(7,ap.getIntValue("length"));
+		assertEquals(7,ap.getValue("length"));
 	}
 	@Test 
 	public void parseStringToBool(){
 		String[] args = new String[] {"true"};
-		ap.addArgument("length","the length of the box",ArgsParser.Type.BOOLEAN);
+		ap.addArgument("length","the length of the box",Argument.Type.BOOLEAN);
 		ap.parseValues(args);
-		assertTrue(ap.getBoolValue("length"));
+		boolean b = ap.getValue("length");
+		assertTrue(b);
 	}
 	@Test
 	public void forceTooManyArguments(){
 		String[] args = new String[] {"7","5","2","43"};
-		ap.addArgument("length","the length of the box",ArgsParser.Type.DOUBLE);
-		ap.addArgument("width","the width of the box",ArgsParser.Type.DOUBLE);
-		ap.addArgument("height","the height of the box",ArgsParser.Type.DOUBLE);
+		ap.addArgument("length","the length of the box",Argument.Type.DOUBLE);
+		ap.addArgument("width","the width of the box",Argument.Type.DOUBLE);
+		ap.addArgument("height","the height of the box",Argument.Type.DOUBLE);
 		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
 		ap.parseValues(args);
 		assertTrue(ap.getError());
@@ -102,9 +106,9 @@ public class ArgsParserTests{
 	@Test
 	public void forceTooFewArguments(){
 		String[] args = new String[] {"7","5"};
-		ap.addArgument("length","the length of the box",ArgsParser.Type.DOUBLE);
-		ap.addArgument("width","the width of the box",ArgsParser.Type.DOUBLE);
-		ap.addArgument("height","the height of the box",ArgsParser.Type.DOUBLE);
+		ap.addArgument("length","the length of the box",Argument.Type.DOUBLE);
+		ap.addArgument("width","the width of the box",Argument.Type.DOUBLE);
+		ap.addArgument("height","the height of the box",Argument.Type.DOUBLE);
 		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
 		ap.parseValues(args);
 		assertTrue(ap.getError());
@@ -115,9 +119,9 @@ public class ArgsParserTests{
 	@Test
 	public void forceNumberFormatException(){
 		String[] args = new String[] {"7","something","2"};
-		ap.addArgument("length","the length of the box",ArgsParser.Type.DOUBLE);
-		ap.addArgument("width","the width of the box",ArgsParser.Type.DOUBLE);
-		ap.addArgument("height","the height of the box",ArgsParser.Type.DOUBLE);
+		ap.addArgument("length","the length of the box",Argument.Type.DOUBLE);
+		ap.addArgument("width","the width of the box",Argument.Type.DOUBLE);
+		ap.addArgument("height","the height of the box",Argument.Type.DOUBLE);
 		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
 		ap.parseValues(args);
 		assertTrue(ap.getError());
@@ -126,10 +130,10 @@ public class ArgsParserTests{
 	@Test
 	public void CheckForDoubleDashType(){
 		String[] args = new String[] {"--type","ellipsoid"};
-		ap.addArgument("--type","the length of the box",ArgsParser.Type.STRING);
+		ap.addArgument("--type","the length of the box",Argument.Type.STRING);
 		ap.addNamedArgument("--type");
 		ap.parseValues(args);
-		assertEquals("ellipsoid",ap.getStringValue("--type"));
+		assertEquals("ellipsoid",ap.getValue("--type"));
 		
 	}
 	

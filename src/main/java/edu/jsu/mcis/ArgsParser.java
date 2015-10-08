@@ -5,14 +5,8 @@ import java.lang.*;
 
 public class ArgsParser{
 	private List<String> argumentNames;
-	private List<String> argumentValues;
-	private List<String> argumentDescriptions;
-	private List<Double>  doubleArgumentValues;
-	private List<Boolean> booleanArgumentValues;
-	private List<Integer> integerArgumentValues;
-	public enum Type {DOUBLE, INTEGER, STRING, BOOLEAN};
-	private List<Type> argumentType;
 	private List<String> namedArguments;
+	private List<Argument> arguments;
 	private String premessage;
 	private String helpMessage;
 	private String programName;
@@ -23,14 +17,9 @@ public class ArgsParser{
 	
 	public ArgsParser()
 	{
-		argumentNames = new ArrayList<String>();
-		argumentValues = new ArrayList<String>();
-		argumentDescriptions = new ArrayList<String>();
-		doubleArgumentValues = new ArrayList<Double>();
-		booleanArgumentValues = new ArrayList<Boolean>();
-		integerArgumentValues = new ArrayList<Integer>();
-		argumentType = new ArrayList<Type>();
+		arguments = new ArrayList<Argument>();
 		namedArguments = new ArrayList<String>();
+		argumentNames = new ArrayList<String>();
 		programName = "";
 		programDescription = "";
 		helpMessage = "";
@@ -44,15 +33,9 @@ public class ArgsParser{
 		
 		
 	}
-	public void addArgument(String name, String description, Type t) {
-		
+	public void addArgument(String name, String description, Argument.Type t) {
 		argumentNames.add(name);
-		argumentValues.add("");
-		doubleArgumentValues.add(0.0);
-		integerArgumentValues.add(0);
-		booleanArgumentValues.add(false);
-		argumentType.add(t);
-		argumentDescriptions.add(description);
+		arguments.add(new Argument(t,name,description));
 		setPremessage();
 	}
 	public void parseValues (String[] values){
@@ -61,7 +44,7 @@ public class ArgsParser{
 				if(values[i].equals(namedArguments.get(j))){
 				
 					int index = argumentNames.indexOf("--type");
-					argumentValues.set(index,values[i+1]);
+					arguments.get(index).setValue(values[i+1]);
 					i++;
 				
 				
@@ -70,7 +53,7 @@ public class ArgsParser{
 			
 			if(values[i].equals("-h")){
 			System.out.print(helpMessage);
-			argumentValues.set(i,values[i]);
+			arguments.get(i).setValue(values[i]);
 			
 			
 			}
@@ -94,10 +77,10 @@ public class ArgsParser{
 				
 			}
 			else{
-				if(argumentType.get(i)==Type.STRING){
-				argumentValues.set(i,values[i]);
+				if(arguments.get(i).getType()==Argument.Type.STRING){
+				arguments.get(i).setValue(values[i]);
 				}
-				else if(argumentType.get(i) == Type.DOUBLE){
+				else if(arguments.get(i).getType()==Argument.Type.DOUBLE){
 				try{
 					parseDouble(i,values[i]);
 				}
@@ -106,7 +89,7 @@ public class ArgsParser{
 				error=true;
 			}
 		}
-		else if(argumentType.get(i)==Type.INTEGER){
+		else if(arguments.get(i).getType()==Argument.Type.INTEGER){
 			parseInteger(i,values[i]);
 		}
 		else{
@@ -117,17 +100,7 @@ public class ArgsParser{
 	}
 	}
 	}
-	
-	public double getDoubleValue(String name){
-		int index = argumentNames.indexOf(name);
-		return doubleArgumentValues.get(index);
-	}
-	
-	
-	public String getStringValue(String name) {
-		int index = argumentNames.indexOf(name);
-		return argumentValues.get(index);
-	}	
+
 	public void addProgram(String name,String description){
 		programName = name;
 		programDescription = description;
@@ -136,16 +109,16 @@ public class ArgsParser{
 	public String getDescription(String name)
 	{
 		int index = argumentNames.indexOf(name);
-		return argumentDescriptions.get(index);
+		return arguments.get(index).getDescription();
 		
 		
 	}
 	private void setHelpMessage(){
 		helpMessage = premessage;
 		helpMessage += "\n"+programDescription+"\npositional arguments:\n";
-		for(int i =0; i<argumentDescriptions.size();i++)
+		for(int i =0; i<arguments.size();i++)
 		{
-			helpMessage += argumentNames.get(i)+" "+argumentDescriptions.get(i)+"\n";
+			helpMessage += arguments.get(i).getName()+" "+arguments.get(i).getDescription()+"\n";
 			
 		}
 		
@@ -153,8 +126,8 @@ public class ArgsParser{
 	}
 	private void setPremessage(){
 		premessage = "usage: java "+programName+" ";
-		for(int i = 0; i < argumentDescriptions.size();i++){
-			premessage += argumentNames.get(i)+" ";
+		for(int i = 0; i < arguments.size();i++){
+			premessage += arguments.get(i).getName()+" ";
 		}
 		
 	}  
@@ -165,22 +138,20 @@ public class ArgsParser{
 		return helpMessage;
 		
 	}
-	public int getIntValue(String name){
+
+	public <T> T getValue(String name){
 		int index = argumentNames.indexOf(name);
-		return integerArgumentValues.get(index);
-	}
-	public boolean getBoolValue(String name){
-		int index = argumentNames.indexOf(name);
-		return booleanArgumentValues.get(index);
+		return (T)arguments.get(index).getValue();
 	}
 	private void parseDouble(int index,String value)throws NumberFormatException {
-		doubleArgumentValues.set(index,Double.parseDouble(value));
+		arguments.get(index).setValue(Double.parseDouble(value));
 	}
 	private void parseInteger(int index,String value){
-		integerArgumentValues.set(index,Integer.parseInt(value));
+		
+		arguments.get(index).setValue(Integer.parseInt(value));
 	}
 	private void parseBoolean(int index,String value){
-		booleanArgumentValues.set(index,Boolean.parseBoolean(value));
+		arguments.get(index).setValue(Boolean.parseBoolean(value));
 	}
 	public String getErrorMessage(){
 		return errorMessage;
