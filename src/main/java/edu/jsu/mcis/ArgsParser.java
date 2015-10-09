@@ -13,6 +13,7 @@ public class ArgsParser{
 	private String programDescription;
 	private String errorMessage;
 	private boolean error;
+	private boolean help;
 	
 	
 	public ArgsParser()
@@ -26,6 +27,7 @@ public class ArgsParser{
 		premessage = "";
 		errorMessage = "";
 		error = false;
+		help = false;
 	
 	}
 	public void addNamedArgument(String name){
@@ -54,6 +56,7 @@ public class ArgsParser{
 			if(values[i].equals("-h")){
 			System.out.print(helpMessage);
 			arguments.get(i).setValue(values[i]);
+			help = true;
 			
 			
 			}
@@ -158,6 +161,15 @@ public class ArgsParser{
 	}
 	public boolean getError(){
 		return error;
+	}
+	public Argument.Type getArgumentType(String name){
+		int index = argumentNames.indexOf(name);
+		return arguments.get(index).getType();
+		
+	}
+	public boolean  getHelp(){
+		
+		return help;
 	}
 	
 }

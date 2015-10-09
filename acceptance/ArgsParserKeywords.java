@@ -7,40 +7,63 @@ public class ArgsParserKeywords {
 	public void startVolumeCacluatorWithArguments(String[] args) {
 		ap = new ArgsParser();
 		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
-		ap.addArgument("length","the length of the box",ArgsParser.Type.STRING);
-		ap.addArgument("width","the width of the box",ArgsParser.Type.STRING);
-		ap.addArgument("height","the height of the box",ArgsParser.Type.STRING);
+		ap.addArgument("length","the length of the box",Argument.Type.STRING);
+		ap.addArgument("width","the width of the box",Argument.Type.STRING);
+		ap.addArgument("height","the height of the box",Argument.Type.STRING);
 		ap.parseValues(args);
 		
 	}
 	
-	public String getLength() {
-		return ap.getStringValue("length");
+	public <T> T getLength() {
+		 
+		return ap.getValue("length");
 	}
-	public String getWidth() {
-		return ap.getStringValue("width");
+	public <T> T getWidth() {
+		 
+		return ap.getValue("width");
 	}
-	public String getHeight() {
-		return ap.getStringValue("height");
+	public <T> T getHeight() {
+		 
+		return ap.getValue("height");
 	}
-	public String getPet() {
-		return ap.getStringValue("pet");
+	public <T> T getPet() {
+		 
+		return ap.getValue("pet");
 	}
-	public String getNumber() {
-		return ap.getStringValue("number");
+	public <T> T getNumber() {
+		 
+		return ap.getValue("number");
 	}
-	public String getRainy() {
-		return ap.getStringValue("rainy");
+	public <T> T getRainy() {
+		 
+		return ap.getValue("rainy");
 	}
-	public String getBathrooms() {
-		return ap.getStringValue("bathrooms");
+	public <T> T getBathrooms() {
+		 
+		return ap.getValue("bathrooms");
 	}
 	
 	public String getProgramOutput() {
-		if(ap.getStringValue("length").equals("-h")){
+		String s = "";
+		double d = 0;
+		int i = 0;
+		boolean b = false;
+		if(ap.getHelp()){
 			return ap.getHelpMessage();
 		}
-		else if(ap.getError()){
+		if(ap.getArgumentType("length")==Argument.Type.STRING){
+			s = ap.getValue("length");
+		}
+		else if (ap.getArgumentType("length")==Argument.Type.DOUBLE){
+			d = ap.getValue("length");
+		}
+		else if (ap.getArgumentType("length")==Argument.Type.INTEGER){
+			i = ap.getValue("length");
+		}
+		else{
+			b = ap.getValue("length");
+		}
+		if(ap.getError()){
 			return ap.getErrorMessage();
 		}
 		else{
@@ -54,10 +77,10 @@ public class ArgsParserKeywords {
 	public void startAbsurdProgramWithArguments(String[] args) {
 		ap = new ArgsParser();
 		ap.addProgram("VolumeCalculator","");
-		ap.addArgument("pet","",ArgsParser.Type.STRING);
-		ap.addArgument("number","",ArgsParser.Type.STRING);
-		ap.addArgument("rainy","",ArgsParser.Type.STRING);
-		ap.addArgument("bathrooms","",ArgsParser.Type.STRING);
+		ap.addArgument("pet","",Argument.Type.STRING);
+		ap.addArgument("number","",Argument.Type.STRING);
+		ap.addArgument("rainy","",Argument.Type.STRING);
+		ap.addArgument("bathrooms","",Argument.Type.STRING);
 		ap.parseValues(args);
 		
 		
@@ -66,9 +89,9 @@ public class ArgsParserKeywords {
 	public void startProgramWithArguments(String[] args) {
 		ap = new ArgsParser();
 		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
-		ap.addArgument("length","the length of the box",ArgsParser.Type.DOUBLE);
-		ap.addArgument("width","the width of the box",ArgsParser.Type.DOUBLE);
-		ap.addArgument("height","the height of the box",ArgsParser.Type.DOUBLE);
+		ap.addArgument("length","the length of the box",Argument.Type.DOUBLE);
+		ap.addArgument("width","the width of the box",Argument.Type.DOUBLE);
+		ap.addArgument("height","the height of the box",Argument.Type.DOUBLE);
 		ap.parseValues(args);
 	}
 }
