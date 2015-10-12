@@ -30,9 +30,9 @@ public class ArgsParser{
 		help = false;
 	
 	}
-	public void addNamedArgument(String name, String description, Argument.Type t){
+	public void addNamedArgument(String name, String description, Argument.Type t, int numberOfValues){
 		namedArgumentsNames.add(name);
-		arguments.put(name,new Argument(t,name,description));
+		arguments.put(name,new namedArgument(t,name,description,numberOfValues));
 		
 		
 	}
@@ -73,7 +73,7 @@ public class ArgsParser{
 					for(int j=i+1;j<argumentNames.size();j++)
 						errorMessage+=argumentNames.get(j)+" ";
 					error=true;
-					throw new TooManyArgumentsException(errorMessage);
+					throw new TooFewArgumentsException(errorMessage);
 				
 				}
 				
@@ -170,5 +170,13 @@ public class ArgsParser{
 		
 		return help;
 	}
+	/**
+	public void setShorthand(String name, String shorthand){
+		arguments.get(name).setShorthand(shorthand);
+	}
+	public String getShorthand(String name){
+		return arguments.get(name).getShorthand();
+		
+	}*/
 	
 }

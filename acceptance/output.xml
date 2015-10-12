@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 2.9 (Jython 2.7.0 on java1.8.0_60)" generated="20151010 15:28:33.808">
+<robot generator="Robot 2.9 (Jython 2.7.0 on java1.8.0_60)" generated="20151012 11:15:18.988">
 <suite source="C:\Users\james\Desktop\softeng-project\acceptance\ArgsParserTests.txt" name="ArgsParserTests" id="s1">
 <test name="Test Volume Calculator Normal Function" id="s1-t1">
 <kw library="ArgsParserKeywords" name="Start Volume Cacluator With Arguments">
@@ -8,15 +8,15 @@
 <arg>5</arg>
 <arg>2</arg>
 </arguments>
-<status endtime="20151010 15:28:34.179" starttime="20151010 15:28:34.170" status="PASS"></status>
+<status endtime="20151012 11:15:19.366" starttime="20151012 11:15:19.353" status="PASS"></status>
 </kw>
 <kw library="ArgsParserKeywords" name="Get Length">
 <assign>
 <var>${length}</var>
 </assign>
-<msg level="WARN" timestamp="20151010 15:28:34.181">Keyword 'Get Length' found both from a custom test library 'ArgsParserKeywords' and a standard library 'BuiltIn'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'ArgsParserKeywords.Get Length' or 'BuiltIn.Get Length'.</msg>
-<msg level="INFO" timestamp="20151010 15:28:34.189">${length} = 7</msg>
-<status endtime="20151010 15:28:34.190" starttime="20151010 15:28:34.182" status="PASS"></status>
+<msg level="WARN" timestamp="20151012 11:15:19.368">Keyword 'Get Length' found both from a custom test library 'ArgsParserKeywords' and a standard library 'BuiltIn'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'ArgsParserKeywords.Get Length' or 'BuiltIn.Get Length'.</msg>
+<msg level="INFO" timestamp="20151012 11:15:19.372">${length} = 7</msg>
+<status endtime="20151012 11:15:19.372" starttime="20151012 11:15:19.369" status="PASS"></status>
 </kw>
 <kw library="BuiltIn" name="Should Be Equal">
 <doc>Fails if the given objects are unequal.</doc>
@@ -24,14 +24,14 @@
 <arg>7</arg>
 <arg>${length}</arg>
 </arguments>
-<status endtime="20151010 15:28:34.198" starttime="20151010 15:28:34.192" status="PASS"></status>
+<status endtime="20151012 11:15:19.378" starttime="20151012 11:15:19.374" status="PASS"></status>
 </kw>
 <kw library="ArgsParserKeywords" name="Get Width">
 <assign>
 <var>${width}</var>
 </assign>
-<msg level="INFO" timestamp="20151010 15:28:34.203">${width} = 5</msg>
-<status endtime="20151010 15:28:34.204" starttime="20151010 15:28:34.200" status="PASS"></status>
+<msg level="INFO" timestamp="20151012 11:15:19.382">${width} = 5</msg>
+<status endtime="20151012 11:15:19.383" starttime="20151012 11:15:19.379" status="PASS"></status>
 </kw>
 <kw library="BuiltIn" name="Should Be Equal">
 <doc>Fails if the given objects are unequal.</doc>
@@ -39,14 +39,14 @@
 <arg>5</arg>
 <arg>${width}</arg>
 </arguments>
-<status endtime="20151010 15:28:34.212" starttime="20151010 15:28:34.207" status="PASS"></status>
+<status endtime="20151012 11:15:19.387" starttime="20151012 11:15:19.384" status="PASS"></status>
 </kw>
 <kw library="ArgsParserKeywords" name="Get Height">
 <assign>
 <var>${height}</var>
 </assign>
-<msg level="INFO" timestamp="20151010 15:28:34.218">${height} = 2</msg>
-<status endtime="20151010 15:28:34.219" starttime="20151010 15:28:34.214" status="PASS"></status>
+<msg level="INFO" timestamp="20151012 11:15:19.390">${height} = 2</msg>
+<status endtime="20151012 11:15:19.391" starttime="20151012 11:15:19.388" status="PASS"></status>
 </kw>
 <kw library="BuiltIn" name="Should Be Equal">
 <doc>Fails if the given objects are unequal.</doc>
@@ -54,24 +54,16 @@
 <arg>2</arg>
 <arg>${height}</arg>
 </arguments>
-<status endtime="20151010 15:28:34.225" starttime="20151010 15:28:34.221" status="PASS"></status>
+<status endtime="20151012 11:15:19.397" starttime="20151012 11:15:19.393" status="PASS"></status>
 </kw>
 <kw library="ArgsParserKeywords" name="Get Program Output">
 <assign>
 <var>${output}</var>
 </assign>
-<msg level="INFO" timestamp="20151010 15:28:34.231">${output} = 70.0</msg>
-<status endtime="20151010 15:28:34.231" starttime="20151010 15:28:34.227" status="PASS"></status>
+<msg level="FAIL" timestamp="20151012 11:15:19.406">NullPointerException</msg>
+<status endtime="20151012 11:15:19.407" starttime="20151012 11:15:19.399" status="FAIL"></status>
 </kw>
-<kw library="BuiltIn" name="Should Be Equal">
-<doc>Fails if the given objects are unequal.</doc>
-<arguments>
-<arg>${output}</arg>
-<arg>70.0</arg>
-</arguments>
-<status endtime="20151010 15:28:34.238" starttime="20151010 15:28:34.234" status="PASS"></status>
-</kw>
-<status critical="yes" endtime="20151010 15:28:34.240" starttime="20151010 15:28:34.164" status="PASS"></status>
+<status critical="yes" endtime="20151012 11:15:19.410" starttime="20151012 11:15:19.347" status="FAIL">NullPointerException</status>
 </test>
 <test name="Test Unrecognized Argument" id="s1-t2">
 <kw library="ArgsParserKeywords" name="Start Volume Cacluator With Arguments">
@@ -81,30 +73,16 @@
 <arg>2</arg>
 <arg>43</arg>
 </arguments>
-<msg level="INFO" timestamp="20151010 15:28:34.254">usage: java VolumeCalculator length width height 
-VolumeCalculator.java: error: unrecognized arguments: 7usage: java VolumeCalculator length width height 
-VolumeCalculator.java: error: unrecognized arguments: 5usage: java VolumeCalculator length width height 
-VolumeCalculator.java: error: unrecognized arguments: 2usage: java VolumeCalculator length width height 
-VolumeCalculator.java: error: unrecognized arguments: 43</msg>
-<status endtime="20151010 15:28:34.256" starttime="20151010 15:28:34.248" status="PASS"></status>
+<status endtime="20151012 11:15:19.420" starttime="20151012 11:15:19.417" status="PASS"></status>
 </kw>
 <kw library="ArgsParserKeywords" name="Get Program Output">
 <assign>
 <var>${output}</var>
 </assign>
-<msg level="INFO" timestamp="20151010 15:28:34.262">${output} = usage: java VolumeCalculator length width height 
-VolumeCalculator.java: error: unrecognized arguments: 43</msg>
-<status endtime="20151010 15:28:34.263" starttime="20151010 15:28:34.258" status="PASS"></status>
+<msg level="FAIL" timestamp="20151012 11:15:19.427">NullPointerException</msg>
+<status endtime="20151012 11:15:19.428" starttime="20151012 11:15:19.421" status="FAIL"></status>
 </kw>
-<kw library="BuiltIn" name="Should Be Equal">
-<doc>Fails if the given objects are unequal.</doc>
-<arguments>
-<arg>${output}</arg>
-<arg>${expected}</arg>
-</arguments>
-<status endtime="20151010 15:28:34.270" starttime="20151010 15:28:34.265" status="PASS"></status>
-</kw>
-<status critical="yes" endtime="20151010 15:28:34.272" starttime="20151010 15:28:34.243" status="PASS"></status>
+<status critical="yes" endtime="20151012 11:15:19.430" starttime="20151012 11:15:19.413" status="FAIL">NullPointerException</status>
 </test>
 <test name="Test Absurd Program Normal Function" id="s1-t3">
 <kw library="ArgsParserKeywords" name="Start Absurd Program With Arguments">
@@ -114,14 +92,14 @@ VolumeCalculator.java: error: unrecognized arguments: 43</msg>
 <arg>true</arg>
 <arg>3.5</arg>
 </arguments>
-<status endtime="20151010 15:28:34.284" starttime="20151010 15:28:34.280" status="PASS"></status>
+<status endtime="20151012 11:15:19.440" starttime="20151012 11:15:19.436" status="PASS"></status>
 </kw>
 <kw library="ArgsParserKeywords" name="Get Pet">
 <assign>
 <var>${pet}</var>
 </assign>
-<msg level="INFO" timestamp="20151010 15:28:34.290">${pet} = dog</msg>
-<status endtime="20151010 15:28:34.291" starttime="20151010 15:28:34.287" status="PASS"></status>
+<msg level="INFO" timestamp="20151012 11:15:19.444">${pet} = dog</msg>
+<status endtime="20151012 11:15:19.445" starttime="20151012 11:15:19.442" status="PASS"></status>
 </kw>
 <kw library="BuiltIn" name="Should Be Equal">
 <doc>Fails if the given objects are unequal.</doc>
@@ -129,14 +107,14 @@ VolumeCalculator.java: error: unrecognized arguments: 43</msg>
 <arg>dog</arg>
 <arg>${pet}</arg>
 </arguments>
-<status endtime="20151010 15:28:34.298" starttime="20151010 15:28:34.293" status="PASS"></status>
+<status endtime="20151012 11:15:19.452" starttime="20151012 11:15:19.448" status="PASS"></status>
 </kw>
 <kw library="ArgsParserKeywords" name="Get Number">
 <assign>
 <var>${number}</var>
 </assign>
-<msg level="INFO" timestamp="20151010 15:28:34.303">${number} = 2</msg>
-<status endtime="20151010 15:28:34.304" starttime="20151010 15:28:34.300" status="PASS"></status>
+<msg level="INFO" timestamp="20151012 11:15:19.458">${number} = 2</msg>
+<status endtime="20151012 11:15:19.459" starttime="20151012 11:15:19.454" status="PASS"></status>
 </kw>
 <kw library="BuiltIn" name="Should Be Equal">
 <doc>Fails if the given objects are unequal.</doc>
@@ -144,14 +122,14 @@ VolumeCalculator.java: error: unrecognized arguments: 43</msg>
 <arg>2</arg>
 <arg>${number}</arg>
 </arguments>
-<status endtime="20151010 15:28:34.309" starttime="20151010 15:28:34.306" status="PASS"></status>
+<status endtime="20151012 11:15:19.467" starttime="20151012 11:15:19.462" status="PASS"></status>
 </kw>
 <kw library="ArgsParserKeywords" name="Get Rainy">
 <assign>
 <var>${rainy}</var>
 </assign>
-<msg level="INFO" timestamp="20151010 15:28:34.314">${rainy} = true</msg>
-<status endtime="20151010 15:28:34.314" starttime="20151010 15:28:34.311" status="PASS"></status>
+<msg level="INFO" timestamp="20151012 11:15:19.472">${rainy} = true</msg>
+<status endtime="20151012 11:15:19.473" starttime="20151012 11:15:19.469" status="PASS"></status>
 </kw>
 <kw library="BuiltIn" name="Should Be Equal">
 <doc>Fails if the given objects are unequal.</doc>
@@ -159,14 +137,14 @@ VolumeCalculator.java: error: unrecognized arguments: 43</msg>
 <arg>true</arg>
 <arg>${rainy}</arg>
 </arguments>
-<status endtime="20151010 15:28:34.321" starttime="20151010 15:28:34.316" status="PASS"></status>
+<status endtime="20151012 11:15:19.480" starttime="20151012 11:15:19.475" status="PASS"></status>
 </kw>
 <kw library="ArgsParserKeywords" name="Get Bathrooms">
 <assign>
 <var>${bathrooms}</var>
 </assign>
-<msg level="INFO" timestamp="20151010 15:28:34.325">${bathrooms} = 3.5</msg>
-<status endtime="20151010 15:28:34.325" starttime="20151010 15:28:34.323" status="PASS"></status>
+<msg level="INFO" timestamp="20151012 11:15:19.486">${bathrooms} = 3.5</msg>
+<status endtime="20151012 11:15:19.487" starttime="20151012 11:15:19.483" status="PASS"></status>
 </kw>
 <kw library="BuiltIn" name="Should Be Equal">
 <doc>Fails if the given objects are unequal.</doc>
@@ -174,39 +152,19 @@ VolumeCalculator.java: error: unrecognized arguments: 43</msg>
 <arg>3.5</arg>
 <arg>${bathrooms}</arg>
 </arguments>
-<status endtime="20151010 15:28:34.330" starttime="20151010 15:28:34.327" status="PASS"></status>
+<status endtime="20151012 11:15:19.492" starttime="20151012 11:15:19.488" status="PASS"></status>
 </kw>
-<status critical="yes" endtime="20151010 15:28:34.331" starttime="20151010 15:28:34.276" status="PASS"></status>
+<status critical="yes" endtime="20151012 11:15:19.494" starttime="20151012 11:15:19.432" status="PASS"></status>
 </test>
 <test name="Test Usage Message" id="s1-t4">
 <kw library="ArgsParserKeywords" name="Start Program With Arguments">
 <arguments>
 <arg>-h</arg>
 </arguments>
-<status endtime="20151010 15:28:34.339" starttime="20151010 15:28:34.336" status="PASS"></status>
+<msg level="FAIL" timestamp="20151012 11:15:19.504">NullPointerException</msg>
+<status endtime="20151012 11:15:19.505" starttime="20151012 11:15:19.499" status="FAIL"></status>
 </kw>
-<kw library="ArgsParserKeywords" name="Get Program Output">
-<assign>
-<var>${output}</var>
-</assign>
-<msg level="INFO" timestamp="20151010 15:28:34.343">${output} = usage: java VolumeCalculator length width height 
-Calculate the volume of a box
-positional arguments:
-length the length of the box
-width the width of the box
-height the height of the box
-</msg>
-<status endtime="20151010 15:28:34.343" starttime="20151010 15:28:34.341" status="PASS"></status>
-</kw>
-<kw library="BuiltIn" name="Should Be Equal">
-<doc>Fails if the given objects are unequal.</doc>
-<arguments>
-<arg>${expect}</arg>
-<arg>${output}</arg>
-</arguments>
-<status endtime="20151010 15:28:34.348" starttime="20151010 15:28:34.345" status="PASS"></status>
-</kw>
-<status critical="yes" endtime="20151010 15:28:34.349" starttime="20151010 15:28:34.334" status="PASS"></status>
+<status critical="yes" endtime="20151012 11:15:19.508" starttime="20151012 11:15:19.497" status="FAIL">NullPointerException</status>
 </test>
 <test name="Test Incorrect Datatype Message" id="s1-t5">
 <kw library="ArgsParserKeywords" name="Start Program With Arguments">
@@ -215,25 +173,16 @@ height the height of the box
 <arg>something</arg>
 <arg>2</arg>
 </arguments>
-<status endtime="20151010 15:28:34.357" starttime="20151010 15:28:34.354" status="PASS"></status>
+<status endtime="20151012 11:15:19.517" starttime="20151012 11:15:19.513" status="PASS"></status>
 </kw>
 <kw library="ArgsParserKeywords" name="Get Program Output">
 <assign>
 <var>${output}</var>
 </assign>
-<msg level="INFO" timestamp="20151010 15:28:34.361">${output} = usage: java VolumeCalculator length width height 
-VolumeCalculator.java: error: argument width: invalid double value: something</msg>
-<status endtime="20151010 15:28:34.361" starttime="20151010 15:28:34.358" status="PASS"></status>
+<msg level="FAIL" timestamp="20151012 11:15:19.525">NullPointerException</msg>
+<status endtime="20151012 11:15:19.526" starttime="20151012 11:15:19.519" status="FAIL"></status>
 </kw>
-<kw library="BuiltIn" name="Should Be Equal">
-<doc>Fails if the given objects are unequal.</doc>
-<arguments>
-<arg>${output}</arg>
-<arg>${exp}</arg>
-</arguments>
-<status endtime="20151010 15:28:34.366" starttime="20151010 15:28:34.362" status="PASS"></status>
-</kw>
-<status critical="yes" endtime="20151010 15:28:34.368" starttime="20151010 15:28:34.352" status="PASS"></status>
+<status critical="yes" endtime="20151012 11:15:19.527" starttime="20151012 11:15:19.510" status="FAIL">NullPointerException</status>
 </test>
 <test name="Test Named Argument Defaults" id="s1-t6">
 <kw library="ArgsParserKeywords" name="Start Volume Cacluator With Arguments">
@@ -242,16 +191,16 @@ VolumeCalculator.java: error: argument width: invalid double value: something</m
 <arg>3</arg>
 <arg>2</arg>
 </arguments>
-<status endtime="20151010 15:28:34.376" starttime="20151010 15:28:34.373" status="PASS"></status>
+<status endtime="20151012 11:15:19.538" starttime="20151012 11:15:19.534" status="PASS"></status>
 </kw>
 <kw library="ArgsParserKeywords" name="Get Length">
 <assign>
 <var>${length}</var>
 </assign>
-<msg level="WARN" timestamp="20151010 15:28:34.181">Keyword 'Get Length' found both from a custom test library 'ArgsParserKeywords' and a standard library 'BuiltIn'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'ArgsParserKeywords.Get Length' or 'BuiltIn.Get Length'.</msg>
-<msg level="WARN" timestamp="20151010 15:28:34.378">Keyword 'Get Length' found both from a custom test library 'ArgsParserKeywords' and a standard library 'BuiltIn'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'ArgsParserKeywords.Get Length' or 'BuiltIn.Get Length'.</msg>
-<msg level="INFO" timestamp="20151010 15:28:34.384">${length} = 7</msg>
-<status endtime="20151010 15:28:34.385" starttime="20151010 15:28:34.378" status="PASS"></status>
+<msg level="WARN" timestamp="20151012 11:15:19.368">Keyword 'Get Length' found both from a custom test library 'ArgsParserKeywords' and a standard library 'BuiltIn'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'ArgsParserKeywords.Get Length' or 'BuiltIn.Get Length'.</msg>
+<msg level="WARN" timestamp="20151012 11:15:19.540">Keyword 'Get Length' found both from a custom test library 'ArgsParserKeywords' and a standard library 'BuiltIn'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'ArgsParserKeywords.Get Length' or 'BuiltIn.Get Length'.</msg>
+<msg level="INFO" timestamp="20151012 11:15:19.546">${length} = 7</msg>
+<status endtime="20151012 11:15:19.547" starttime="20151012 11:15:19.540" status="PASS"></status>
 </kw>
 <kw library="BuiltIn" name="Should Be Equal">
 <doc>Fails if the given objects are unequal.</doc>
@@ -259,14 +208,14 @@ VolumeCalculator.java: error: argument width: invalid double value: something</m
 <arg>7</arg>
 <arg>${length}</arg>
 </arguments>
-<status endtime="20151010 15:28:34.391" starttime="20151010 15:28:34.387" status="PASS"></status>
+<status endtime="20151012 11:15:19.551" starttime="20151012 11:15:19.548" status="PASS"></status>
 </kw>
 <kw library="ArgsParserKeywords" name="Get Width">
 <assign>
 <var>${width}</var>
 </assign>
-<msg level="INFO" timestamp="20151010 15:28:34.394">${width} = 3</msg>
-<status endtime="20151010 15:28:34.395" starttime="20151010 15:28:34.392" status="PASS"></status>
+<msg level="INFO" timestamp="20151012 11:15:19.555">${width} = 3</msg>
+<status endtime="20151012 11:15:19.556" starttime="20151012 11:15:19.553" status="PASS"></status>
 </kw>
 <kw library="BuiltIn" name="Should Be Equal">
 <doc>Fails if the given objects are unequal.</doc>
@@ -274,14 +223,14 @@ VolumeCalculator.java: error: argument width: invalid double value: something</m
 <arg>3</arg>
 <arg>${width}</arg>
 </arguments>
-<status endtime="20151010 15:28:34.399" starttime="20151010 15:28:34.396" status="PASS"></status>
+<status endtime="20151012 11:15:19.561" starttime="20151012 11:15:19.558" status="PASS"></status>
 </kw>
 <kw library="ArgsParserKeywords" name="Get Height">
 <assign>
 <var>${height}</var>
 </assign>
-<msg level="INFO" timestamp="20151010 15:28:34.403">${height} = 2</msg>
-<status endtime="20151010 15:28:34.403" starttime="20151010 15:28:34.400" status="PASS"></status>
+<msg level="INFO" timestamp="20151012 11:15:19.565">${height} = 2</msg>
+<status endtime="20151012 11:15:19.566" starttime="20151012 11:15:19.563" status="PASS"></status>
 </kw>
 <kw library="BuiltIn" name="Should Be Equal">
 <doc>Fails if the given objects are unequal.</doc>
@@ -289,18 +238,18 @@ VolumeCalculator.java: error: argument width: invalid double value: something</m
 <arg>2</arg>
 <arg>${height}</arg>
 </arguments>
-<status endtime="20151010 15:28:34.408" starttime="20151010 15:28:34.404" status="PASS"></status>
+<status endtime="20151012 11:15:19.572" starttime="20151012 11:15:19.567" status="PASS"></status>
 </kw>
 <kw name="Get Type">
 <assign>
 <var>${type}</var>
 </assign>
-<msg level="FAIL" timestamp="20151010 15:28:34.420">No keyword with name 'Get Type' found. Did you mean:
+<msg level="FAIL" timestamp="20151012 11:15:19.588">No keyword with name 'Get Type' found. Did you mean:
     ArgsParserKeywords.Get Pet
     BuiltIn.Get Time</msg>
-<status endtime="20151010 15:28:34.420" starttime="20151010 15:28:34.419" status="FAIL"></status>
+<status endtime="20151012 11:15:19.589" starttime="20151012 11:15:19.587" status="FAIL"></status>
 </kw>
-<status critical="yes" endtime="20151010 15:28:34.422" starttime="20151010 15:28:34.370" status="FAIL">No keyword with name 'Get Type' found. Did you mean:
+<status critical="yes" endtime="20151012 11:15:19.592" starttime="20151012 11:15:19.530" status="FAIL">No keyword with name 'Get Type' found. Did you mean:
     ArgsParserKeywords.Get Pet
     BuiltIn.Get Time</status>
 </test>
@@ -313,34 +262,12 @@ VolumeCalculator.java: error: argument width: invalid double value: something</m
 <arg>--type</arg>
 <arg>ellipsoid</arg>
 </arguments>
-<msg level="INFO" timestamp="20151010 15:28:34.431">usage: java VolumeCalculator length width height 
-VolumeCalculator.java: error: unrecognized arguments: 7usage: java VolumeCalculator length width height 
-VolumeCalculator.java: error: unrecognized arguments: 3usage: java VolumeCalculator length width height 
-VolumeCalculator.java: error: unrecognized arguments: 2usage: java VolumeCalculator length width height 
-VolumeCalculator.java: error: unrecognized arguments: --typeusage: java VolumeCalculator length width height 
+<msg level="FAIL" timestamp="20151012 11:15:19.602">TooManyArgumentsException: usage: java VolumeCalculator length width height 
 VolumeCalculator.java: error: unrecognized arguments: ellipsoid</msg>
-<status endtime="20151010 15:28:34.432" starttime="20151010 15:28:34.427" status="PASS"></status>
+<status endtime="20151012 11:15:19.604" starttime="20151012 11:15:19.598" status="FAIL"></status>
 </kw>
-<kw library="ArgsParserKeywords" name="Get Length">
-<assign>
-<var>${length}</var>
-</assign>
-<msg level="WARN" timestamp="20151010 15:28:34.181">Keyword 'Get Length' found both from a custom test library 'ArgsParserKeywords' and a standard library 'BuiltIn'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'ArgsParserKeywords.Get Length' or 'BuiltIn.Get Length'.</msg>
-<msg level="WARN" timestamp="20151010 15:28:34.378">Keyword 'Get Length' found both from a custom test library 'ArgsParserKeywords' and a standard library 'BuiltIn'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'ArgsParserKeywords.Get Length' or 'BuiltIn.Get Length'.</msg>
-<msg level="WARN" timestamp="20151010 15:28:34.433">Keyword 'Get Length' found both from a custom test library 'ArgsParserKeywords' and a standard library 'BuiltIn'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'ArgsParserKeywords.Get Length' or 'BuiltIn.Get Length'.</msg>
-<msg level="INFO" timestamp="20151010 15:28:34.440">${length} = </msg>
-<status endtime="20151010 15:28:34.441" starttime="20151010 15:28:34.433" status="PASS"></status>
-</kw>
-<kw library="BuiltIn" name="Should Be Equal">
-<doc>Fails if the given objects are unequal.</doc>
-<arguments>
-<arg>7</arg>
-<arg>${length}</arg>
-</arguments>
-<msg level="FAIL" timestamp="20151010 15:28:34.445">7 != </msg>
-<status endtime="20151010 15:28:34.447" starttime="20151010 15:28:34.442" status="FAIL"></status>
-</kw>
-<status critical="yes" endtime="20151010 15:28:34.449" starttime="20151010 15:28:34.425" status="FAIL">7 != </status>
+<status critical="yes" endtime="20151012 11:15:19.606" starttime="20151012 11:15:19.594" status="FAIL">TooManyArgumentsException: usage: java VolumeCalculator length width height 
+VolumeCalculator.java: error: unrecognized arguments: ellipsoid</status>
 </test>
 <test name="Test Named Argument Multiple" id="s1-t8">
 <kw library="ArgsParserKeywords" name="Start Volume Cacluator With Arguments">
@@ -353,61 +280,29 @@ VolumeCalculator.java: error: unrecognized arguments: ellipsoid</msg>
 <arg>--digits</arg>
 <arg>1</arg>
 </arguments>
-<msg level="INFO" timestamp="20151010 15:28:34.458">usage: java VolumeCalculator length width height 
-VolumeCalculator.java: error: unrecognized arguments: 7usage: java VolumeCalculator length width height 
-VolumeCalculator.java: error: unrecognized arguments: 3usage: java VolumeCalculator length width height 
-VolumeCalculator.java: error: unrecognized arguments: 2usage: java VolumeCalculator length width height 
-VolumeCalculator.java: error: unrecognized arguments: --typeusage: java VolumeCalculator length width height 
-VolumeCalculator.java: error: unrecognized arguments: ellipsoidusage: java VolumeCalculator length width height 
-VolumeCalculator.java: error: unrecognized arguments: --digitsusage: java VolumeCalculator length width height 
-VolumeCalculator.java: error: unrecognized arguments: 1</msg>
-<status endtime="20151010 15:28:34.459" starttime="20151010 15:28:34.455" status="PASS"></status>
+<msg level="FAIL" timestamp="20151012 11:15:19.618">TooManyArgumentsException: usage: java VolumeCalculator length width height 
+VolumeCalculator.java: error: unrecognized arguments: ellipsoid</msg>
+<status endtime="20151012 11:15:19.618" starttime="20151012 11:15:19.610" status="FAIL"></status>
 </kw>
-<kw library="ArgsParserKeywords" name="Get Length">
-<assign>
-<var>${length}</var>
-</assign>
-<msg level="WARN" timestamp="20151010 15:28:34.181">Keyword 'Get Length' found both from a custom test library 'ArgsParserKeywords' and a standard library 'BuiltIn'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'ArgsParserKeywords.Get Length' or 'BuiltIn.Get Length'.</msg>
-<msg level="WARN" timestamp="20151010 15:28:34.378">Keyword 'Get Length' found both from a custom test library 'ArgsParserKeywords' and a standard library 'BuiltIn'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'ArgsParserKeywords.Get Length' or 'BuiltIn.Get Length'.</msg>
-<msg level="WARN" timestamp="20151010 15:28:34.433">Keyword 'Get Length' found both from a custom test library 'ArgsParserKeywords' and a standard library 'BuiltIn'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'ArgsParserKeywords.Get Length' or 'BuiltIn.Get Length'.</msg>
-<msg level="WARN" timestamp="20151010 15:28:34.461">Keyword 'Get Length' found both from a custom test library 'ArgsParserKeywords' and a standard library 'BuiltIn'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'ArgsParserKeywords.Get Length' or 'BuiltIn.Get Length'.</msg>
-<msg level="INFO" timestamp="20151010 15:28:34.471">${length} = </msg>
-<status endtime="20151010 15:28:34.471" starttime="20151010 15:28:34.462" status="PASS"></status>
-</kw>
-<kw library="BuiltIn" name="Should Be Equal">
-<doc>Fails if the given objects are unequal.</doc>
-<arguments>
-<arg>7</arg>
-<arg>${length}</arg>
-</arguments>
-<msg level="FAIL" timestamp="20151010 15:28:34.475">7 != </msg>
-<status endtime="20151010 15:28:34.476" starttime="20151010 15:28:34.472" status="FAIL"></status>
-</kw>
-<status critical="yes" endtime="20151010 15:28:34.477" starttime="20151010 15:28:34.452" status="FAIL">7 != </status>
+<status critical="yes" endtime="20151012 11:15:19.620" starttime="20151012 11:15:19.608" status="FAIL">TooManyArgumentsException: usage: java VolumeCalculator length width height 
+VolumeCalculator.java: error: unrecognized arguments: ellipsoid</status>
 </test>
-<status endtime="20151010 15:28:34.482" starttime="20151010 15:28:33.821" status="FAIL"></status>
+<status endtime="20151012 11:15:19.623" starttime="20151012 11:15:19.003" status="FAIL"></status>
 </suite>
 <statistics>
 <total>
-<stat pass="5" fail="3">Critical Tests</stat>
-<stat pass="5" fail="3">All Tests</stat>
+<stat pass="1" fail="7">Critical Tests</stat>
+<stat pass="1" fail="7">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="5" fail="3" name="ArgsParserTests" id="s1">ArgsParserTests</stat>
+<stat pass="1" fail="7" name="ArgsParserTests" id="s1">ArgsParserTests</stat>
 </suite>
 </statistics>
 <errors>
-<msg level="WARN" timestamp="20151010 15:28:34.181">Keyword 'Get Length' found both from a custom test library 'ArgsParserKeywords' and a standard library 'BuiltIn'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'ArgsParserKeywords.Get Length' or 'BuiltIn.Get Length'.</msg>
-<msg level="WARN" timestamp="20151010 15:28:34.181">Keyword 'Get Length' found both from a custom test library 'ArgsParserKeywords' and a standard library 'BuiltIn'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'ArgsParserKeywords.Get Length' or 'BuiltIn.Get Length'.</msg>
-<msg level="WARN" timestamp="20151010 15:28:34.378">Keyword 'Get Length' found both from a custom test library 'ArgsParserKeywords' and a standard library 'BuiltIn'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'ArgsParserKeywords.Get Length' or 'BuiltIn.Get Length'.</msg>
-<msg level="WARN" timestamp="20151010 15:28:34.181">Keyword 'Get Length' found both from a custom test library 'ArgsParserKeywords' and a standard library 'BuiltIn'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'ArgsParserKeywords.Get Length' or 'BuiltIn.Get Length'.</msg>
-<msg level="WARN" timestamp="20151010 15:28:34.378">Keyword 'Get Length' found both from a custom test library 'ArgsParserKeywords' and a standard library 'BuiltIn'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'ArgsParserKeywords.Get Length' or 'BuiltIn.Get Length'.</msg>
-<msg level="WARN" timestamp="20151010 15:28:34.433">Keyword 'Get Length' found both from a custom test library 'ArgsParserKeywords' and a standard library 'BuiltIn'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'ArgsParserKeywords.Get Length' or 'BuiltIn.Get Length'.</msg>
-<msg level="WARN" timestamp="20151010 15:28:34.181">Keyword 'Get Length' found both from a custom test library 'ArgsParserKeywords' and a standard library 'BuiltIn'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'ArgsParserKeywords.Get Length' or 'BuiltIn.Get Length'.</msg>
-<msg level="WARN" timestamp="20151010 15:28:34.378">Keyword 'Get Length' found both from a custom test library 'ArgsParserKeywords' and a standard library 'BuiltIn'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'ArgsParserKeywords.Get Length' or 'BuiltIn.Get Length'.</msg>
-<msg level="WARN" timestamp="20151010 15:28:34.433">Keyword 'Get Length' found both from a custom test library 'ArgsParserKeywords' and a standard library 'BuiltIn'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'ArgsParserKeywords.Get Length' or 'BuiltIn.Get Length'.</msg>
-<msg level="WARN" timestamp="20151010 15:28:34.461">Keyword 'Get Length' found both from a custom test library 'ArgsParserKeywords' and a standard library 'BuiltIn'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'ArgsParserKeywords.Get Length' or 'BuiltIn.Get Length'.</msg>
+<msg level="WARN" timestamp="20151012 11:15:19.368">Keyword 'Get Length' found both from a custom test library 'ArgsParserKeywords' and a standard library 'BuiltIn'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'ArgsParserKeywords.Get Length' or 'BuiltIn.Get Length'.</msg>
+<msg level="WARN" timestamp="20151012 11:15:19.368">Keyword 'Get Length' found both from a custom test library 'ArgsParserKeywords' and a standard library 'BuiltIn'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'ArgsParserKeywords.Get Length' or 'BuiltIn.Get Length'.</msg>
+<msg level="WARN" timestamp="20151012 11:15:19.540">Keyword 'Get Length' found both from a custom test library 'ArgsParserKeywords' and a standard library 'BuiltIn'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'ArgsParserKeywords.Get Length' or 'BuiltIn.Get Length'.</msg>
 </errors>
 </robot>

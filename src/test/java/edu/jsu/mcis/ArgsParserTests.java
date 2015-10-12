@@ -115,7 +115,7 @@ public class ArgsParserTests{
 		try{
 		ap.parseValues(args);
 		}
-		catch(TooManyArgumentsException e){
+		catch(TooFewArgumentsException e){
 		assertEquals("usage: java VolumeCalculator length width height \nVolumeCalculator.java: error: the following arguments are required: height ",ap.getErrorMessage());
 		}
 	}
@@ -132,13 +132,19 @@ public class ArgsParserTests{
 		assertEquals("usage: java VolumeCalculator length width height \nVolumeCalculator.java: error: argument width: invalid double value: something",ap.getErrorMessage());
 	}
 	@Test
-	public void CheckForDoubleDashType(){
-		String[] args = new String[] {"--type","ellipsoid"};
-		ap.addArgument("--type","the length of the box",Argument.Type.STRING);
-		ap.addNamedArgument("--type","the length of the box",Argument.Type.STRING);
-		ap.parseValues(args);
-		assertEquals("ellipsoid",ap.getValue("--type"));
+	public void makeNamedArgument(){
+		ap.addNamedArgument("length","the length of the box",Argument.Type.STRING,1);
+		assertEquals("", ap.getValue("length"));
+		
 		
 	}
+	//@Test
+	//public void checkShorthand()
+	//{
+	//	ap.addNamedArgument("--type","the length of the box",Argument.Type.STRING,1);
+		//ap.setShorthand("--type","-t");
+		//assertEquals("-t", ap.getShorthand("--type"));
+		
+	//}
 	
 }
