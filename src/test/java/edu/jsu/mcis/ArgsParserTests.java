@@ -98,10 +98,12 @@ public class ArgsParserTests{
 		ap.addArgument("width","the width of the box",Argument.Type.DOUBLE);
 		ap.addArgument("height","the height of the box",Argument.Type.DOUBLE);
 		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
+		try{
 		ap.parseValues(args);
-		assertTrue(ap.getError());
+		}
+		catch(TooManyArgumentsException e){
 		assertEquals("usage: java VolumeCalculator length width height \nVolumeCalculator.java: error: unrecognized arguments: 43",ap.getErrorMessage());
-		
+		}
 	}
 	@Test
 	public void forceTooFewArguments(){
@@ -110,10 +112,12 @@ public class ArgsParserTests{
 		ap.addArgument("width","the width of the box",Argument.Type.DOUBLE);
 		ap.addArgument("height","the height of the box",Argument.Type.DOUBLE);
 		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
+		try{
 		ap.parseValues(args);
-		assertTrue(ap.getError());
+		}
+		catch(TooManyArgumentsException e){
 		assertEquals("usage: java VolumeCalculator length width height \nVolumeCalculator.java: error: the following arguments are required: height ",ap.getErrorMessage());
-		
+		}
 	}
 	
 	@Test
@@ -131,7 +135,7 @@ public class ArgsParserTests{
 	public void CheckForDoubleDashType(){
 		String[] args = new String[] {"--type","ellipsoid"};
 		ap.addArgument("--type","the length of the box",Argument.Type.STRING);
-		ap.addNamedArgument("--type");
+		ap.addNamedArgument("--type","the length of the box",Argument.Type.STRING);
 		ap.parseValues(args);
 		assertEquals("ellipsoid",ap.getValue("--type"));
 		

@@ -7,8 +7,5 @@ public class InvalidException extends Exception{
         super(message);
     }
     
-    public String getMessage(){
-        return super.getMessage();
-    }
     
 }

@@ -1,8 +1,0 @@
-¥usage: java VolumeCalculator length width height 
-VolumeCalculator.java: error: unrecognized arguments: 7usage: java VolumeCalculator length width height 
-VolumeCalculator.java: error: unrecognized arguments: 5usage: java VolumeCalculator length width height 
-VolumeCalculator.java: error: unrecognized arguments: 2usage: java VolumeCalculator length width height 
-VolumeCalculator.java: error: unrecognized arguments: 43Dusage: java  --type 
-.java: error: unrecognized arguments: ellipsoid€usage: java VolumeCalculator length width height 
-VolumeCalculator.java: error: the following arguments are required: width height usage: java VolumeCalculator length width height 
-VolumeCalculator.java: error: the following arguments are required: height 
