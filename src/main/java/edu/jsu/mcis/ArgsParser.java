@@ -44,23 +44,7 @@ public class ArgsParser{
 	
 	public void parseValues (String[] values){
 		for(int i=0;i<values.length;i++){
-			for(int j=0;j<namedArgumentsNames.size();j++){
-				help=false;
-				if(values[i].equals(namedArgumentsNames.get(j))){
-					if(values[i].equals("-h")||values[i].equals("--help")){
-						arguments.get(i).setValue(values[i]);
-						help = true;
-					}
-					help=true;
-					arguments.get(namedArgumentsNames.get(j)).setValue("box");
-					i+=2;
-				
-				
-				}
-			}
-			
-			
-			
+			i = parseNamedArguments(i, values);
 			 if(values.length != argumentNames.size()+namedArgumentsNames.size()&&!help){
 				if(values.length > argumentNames.size()&& i>argumentNames.size()){
 					errorMessage = premessage+"\n"+programName+".java: error: unrecognized arguments: "+values[i];
@@ -91,6 +75,7 @@ public class ArgsParser{
 			catch(NumberFormatException e){
 				errorMessage = premessage+"\n"+programName+".java: error: argument "+argumentNames.get(i)+": invalid double value: "+values[i];
 				error=true;
+				throw new NumberFormatException(errorMessage);
 			}
 		}
 		else if(arguments.get(argumentNames.get(i)).getType()==Argument.Type.INTEGER){
@@ -120,7 +105,7 @@ public class ArgsParser{
 	private void setHelpMessage(){
 		helpMessage = premessage;
 		helpMessage += "\n"+programDescription+"\npositional arguments:\n";
-		for(int i =0; i<arguments.size();i++)
+		for(int i =0; i<argumentNames.size();i++)
 		{
 			helpMessage += argumentNames.get(i)+" "+arguments.get(argumentNames.get(i)).getDescription()+"\n";
 			
@@ -167,17 +152,24 @@ public class ArgsParser{
 		return arguments.get(name).getType();
 		
 	}
-	public boolean  getHelp(){
+	private int parseNamedArguments(int i, String[] values){
 		
-		return help;
-	}
-	/**
-	public void setShorthand(String name, String shorthand){
-		arguments.get(name).setShorthand(shorthand);
-	}
-	public String getShorthand(String name){
-		return arguments.get(name).getShorthand();
+		for(int j=0;j<namedArgumentsNames.size();j++){
+				if(values[i].equals(namedArgumentsNames.get(j))){
+					if(values[i].equals("-h")||values[i].equals("--help")){
+						throw new HelpMessageException(helpMessage);
+					}
+					else{
+					arguments.get(namedArgumentsNames.get(j)).setValue(values[i+1]);
+					i+=2;
+					}
+				    help=true;
+				
+				}
+			}
+			return i;
 		
-	}*/
+	}
+	
 	
 }
