@@ -188,20 +188,26 @@ public class ArgsParserTests{
 		
 	}
 	@Test
-	public void checkArgumentType(){
+	public void checkArgumentTypeDouble(){
 		ap.addArgument("length","the length of the box",Argument.Type.DOUBLE);
 		assertEquals(Argument.Type.DOUBLE, ap.getArgumentType("length"));
 		
 	}
-	
-	
-	//@Test
-	//public void checkShorthand()
-	//{
-	//	ap.addNamedArgument("--type","the length of the box",Argument.Type.STRING,1);
-		//ap.setShorthand("--type","-t");
-		//assertEquals("-t", ap.getShorthand("--type"));
+	public void checkArgumentTypeString(){
+		ap.addArgument("length","the length of the box",Argument.Type.STRING);
+		assertEquals(Argument.Type.STRING, ap.getArgumentType("length"));
 		
-	//}
+	}
+	public void checkArgumentTypeINT(){
+		ap.addArgument("length","the length of the box",Argument.Type.INTEGER);
+		assertEquals(Argument.Type.INTEGER, ap.getArgumentType("length"));
+		
+	}
+	public void checkArgumentTypeBoolean(){
+		ap.addArgument("length","the length of the box",Argument.Type.BOOLEAN);
+		assertEquals(Argument.Type.BOOLEAN, ap.getArgumentType("length"));
+		
+	}
+	
 	
 }
