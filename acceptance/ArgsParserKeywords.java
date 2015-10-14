@@ -1,49 +1,47 @@
 import edu.jsu.mcis.*;
 
-public class ArgsParserKeywords {
+public class ArgsParserKeywords{
 	
 	private ArgsParser ap;
 	
-	public void startVolumeCacluatorWithArguments(String[] args) {
+	public void startVolumeCacluatorWithArguments(String[] args){
 		ap = new ArgsParser();
 		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
 		ap.addArgument("length","the length of the box",Argument.Type.STRING);
 		ap.addArgument("width","the width of the box",Argument.Type.STRING);
 		ap.addArgument("height","the height of the box",Argument.Type.STRING);
 		ap.parseValues(args);
-		
 	}
 	
-	public <T> T getLength() {
-		 
+	public <T> T getLength(){
 		return ap.getValue("length");
 	}
-	public <T> T getWidth() {
-		 
+	
+	public <T> T getWidth(){
 		return ap.getValue("width");
 	}
-	public <T> T getHeight() {
-		 
+	
+	public <T> T getHeight(){
 		return ap.getValue("height");
 	}
-	public <T> T getPet() {
-		 
+	
+	public <T> T getPet(){
 		return ap.getValue("pet");
 	}
-	public <T> T getNumber() {
-		 
+	
+	public <T> T getNumber(){
 		return ap.getValue("number");
 	}
-	public <T> T getRainy() {
-		 
+	
+	public <T> T getRainy(){
 		return ap.getValue("rainy");
 	}
-	public <T> T getBathrooms() {
-		 
+	
+	public <T> T getBathrooms(){
 		return ap.getValue("bathrooms");
 	}
 	
-	public String getProgramOutput() {
+	public String getProgramOutput(){
 		String s = "";
 		double d = 0;
 		int i = 0;
@@ -67,14 +65,14 @@ public class ArgsParserKeywords {
 			return ap.getErrorMessage();
 		}
 		else{
-		float len = Float.parseFloat(getLength());
-		float wid = Float.parseFloat(getWidth());
-		float hei = Float.parseFloat(getHeight());
-		return String.valueOf(len * wid * hei);}
+			float len = Float.parseFloat(getLength());
+			float wid = Float.parseFloat(getWidth());
+			float hei = Float.parseFloat(getHeight());
+			return String.valueOf(len * wid * hei);
+		}
 	}
 	
-	
-	public void startAbsurdProgramWithArguments(String[] args) {
+	public void startAbsurdProgramWithArguments(String[] args){
 		ap = new ArgsParser();
 		ap.addProgram("VolumeCalculator","");
 		ap.addArgument("pet","",Argument.Type.STRING);
@@ -82,11 +80,9 @@ public class ArgsParserKeywords {
 		ap.addArgument("rainy","",Argument.Type.STRING);
 		ap.addArgument("bathrooms","",Argument.Type.STRING);
 		ap.parseValues(args);
-		
-		
 	}
 	
-	public void startProgramWithArguments(String[] args) {
+	public void startProgramWithArguments(String[] args){
 		ap = new ArgsParser();
 		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
 		ap.addArgument("length","the length of the box",Argument.Type.DOUBLE);
