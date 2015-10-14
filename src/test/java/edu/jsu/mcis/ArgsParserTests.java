@@ -53,7 +53,7 @@ public class ArgsParserTests{
 		ap.addArgument("length","the length of the box",Argument.Type.STRING);
 		ap.addArgument("width","the width of the box",Argument.Type.STRING);
 		ap.addArgument("height","the height of the box",Argument.Type.STRING);
-		
+		assertTrue(ap.getHelp());
 		assertEquals("usage: java VolumeCalculator length width height \nCalculate the volume of a box\npositional arguments:\nlength the length of the box\nwidth the width of the box\nheight the height of the box\n",
 					 ap.getHelpMessage());
 		
@@ -138,6 +138,23 @@ public class ArgsParserTests{
 		
 		
 	}
+	@Test
+	public void checkNamedArgumentValue(){
+		String[] args = new String[] {"--type", "box"};
+		ap.addNamedArgument("--type","",Argument.Type.STRING,1);
+		ap.parseValues(args);
+		assertEquals("box", ap.getValue("--type"));
+		
+		
+	}
+	@Test
+	public void checkArgumentType(){
+		ap.addArgument("length","the length of the box",Argument.Type.DOUBLE);
+		assertEquals(Argument.Type.DOUBLE, ap.getArgumentType("length"));
+		
+	}
+	
+	
 	//@Test
 	//public void checkShorthand()
 	//{

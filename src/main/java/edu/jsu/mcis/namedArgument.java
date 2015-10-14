@@ -2,13 +2,9 @@ package edu.jsu.mcis;
 public class namedArgument extends Argument{
 	private int numberOfValues;
 	private Object[] argumentValues;
-	private Type argumentType;
-	private String argumentName;
-	private Object argumentValue;
-	private String argumentDescription;
 	private String shorthand;
-	public namedArgument(Type type, String name, String description, int numberOfValues){
-		  super(type,name,description);
+	public namedArgument(Type type, String description, int numberOfValues){
+		  super(type,description);
 		 shorthand = "";
 		 this.numberOfValues = numberOfValues;
 		// argumentValues= new Object[numberOfValues];

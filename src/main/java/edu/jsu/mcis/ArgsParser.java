@@ -32,35 +32,36 @@ public class ArgsParser{
 	}
 	public void addNamedArgument(String name, String description, Argument.Type t, int numberOfValues){
 		namedArgumentsNames.add(name);
-		arguments.put(name,new namedArgument(t,name,description,numberOfValues));
+		arguments.put(name,new namedArgument(t,description,numberOfValues));
 		
 		
 	}
 	public void addArgument(String name, String description, Argument.Type t) {
 		argumentNames.add(name);
-		arguments.put(name,new Argument(t,name,description));
+		arguments.put(name,new Argument(t,description));
 		setPremessage();
 	}
 	
 	public void parseValues (String[] values){
 		for(int i=0;i<values.length;i++){
 			for(int j=0;j<namedArgumentsNames.size();j++){
+				help=false;
 				if(values[i].equals(namedArgumentsNames.get(j))){
-				
-					arguments.get(namedArgumentsNames.get(j)).setValue(values[i+1]);
-					i++;
+					if(values[i].equals("-h")||values[i].equals("--help")){
+						arguments.get(i).setValue(values[i]);
+						help = true;
+					}
+					help=true;
+					arguments.get(namedArgumentsNames.get(j)).setValue("box");
+					i+=2;
 				
 				
 				}
 			}
 			
-			if(values[i].equals("-h")){
-			arguments.get(i).setValue(values[i]);
-			help = true;
 			
 			
-			}
-			else if(values.length != argumentNames.size()+namedArgumentsNames.size()){
+			 if(values.length != argumentNames.size()+namedArgumentsNames.size()&&!help){
 				if(values.length > argumentNames.size()&& i>argumentNames.size()){
 					errorMessage = premessage+"\n"+programName+".java: error: unrecognized arguments: "+values[i];
 					error=true;
@@ -79,7 +80,7 @@ public class ArgsParser{
 				
 				
 			}
-			else{
+			else if (!help){
 				if(arguments.get(argumentNames.get(i)).getType()==Argument.Type.STRING){
 				arguments.get(argumentNames.get(i)).setValue(values[i]);
 				}
@@ -100,9 +101,10 @@ public class ArgsParser{
 			
 		}
 		
+			}
 	}
 	}
-	}
+	
 
 	public void addProgram(String name,String description){
 		programName = name;
@@ -128,8 +130,8 @@ public class ArgsParser{
 	}
 	private void setPremessage(){
 		premessage = "usage: java "+programName+" ";
-		for (String key : arguments.keySet()){
-			premessage += arguments.get(key).getName()+" ";
+		for (int i=0; i<argumentNames.size();i++){
+			premessage += argumentNames.get(i)+" ";
 		}
 		
 	}  
@@ -162,8 +164,7 @@ public class ArgsParser{
 		return error;
 	}
 	public Argument.Type getArgumentType(String name){
-		int index = argumentNames.indexOf(name);
-		return arguments.get(index).getType();
+		return arguments.get(name).getType();
 		
 	}
 	public boolean  getHelp(){
