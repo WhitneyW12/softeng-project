@@ -54,7 +54,7 @@ public class ArgsParserTests{
 		ap.addArgument("length","the length of the box",Argument.Type.STRING);
 		ap.addArgument("width","the width of the box",Argument.Type.STRING);
 		ap.addArgument("height","the height of the box",Argument.Type.STRING);
-		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0);
+		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false);
 		try{
 		ap.parseValues(args);
 		}
@@ -72,7 +72,7 @@ public class ArgsParserTests{
 		ap.addArgument("length","the length of the box",Argument.Type.STRING);
 		ap.addArgument("width","the width of the box",Argument.Type.STRING);
 		ap.addArgument("height","the height of the box",Argument.Type.STRING);
-		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0);
+		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false);
 		try{
 		ap.parseValues(args);
 		}
@@ -90,7 +90,7 @@ public class ArgsParserTests{
 		ap.addArgument("length","the length of the box",Argument.Type.STRING);
 		ap.addArgument("width","the width of the box",Argument.Type.STRING);
 		ap.addArgument("height","the height of the box",Argument.Type.STRING);
-		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0);
+		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false);
 		assertEquals("usage: java VolumeCalculator length width height \nCalculate the volume of a box\npositional arguments:\nlength the length of the box\nwidth the width of the box\nheight the height of the box\n",
 					 ap.getHelpMessage());
 		
@@ -175,7 +175,7 @@ public class ArgsParserTests{
 	}
 	@Test
 	public void makeNamedArgument(){
-		ap.addNamedArgument("length","the length of the box",Argument.Type.STRING,1);
+		ap.addNamedArgument("length","the length of the box",Argument.Type.STRING,1,"");
 		assertEquals("", ap.getValue("length"));
 		
 		
@@ -183,9 +183,17 @@ public class ArgsParserTests{
 	@Test
 	public void checkNamedArgumentValue(){
 		String [] restrictedValues = new String[]{"box","elipsoid"};
-		String[] args = new String[] {"--type", "box"};
-		ap.addNamedArgument("--type","",Argument.Type.STRING,1,restrictedValues);
+		String[] args = new String[] {"--type", "elipsoid"};
+		ap.addNamedArgument("--type","",Argument.Type.STRING,1,"box",restrictedValues);
 		ap.parseValues(args);
+		assertEquals("elipsoid", ap.getValue("--type"));
+		
+		
+	}
+	@Test
+	public void checkNamedArgumentDefaultValue(){
+		String [] restrictedValues = new String[]{"box","elipsoid"};
+		ap.addNamedArgument("--type","",Argument.Type.STRING,1,"box",restrictedValues);
 		assertEquals("box", ap.getValue("--type"));
 		
 		
@@ -215,7 +223,7 @@ public class ArgsParserTests{
 	public void checkRestrictedValuesException(){
 		String [] restrictedValues= new String[]{"box","elipsoid"};
 		String[] args = new String[] {"--type", "7"};
-		ap.addNamedArgument("--type","",Argument.Type.STRING,1,restrictedValues);
+		ap.addNamedArgument("--type","",Argument.Type.STRING,1,"box",restrictedValues);
 		try{
 		ap.parseValues(args);
 		assertTrue(false);

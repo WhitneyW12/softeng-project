@@ -10,19 +10,22 @@ public class ArgsParserKeywords{
 		ap.addArgument("length","the length of the box",Argument.Type.STRING);
 		ap.addArgument("width","the width of the box",Argument.Type.STRING);
 		ap.addArgument("height","the height of the box",Argument.Type.STRING);
+		try{
 		ap.parseValues(args);
+		}
+		catch(TooManyArgumentsException ex){};
 	}
 	
 	public <T> T getLength(){
-		return ap.getValue("length");
+		return (T)ap.getValue("length");
 	}
 	
 	public <T> T getWidth(){
-		return ap.getValue("width");
+		return (T)ap.getValue("width");
 	}
 	
 	public <T> T getHeight(){
-		return ap.getValue("height");
+		return (T)ap.getValue("height");
 	}
 	
 	public <T> T getPet(){
@@ -30,36 +33,27 @@ public class ArgsParserKeywords{
 	}
 	
 	public <T> T getNumber(){
-		return ap.getValue("number");
+		return (T)ap.getValue("number");
 	}
 	
 	public <T> T getRainy(){
-		return ap.getValue("rainy");
+		return (T)ap.getValue("rainy");
 	}
 	
 	public <T> T getBathrooms(){
 		return ap.getValue("bathrooms");
 	}
+	public <T> T getType(){
+		return (T)ap.getValue("--type");
+	}
+	public <T> T getDigits(){
+		return (T)ap.getValue("--digits");
+	}
+	
 	
 	public String getProgramOutput(){
-		String s = "";
-		double d = 0;
-		int i = 0;
-		boolean b = false;
 		if(ap.getHelp()){
 			return ap.getHelpMessage();
-		}
-		if(ap.getArgumentType("length")==Argument.Type.STRING){
-			s = ap.getValue("length");
-		}
-		else if (ap.getArgumentType("length")==Argument.Type.DOUBLE){
-			d = ap.getValue("length");
-		}
-		else if (ap.getArgumentType("length")==Argument.Type.INTEGER){
-			i = ap.getValue("length");
-		}
-		else{
-			b = ap.getValue("length");
 		}
 		if(ap.getError()){
 			return ap.getErrorMessage();
@@ -88,6 +82,14 @@ public class ArgsParserKeywords{
 		ap.addArgument("length","the length of the box",Argument.Type.DOUBLE);
 		ap.addArgument("width","the width of the box",Argument.Type.DOUBLE);
 		ap.addArgument("height","the height of the box",Argument.Type.DOUBLE);
+		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false);
+		String [] restrictedValues= new String[]{"box","ellipsoid"};
+		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,0,"box",restrictedValues);
+		ap.addNamedArgument("--digits","prints help message",Argument.Type.BOOLEAN,0,4);
+		try{
 		ap.parseValues(args);
+		}
+		catch(HelpMessageException|NumberFormatException ex){};
+		
 	}
 }

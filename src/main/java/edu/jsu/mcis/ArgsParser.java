@@ -14,6 +14,7 @@ public class ArgsParser{
 	private String errorMessage;
 	private boolean error;
 	private boolean help;
+	private int numofNamedArgValues;
 	
 	public ArgsParser(){
 		arguments = new HashMap<String,Argument>();
@@ -26,15 +27,17 @@ public class ArgsParser{
 		errorMessage = "";
 		error = false;
 		help = false;
+		numofNamedArgValues = 0;
 	}
 	
-	public void addNamedArgument(String name, String description, Argument.Type t, int numberOfValues,String[] restrictedValues){
+	public void addNamedArgument(String name, String description, Argument.Type t, int numberOfValues,Object defaultvalue,String[] restrictedValues){
 		namedArgumentsNames.add(name);
 		arguments.put(name,new namedArgument(t,description,numberOfValues, restrictedValues));
+		arguments.get(name).setValue(defaultvalue);
 		arguments.get(name).setHasRestricted(true);
 	}
-	public void addNamedArgument(String name, String description, Argument.Type t, int numberOfValues){
-		addNamedArgument(name,description,t,numberOfValues,null);
+	public void addNamedArgument(String name, String description, Argument.Type t, int numberOfValues, Object defaultvalue){
+		addNamedArgument(name,description,t,numberOfValues,defaultvalue,null);
 		arguments.get(name).setHasRestricted(false);
 	}
 	public void addArgument(String name, String description, Argument.Type t){
@@ -42,12 +45,19 @@ public class ArgsParser{
 		arguments.put(name,new Argument(t,description));
 		setPremessage();
 	}
+	private void setnumberofNamedargumentvalues(){
+		for(int i =0;i<namedArgumentsNames.size();i++){
+			numofNamedArgValues+=arguments.get(namedArgumentsNames.get(i)).getNumberOfValues();
+		}
+			
+	}
 	
 	public void parseValues (String[] values){
 		for(int i=0;i<values.length;i++){
+			help = false;
 			i = parseNamedArguments(i, values);
-			if(values.length != argumentNames.size()+namedArgumentsNames.size()&&!help){
-				if(values.length > argumentNames.size()+namedArgumentsNames.size()&&  i==values.length-1){
+			if(values.length != argumentNames.size()+namedArgumentsNames.size()+numofNamedArgValues&&!help){
+				if(values.length > argumentNames.size()+namedArgumentsNames.size()+numofNamedArgValues&&  i==values.length-1){
 					errorMessage = premessage+"\n"+programName+".java: error: unrecognized arguments: "+values[i];
 					error=true;
 					throw new TooManyArgumentsException(errorMessage);
@@ -60,7 +70,7 @@ public class ArgsParser{
 						throw new TooFewArgumentsException(errorMessage);
 					}
 				}
-			else if (!help){
+			if(i<values.length){
 				if(arguments.get(argumentNames.get(i)).getType()==Argument.Type.STRING){
 					arguments.get(argumentNames.get(i)).setValue(values[i]);
 				}
@@ -70,7 +80,7 @@ public class ArgsParser{
 					}
 					catch(NumberFormatException e){
 						errorMessage = premessage+"\n"+programName+".java: error: argument "+argumentNames.get(i)+": invalid double value: "+values[i];
-						error=true;
+						error = true;
 						throw new NumberFormatException(errorMessage);
 					}
 				}
@@ -144,34 +154,40 @@ public class ArgsParser{
 	
 	private int parseNamedArguments(int i, String[] values){
 		for(int j=0;j<namedArgumentsNames.size();j++){
-			if(values[i].equals(namedArgumentsNames.get(j))){
-				if(values[i].equals("-h")||values[i].equals("--help")){
+			if(values[i].equals("-h")||values[i].equals("--help")){
+					help=true;
 					throw new HelpMessageException(helpMessage);
+					
 				}
-				else{
+			if(values[i].equals(namedArgumentsNames.get(j))){
+					i++;
+				
 					if(arguments.get(namedArgumentsNames.get(j)).getHasRestricted()){
 						String[] restrictedValues = arguments.get(namedArgumentsNames.get(j)).getRestrictedValues();
 						boolean temp=true;
 						for(int k =0; k<restrictedValues.length;k++){
-							if(values[i+1].equals(restrictedValues[k])){
-								arguments.get(namedArgumentsNames.get(j)).setValue(values[i+1]);
-								i+=2;
-								temp=false;
-								k=restrictedValues.length;
-							}
-							
+						if(values[i].equals(restrictedValues[k])){
+							arguments.get(namedArgumentsNames.get(j)).setValue(values[i]);
+							i++;
+							temp=false;
+							k=restrictedValues.length;
 						}
-						if(temp){
 							
-							throw new RestrictedValuesException("");
-						
-						}
 					}
-					
+					if(temp){
+							
+						throw new RestrictedValuesException("");
+						
+					}
 				}
+					
 				help=true;
 			}
 		}
 		return i;
 	}
+	public boolean getHelp(){
+		return help;
+	}
+	
 }

@@ -7,12 +7,14 @@ public class Argument
 	private String argumentDescription;
 	private String[] restrictedValues;
 	private boolean hasRestricted; 
+	private int numberOfValues;
 	public Argument(Type type, String description, String[] restrictedValues){
 		  argumentType = type;
 		 argumentValue = "";
 		 argumentDescription = description;
 		 hasRestricted = false;
 		 this.restrictedValues = restrictedValues;
+		 numberOfValues=1;
 		 
 	 }
 	public Argument(Type type, String description){
@@ -44,5 +46,8 @@ public class Argument
 	 public void setHasRestricted(boolean b){
 		 
 		 hasRestricted = b;
+	 }
+	 public int getNumberOfValues(){
+		 return numberOfValues;
 	 }
 }
