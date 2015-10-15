@@ -49,6 +49,7 @@ public class ArgsParserTests{
 	@Test
 	public void checkIfDashHThrowsException()
 	{    String[] args = new String[] {"-h","5","2"};
+		
 		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
 		ap.addArgument("length","the length of the box",Argument.Type.STRING);
 		ap.addArgument("width","the width of the box",Argument.Type.STRING);
@@ -154,6 +155,7 @@ public class ArgsParserTests{
 		catch(TooFewArgumentsException e){
 		assertEquals("usage: java VolumeCalculator length width height \nVolumeCalculator.java: error: the following arguments are required: height ",ap.getErrorMessage());
 		}
+		
 	}
 	
 	@Test
@@ -180,8 +182,9 @@ public class ArgsParserTests{
 	}
 	@Test
 	public void checkNamedArgumentValue(){
+		String [] restrictedValues = new String[]{"box","elipsoid"};
 		String[] args = new String[] {"--type", "box"};
-		ap.addNamedArgument("--type","",Argument.Type.STRING,1);
+		ap.addNamedArgument("--type","",Argument.Type.STRING,1,restrictedValues);
 		ap.parseValues(args);
 		assertEquals("box", ap.getValue("--type"));
 		
@@ -208,6 +211,19 @@ public class ArgsParserTests{
 		assertEquals(Argument.Type.BOOLEAN, ap.getArgumentType("length"));
 		
 	}
-	
+	@Test
+	public void checkRestrictedValuesException(){
+		String [] restrictedValues= new String[]{"box","elipsoid"};
+		String[] args = new String[] {"--type", "7"};
+		ap.addNamedArgument("--type","",Argument.Type.STRING,1,restrictedValues);
+		try{
+		ap.parseValues(args);
+		assertTrue(false);
+		}
+		catch(RestrictedValuesException ex){
+		assertTrue(true);
+		}
+		
+	}
 	
 }

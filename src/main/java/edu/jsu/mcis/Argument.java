@@ -5,13 +5,22 @@ public class Argument
 	private Type argumentType;
 	private Object argumentValue;
 	private String argumentDescription;
-	public Argument(Type type, String description){
+	private String[] restrictedValues;
+	private boolean hasRestricted; 
+	public Argument(Type type, String description, String[] restrictedValues){
 		  argumentType = type;
-		 
 		 argumentValue = "";
 		 argumentDescription = description;
+		 hasRestricted = false;
+		 this.restrictedValues = restrictedValues;
 		 
 	 }
+	public Argument(Type type, String description){
+		this(type,description,null);
+		 
+	 }
+	 
+	 
 	 
 	 public void setValue(Object value){
 		 argumentValue = value;
@@ -24,5 +33,16 @@ public class Argument
 	 }
 	 public Type getType(){
 		 return argumentType;
+	 }
+	 public boolean getHasRestricted(){
+		 
+		 return hasRestricted;
+	 }
+	 public String[] getRestrictedValues(){
+		 return restrictedValues;
+	 }
+	 public void setHasRestricted(boolean b){
+		 
+		 hasRestricted = b;
 	 }
 }

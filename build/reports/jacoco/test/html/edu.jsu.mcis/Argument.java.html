@@ -5,25 +5,45 @@ public class Argument
 	private Type argumentType;
 	private Object argumentValue;
 	private String argumentDescription;
-<span class="fc" id="L8">	public Argument(Type type, String description){</span>
-<span class="fc" id="L9">		  argumentType = type;</span>
+	private String[] restrictedValues;
+	private boolean hasRestricted; 
+<span class="fc" id="L10">	public Argument(Type type, String description, String[] restrictedValues){</span>
+<span class="fc" id="L11">		  argumentType = type;</span>
+<span class="fc" id="L12">		 argumentValue = &quot;&quot;;</span>
+<span class="fc" id="L13">		 argumentDescription = description;</span>
+<span class="fc" id="L14">		 hasRestricted = false;</span>
+<span class="fc" id="L15">		 this.restrictedValues = restrictedValues;</span>
 		 
-<span class="fc" id="L11">		 argumentValue = &quot;&quot;;</span>
-<span class="fc" id="L12">		 argumentDescription = description;</span>
+<span class="fc" id="L17">	 }</span>
+	public Argument(Type type, String description){
+<span class="fc" id="L19">		this(type,description,null);</span>
 		 
-<span class="fc" id="L14">	 }</span>
+<span class="fc" id="L21">	 }</span>
+	 
+	 
 	 
 	 public void setValue(Object value){
-<span class="fc" id="L17">		 argumentValue = value;</span>
-<span class="fc" id="L18">	 }</span>
+<span class="fc" id="L26">		 argumentValue = value;</span>
+<span class="fc" id="L27">	 }</span>
 	 public String getDescription(){
-<span class="fc" id="L20">		 return argumentDescription;</span>
+<span class="fc" id="L29">		 return argumentDescription;</span>
 	 }
 	 public Object getValue(){
-<span class="fc" id="L23">		 return argumentValue;</span>
+<span class="fc" id="L32">		 return argumentValue;</span>
 	 }
 	 public Type getType(){
-<span class="fc" id="L26">		 return argumentType;</span>
+<span class="fc" id="L35">		 return argumentType;</span>
 	 }
+	 public boolean getHasRestricted(){
+		 
+<span class="fc" id="L39">		 return hasRestricted;</span>
+	 }
+	 public String[] getRestrictedValues(){
+<span class="fc" id="L42">		 return restrictedValues;</span>
+	 }
+	 public void setHasRestricted(boolean b){
+		 
+<span class="fc" id="L46">		 hasRestricted = b;</span>
+<span class="fc" id="L47">	 }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

@@ -2,12 +2,17 @@
 public class namedArgument extends Argument{
 	private int numberOfValues;
 	private Object[] argumentValues;
-	public namedArgument(Type type, String description, int numberOfValues){
-<span class="fc" id="L6">		  super(type,description);</span>
-<span class="fc" id="L7">		 this.numberOfValues = numberOfValues;</span>
-		
+	private boolean hasRestricted; 
+
+	public namedArgument(Type type, String description, int numberOfValues,String[] restrictedValues){
+<span class="fc" id="L8">		  super(type,description,restrictedValues);</span>
+<span class="fc" id="L9">		 this.numberOfValues = numberOfValues;</span>
+<span class="fc" id="L10">		 hasRestricted = false;</span>
 		 
-<span class="fc" id="L10">	 }</span>
+<span class="fc" id="L12">	 }</span>
+	 
+	
+	 
 	
 }
 	

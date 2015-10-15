@@ -28,11 +28,15 @@ public class ArgsParser{
 		help = false;
 	}
 	
-	public void addNamedArgument(String name, String description, Argument.Type t, int numberOfValues){
+	public void addNamedArgument(String name, String description, Argument.Type t, int numberOfValues,String[] restrictedValues){
 		namedArgumentsNames.add(name);
-		arguments.put(name,new namedArgument(t,description,numberOfValues));	
+		arguments.put(name,new namedArgument(t,description,numberOfValues, restrictedValues));
+		arguments.get(name).setHasRestricted(true);
 	}
-	
+	public void addNamedArgument(String name, String description, Argument.Type t, int numberOfValues){
+		addNamedArgument(name,description,t,numberOfValues,null);
+		arguments.get(name).setHasRestricted(false);
+	}
 	public void addArgument(String name, String description, Argument.Type t){
 		argumentNames.add(name);
 		arguments.put(name,new Argument(t,description));
@@ -43,12 +47,12 @@ public class ArgsParser{
 		for(int i=0;i<values.length;i++){
 			i = parseNamedArguments(i, values);
 			if(values.length != argumentNames.size()+namedArgumentsNames.size()&&!help){
-				if(values.length > argumentNames.size()&& i>argumentNames.size()){
+				if(values.length > argumentNames.size()+namedArgumentsNames.size()&&  i==values.length-1){
 					errorMessage = premessage+"\n"+programName+".java: error: unrecognized arguments: "+values[i];
 					error=true;
 					throw new TooManyArgumentsException(errorMessage);
 				} 
-				else if (values.length < argumentNames.size()&& i==values.length){
+				else if (values.length < argumentNames.size()&& i==values.length-1){
 					errorMessage = premessage+"\n"+programName+".java: error: the following arguments are required: ";
 					for(int j=i+1;j<argumentNames.size();j++)
 						errorMessage+=argumentNames.get(j)+" ";
@@ -145,8 +149,25 @@ public class ArgsParser{
 					throw new HelpMessageException(helpMessage);
 				}
 				else{
-					arguments.get(namedArgumentsNames.get(j)).setValue(values[i+1]);
-					i+=2;
+					if(arguments.get(namedArgumentsNames.get(j)).getHasRestricted()){
+						String[] restrictedValues = arguments.get(namedArgumentsNames.get(j)).getRestrictedValues();
+						boolean temp=true;
+						for(int k =0; k<restrictedValues.length;k++){
+							if(values[i+1].equals(restrictedValues[k])){
+								arguments.get(namedArgumentsNames.get(j)).setValue(values[i+1]);
+								i+=2;
+								temp=false;
+								k=restrictedValues.length;
+							}
+							
+						}
+						if(temp){
+							
+							throw new RestrictedValuesException("");
+						
+						}
+					}
+					
 				}
 				help=true;
 			}
