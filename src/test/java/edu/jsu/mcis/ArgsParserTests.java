@@ -20,6 +20,7 @@ public class ArgsParserTests{
 		assertEquals("", ap.getValue("width"));
 		assertEquals("", ap.getValue("height"));		
 	}
+	
 	@Test
 	public void checkArgumentValues()
 	{	
@@ -45,60 +46,53 @@ public class ArgsParserTests{
  	  
 	}  
 
-	
 	@Test
-	public void checkIfDashHThrowsException()
-	{    String[] args = new String[] {"-h","5","2"};
-		
+	public void checkIfDashHThrowsException(){
+		String[] args = new String[] {"-h","5","2"};
 		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
 		ap.addArgument("length","the length of the box",Argument.Type.STRING);
 		ap.addArgument("width","the width of the box",Argument.Type.STRING);
 		ap.addArgument("height","the height of the box",Argument.Type.STRING);
 		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false);
 		try{
-		ap.parseValues(args);
+			ap.parseValues(args);
 		}
 		catch(HelpMessageException ex){
 			assertTrue(ap.getHelp());
-		assertEquals("usage: java VolumeCalculator length width height \nCalculate the volume of a box\npositional arguments:\nlength the length of the box\nwidth the width of the box\nheight the height of the box\n",
-					 ap.getHelpMessage());
-		
+			assertEquals("usage: java VolumeCalculator length width height \nCalculate the volume of a box\npositional arguments:\nlength the length of the box\nwidth the width of the box\nheight the height of the box\n",
+			ap.getHelpMessage());
 		}
-		
 	}
+	
 	@Test
-	public void checkIfDashDashHelpThrowsException()
-	{    String[] args = new String[] {"--help","5","2"};
+	public void checkIfDashDashHelpThrowsException(){
+		String[] args = new String[] {"--help","5","2"};
 		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
 		ap.addArgument("length","the length of the box",Argument.Type.STRING);
 		ap.addArgument("width","the width of the box",Argument.Type.STRING);
 		ap.addArgument("height","the height of the box",Argument.Type.STRING);
 		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false);
 		try{
-		ap.parseValues(args);
+			ap.parseValues(args);
 		}
 		catch(HelpMessageException ex){
-		assertEquals("usage: java VolumeCalculator length width height \nCalculate the volume of a box\npositional arguments:\nlength the length of the box\nwidth the width of the box\nheight the height of the box\n",
-					 ap.getHelpMessage());
-		
+			assertEquals("usage: java VolumeCalculator length width height \nCalculate the volume of a box\npositional arguments:\nlength the length of the box\nwidth the width of the box\nheight the height of the box\n",
+			ap.getHelpMessage());
 		}
-		
 	}
+	
 	@Test
-	public void checkHelpMessage()
-	{    String[] args = new String[] {"-h","5","2"};
+	public void checkHelpMessage(){
+		String[] args = new String[] {"-h","5","2"};
 		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
 		ap.addArgument("length","the length of the box",Argument.Type.STRING);
 		ap.addArgument("width","the width of the box",Argument.Type.STRING);
 		ap.addArgument("height","the height of the box",Argument.Type.STRING);
 		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false);
 		assertEquals("usage: java VolumeCalculator length width height \nCalculate the volume of a box\npositional arguments:\nlength the length of the box\nwidth the width of the box\nheight the height of the box\n",
-					 ap.getHelpMessage());
-		
+		ap.getHelpMessage());
 	}
 		
-	
-	
 	@Test
 	public void parseStringargsToDouble(){
 		String[] args = new String[] {"7","5","2"};
@@ -114,6 +108,7 @@ public class ArgsParserTests{
 		assertEquals(5,width,.1);
 		assertEquals(2,height,.1);
 	}
+	
 	@Test
 	public void parseStringToInt(){
 		String[] args = new String[] {"7"};
@@ -121,6 +116,7 @@ public class ArgsParserTests{
 		ap.parseValues(args);
 		assertEquals(7,ap.getValue("length"));
 	}
+	
 	@Test 
 	public void parseStringToBool(){
 		String[] args = new String[] {"true"};
@@ -129,6 +125,7 @@ public class ArgsParserTests{
 		boolean b = ap.getValue("length");
 		assertTrue(b);
 	}
+	
 	@Test
 	public void forceTooManyArguments(){
 		String[] args = new String[] {"7","5","2","43"};
@@ -137,12 +134,13 @@ public class ArgsParserTests{
 		ap.addArgument("height","the height of the box",Argument.Type.DOUBLE);
 		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
 		try{
-		ap.parseValues(args);
+			ap.parseValues(args);
 		}
 		catch(TooManyArgumentsException e){
-		assertEquals("usage: java VolumeCalculator length width height \nVolumeCalculator.java: error: unrecognized arguments: 43",ap.getErrorMessage());
+			assertEquals("usage: java VolumeCalculator length width height \nVolumeCalculator.java: error: unrecognized arguments: 43",ap.getErrorMessage());
 		}
 	}
+	
 	@Test
 	public void forceTooFewArguments(){
 		String[] args = new String[] {"7","5"};
@@ -151,12 +149,11 @@ public class ArgsParserTests{
 		ap.addArgument("height","the height of the box",Argument.Type.DOUBLE);
 		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
 		try{
-		ap.parseValues(args);
+			ap.parseValues(args);
 		}
 		catch(TooFewArgumentsException e){
-		assertEquals("usage: java VolumeCalculator length width height \nVolumeCalculator.java: error: the following arguments are required: height ",ap.getErrorMessage());
+			assertEquals("usage: java VolumeCalculator length width height \nVolumeCalculator.java: error: the following arguments are required: height ",ap.getErrorMessage());
 		}
-		
 	}
 	
 	@Test
@@ -167,37 +164,35 @@ public class ArgsParserTests{
 		ap.addArgument("height","the height of the box",Argument.Type.DOUBLE);
 		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
 		try{
-		ap.parseValues(args);
+			ap.parseValues(args);
 		}
 		catch(NumberFormatException e){
-		assertTrue(ap.getError());
-		assertEquals("usage: java VolumeCalculator length width height \nVolumeCalculator.java: error: argument width: invalid double value: something",ap.getErrorMessage());
+			assertTrue(ap.getError());
+			assertEquals("usage: java VolumeCalculator length width height \nVolumeCalculator.java: error: argument width: invalid double value: something",ap.getErrorMessage());
 		}
 	}
+	
 	@Test
 	public void makeNamedArgument(){
 		ap.addNamedArgument("length","the length of the box",Argument.Type.STRING,1,"");
 		assertEquals("", ap.getValue("length"));
-		
-		
 	}
+	
 	@Test
 	public void checkNamedArgumentWithRestrictedValue(){
 		String [] restrictedValues = new String[]{"box","elipsoid"};
 		String[] args = new String[] {"--type", "elipsoid"};
 		ap.addNamedArgument("--type","",Argument.Type.STRING,1,"box",restrictedValues);
 		ap.parseValues(args);
-		assertEquals("elipsoid", ap.getValue("--type"));
-		
-		
-	}@Test
+		assertEquals("elipsoid", ap.getValue("--type"));	
+	}
+	
+	@Test
 	public void checkNamedArgumentValue(){
 		String[] args = new String[] {"--type", "elipsoid"};
 		ap.addNamedArgument("--type","",Argument.Type.STRING,1,"box");
 		ap.parseValues(args);
 		assertEquals("elipsoid", ap.getValue("--type"));
-		
-		
 	}
 	
 	@Test
@@ -205,43 +200,38 @@ public class ArgsParserTests{
 		String [] restrictedValues = new String[]{"box","elipsoid"};
 		ap.addNamedArgument("--type","",Argument.Type.STRING,1,"box",restrictedValues);
 		assertEquals("box", ap.getValue("--type"));
-		
-		
 	}
+	
 	@Test
 	public void checkArgumentTypeDouble(){
 		ap.addArgument("length","the length of the box",Argument.Type.DOUBLE);
 		assertEquals(Argument.Type.DOUBLE, ap.getArgumentType("length"));
-		
 	}
 	public void checkArgumentTypeString(){
 		ap.addArgument("length","the length of the box",Argument.Type.STRING);
 		assertEquals(Argument.Type.STRING, ap.getArgumentType("length"));
-		
 	}
 	public void checkArgumentTypeINT(){
 		ap.addArgument("length","the length of the box",Argument.Type.INTEGER);
 		assertEquals(Argument.Type.INTEGER, ap.getArgumentType("length"));
-		
 	}
 	public void checkArgumentTypeBoolean(){
 		ap.addArgument("length","the length of the box",Argument.Type.BOOLEAN);
 		assertEquals(Argument.Type.BOOLEAN, ap.getArgumentType("length"));
-		
 	}
+	
 	@Test
 	public void checkRestrictedValuesException(){
 		String [] restrictedValues= new String[]{"box","elipsoid"};
 		String[] args = new String[] {"--type", "7"};
 		ap.addNamedArgument("--type","",Argument.Type.STRING,1,"box",restrictedValues);
 		try{
-		ap.parseValues(args);
-		assertTrue(false);
+			ap.parseValues(args);
+			assertTrue(false);
 		}
 		catch(RestrictedValuesException ex){
-		assertTrue(true);
+			assertTrue(true);
 		}
-		
 	}
 	
 }

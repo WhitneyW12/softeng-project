@@ -29,7 +29,7 @@ public class ArgsParser{
 		error = false;
 		help = false;
 		numofNamedArgValues = 0;
-		 positionalvaluesparsed = 0;
+		positionalvaluesparsed = 0;
 	}
 	
 	public void addNamedArgument(String name, String description, Argument.Type t, int numberOfValues,Object defaultvalue,String[] restrictedValues){
@@ -38,20 +38,22 @@ public class ArgsParser{
 		arguments.get(name).setValue(defaultvalue);
 		arguments.get(name).setHasRestricted(true);
 	}
+	
 	public void addNamedArgument(String name, String description, Argument.Type t, int numberOfValues, Object defaultvalue){
 		addNamedArgument(name,description,t,numberOfValues,defaultvalue,null);
 		arguments.get(name).setHasRestricted(false);
 	}
+	
 	public void addArgument(String name, String description, Argument.Type t){
 		argumentNames.add(name);
 		arguments.put(name,new Argument(t,description));
 		setPremessage();
 	}
+	
 	private void setnumberofNamedargumentvalues(){
 		for(int i =0;i<namedArgumentsNames.size();i++){
 			numofNamedArgValues+=arguments.get(namedArgumentsNames.get(i)).getNumberOfValues();
 		}
-			
 	}
 	
 	public void parseValues (String[] values){
@@ -74,7 +76,7 @@ public class ArgsParser{
 					}
 				}
 			if(i<values.length){
-				 positionalvaluesparsed++;
+				positionalvaluesparsed++;
 				if(arguments.get(argumentNames.get(positionalvaluesparsed-1)).getType()==Argument.Type.STRING){
 					arguments.get(argumentNames.get(positionalvaluesparsed-1)).setValue(values[i]);
 				}
@@ -132,7 +134,7 @@ public class ArgsParser{
 		return (T)arguments.get(name).getValue();
 	}
 	
-	private void parseDouble(int index,String value)throws NumberFormatException {
+	private void parseDouble(int index,String value)throws NumberFormatException{
 		arguments.get(argumentNames.get(index)).setValue(Double.parseDouble(value));
 	}
 	
@@ -159,41 +161,35 @@ public class ArgsParser{
 	private int parseNamedArguments(int i, String[] values){
 		for(int j=0;j<namedArgumentsNames.size();j++){
 			if(values[i].equals("-h")||values[i].equals("--help")){
-					help=true;
-					throw new HelpMessageException(helpMessage);
-					
-				}
-			if(values[i].equals(namedArgumentsNames.get(j))){
-					
+				help=true;
+				throw new HelpMessageException(helpMessage);	
+			}
+			if(values[i].equals(namedArgumentsNames.get(j))){	
 				boolean temp=true;
-					if(arguments.get(namedArgumentsNames.get(j)).getHasRestricted()){
-						String[] restrictedValues = arguments.get(namedArgumentsNames.get(j)).getRestrictedValues();
-						for(int k =0; k<restrictedValues.length;k++){
+				if(arguments.get(namedArgumentsNames.get(j)).getHasRestricted()){
+					String[] restrictedValues = arguments.get(namedArgumentsNames.get(j)).getRestrictedValues();
+					for(int k =0; k<restrictedValues.length;k++){
 						if(values[i+1].equals(restrictedValues[k])){
 							arguments.get(namedArgumentsNames.get(j)).setValue(values[i+1]);
 							i+=2;
 							temp=false;
 							k=restrictedValues.length;
-						}
-					
-							
+						}	
 					}
-					if(temp){
-							
+					if(temp){	
 						throw new RestrictedValuesException("");
-						
 					}
 				}
 				else{
-						arguments.get(namedArgumentsNames.get(j)).setValue(values[i+1]);
-							i+=2;	
-					}
-					
+					arguments.get(namedArgumentsNames.get(j)).setValue(values[i+1]);
+					i+=2;	
+				}	
 				help=true;
 			}
 		}
 		return i;
 	}
+	
 	public boolean getHelp(){
 		return help;
 	}
