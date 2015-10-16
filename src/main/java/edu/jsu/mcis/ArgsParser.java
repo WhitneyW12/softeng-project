@@ -15,6 +15,7 @@ public class ArgsParser{
 	private boolean error;
 	private boolean help;
 	private int numofNamedArgValues;
+	private int positionalvaluesparsed;
 	
 	public ArgsParser(){
 		arguments = new HashMap<String,Argument>();
@@ -28,6 +29,7 @@ public class ArgsParser{
 		error = false;
 		help = false;
 		numofNamedArgValues = 0;
+		 positionalvaluesparsed = 0;
 	}
 	
 	public void addNamedArgument(String name, String description, Argument.Type t, int numberOfValues,Object defaultvalue,String[] restrictedValues){
@@ -56,8 +58,9 @@ public class ArgsParser{
 		for(int i=0;i<values.length;i++){
 			help = false;
 			i = parseNamedArguments(i, values);
-			if(values.length != argumentNames.size()+namedArgumentsNames.size()+numofNamedArgValues&&!help){
-				if(values.length > argumentNames.size()+namedArgumentsNames.size()+numofNamedArgValues&&  i==values.length-1){
+			setnumberofNamedargumentvalues();
+			if(values.length != argumentNames.size()&&!help){
+				if( positionalvaluesparsed==argumentNames.size()){
 					errorMessage = premessage+"\n"+programName+".java: error: unrecognized arguments: "+values[i];
 					error=true;
 					throw new TooManyArgumentsException(errorMessage);
@@ -71,12 +74,13 @@ public class ArgsParser{
 					}
 				}
 			if(i<values.length){
-				if(arguments.get(argumentNames.get(i)).getType()==Argument.Type.STRING){
-					arguments.get(argumentNames.get(i)).setValue(values[i]);
+				 positionalvaluesparsed++;
+				if(arguments.get(argumentNames.get(positionalvaluesparsed-1)).getType()==Argument.Type.STRING){
+					arguments.get(argumentNames.get(positionalvaluesparsed-1)).setValue(values[i]);
 				}
-				else if(arguments.get(argumentNames.get(i)).getType()==Argument.Type.DOUBLE){
+				else if(arguments.get(argumentNames.get(positionalvaluesparsed-1)).getType()==Argument.Type.DOUBLE){
 					try{
-						parseDouble(i,values[i]);
+						parseDouble(positionalvaluesparsed-1,values[i]);
 					}
 					catch(NumberFormatException e){
 						errorMessage = premessage+"\n"+programName+".java: error: argument "+argumentNames.get(i)+": invalid double value: "+values[i];
@@ -84,11 +88,11 @@ public class ArgsParser{
 						throw new NumberFormatException(errorMessage);
 					}
 				}
-				else if(arguments.get(argumentNames.get(i)).getType()==Argument.Type.INTEGER){
-					parseInteger(i,values[i]);
+				else if(arguments.get(argumentNames.get(positionalvaluesparsed-1)).getType()==Argument.Type.INTEGER){
+					parseInteger(positionalvaluesparsed-1,values[i]);
 				}
 				else{
-					parseBoolean(i,values[i]);
+					parseBoolean(positionalvaluesparsed-1,values[i]);
 				}
 			}
 		}
@@ -160,18 +164,18 @@ public class ArgsParser{
 					
 				}
 			if(values[i].equals(namedArgumentsNames.get(j))){
-					i++;
-				
+					
+				boolean temp=true;
 					if(arguments.get(namedArgumentsNames.get(j)).getHasRestricted()){
 						String[] restrictedValues = arguments.get(namedArgumentsNames.get(j)).getRestrictedValues();
-						boolean temp=true;
 						for(int k =0; k<restrictedValues.length;k++){
-						if(values[i].equals(restrictedValues[k])){
-							arguments.get(namedArgumentsNames.get(j)).setValue(values[i]);
-							i++;
+						if(values[i+1].equals(restrictedValues[k])){
+							arguments.get(namedArgumentsNames.get(j)).setValue(values[i+1]);
+							i+=2;
 							temp=false;
 							k=restrictedValues.length;
 						}
+					
 							
 					}
 					if(temp){
@@ -180,6 +184,10 @@ public class ArgsParser{
 						
 					}
 				}
+				else{
+						arguments.get(namedArgumentsNames.get(j)).setValue(values[i+1]);
+							i+=2;	
+					}
 					
 				help=true;
 			}

@@ -10,10 +10,14 @@ public class ArgsParserKeywords{
 		ap.addArgument("length","the length of the box",Argument.Type.STRING);
 		ap.addArgument("width","the width of the box",Argument.Type.STRING);
 		ap.addArgument("height","the height of the box",Argument.Type.STRING);
+		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false);
+		String [] restrictedValues= new String[]{"box","ellipsoid"};
+		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,0,"box",restrictedValues);
+		ap.addNamedArgument("--digits","prints help message",Argument.Type.STRING,0,"4");
 		try{
 		ap.parseValues(args);
 		}
-		catch(TooManyArgumentsException ex){};
+		catch(TooManyArgumentsException|IndexOutOfBoundsException ex){};
 	}
 	
 	public <T> T getLength(){

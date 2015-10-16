@@ -59,6 +59,7 @@ public class ArgsParserTests{
 		ap.parseValues(args);
 		}
 		catch(HelpMessageException ex){
+			assertTrue(ap.getHelp());
 		assertEquals("usage: java VolumeCalculator length width height \nCalculate the volume of a box\npositional arguments:\nlength the length of the box\nwidth the width of the box\nheight the height of the box\n",
 					 ap.getHelpMessage());
 		
@@ -181,7 +182,7 @@ public class ArgsParserTests{
 		
 	}
 	@Test
-	public void checkNamedArgumentValue(){
+	public void checkNamedArgumentWithRestrictedValue(){
 		String [] restrictedValues = new String[]{"box","elipsoid"};
 		String[] args = new String[] {"--type", "elipsoid"};
 		ap.addNamedArgument("--type","",Argument.Type.STRING,1,"box",restrictedValues);
@@ -189,7 +190,16 @@ public class ArgsParserTests{
 		assertEquals("elipsoid", ap.getValue("--type"));
 		
 		
+	}@Test
+	public void checkNamedArgumentValue(){
+		String[] args = new String[] {"--type", "elipsoid"};
+		ap.addNamedArgument("--type","",Argument.Type.STRING,1,"box");
+		ap.parseValues(args);
+		assertEquals("elipsoid", ap.getValue("--type"));
+		
+		
 	}
+	
 	@Test
 	public void checkNamedArgumentDefaultValue(){
 		String [] restrictedValues = new String[]{"box","elipsoid"};
