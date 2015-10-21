@@ -62,20 +62,14 @@ public class ArgsParser{
 			i = parseNamedArguments(i, values);
 			setnumberofNamedargumentvalues();
 			if(values.length != argumentNames.size()&&!help){
-				if( positionalvaluesparsed==argumentNames.size()){
-					errorMessage = premessage+"\n"+programName+".java: error: unrecognized arguments: "+values[i];
-					error=true;
-					throw new TooManyArgumentsException(errorMessage);
-				} 
-				else if (values.length < argumentNames.size()&& i==values.length-1){
-					errorMessage = premessage+"\n"+programName+".java: error: the following arguments are required: ";
-					for(int j=i+1;j<argumentNames.size();j++)
-						errorMessage+=argumentNames.get(j)+" ";
-						error=true;
-						throw new TooFewArgumentsException(errorMessage);
-					}
-				}
-			if(i<values.length){
+				checkForLengthOfArgumentExceptions(i, values);
+			}
+			parsePositionalArguments(i, values);
+		}
+	}
+	
+	private void parsePositionalArguments(int i, String[] values){
+		if(i<values.length){
 				positionalvaluesparsed++;
 				if(arguments.get(argumentNames.get(positionalvaluesparsed-1)).getType()==Argument.Type.STRING){
 					arguments.get(argumentNames.get(positionalvaluesparsed-1)).setValue(values[i]);
@@ -97,9 +91,22 @@ public class ArgsParser{
 					parseBoolean(positionalvaluesparsed-1,values[i]);
 				}
 			}
-		}
 	}
-	
+	private void checkForLengthOfArgumentExceptions(int i, String[] values){
+				if( positionalvaluesparsed==argumentNames.size()){
+					errorMessage = premessage+"\n"+programName+".java: error: unrecognized arguments: "+values[i];
+					error=true;
+					throw new TooManyArgumentsException(errorMessage);
+				} 
+				else if (values.length < argumentNames.size()&& i==values.length-1){
+					errorMessage = premessage+"\n"+programName+".java: error: the following arguments are required: ";
+					for(int j=i+1;j<argumentNames.size();j++)
+						errorMessage+=argumentNames.get(j)+" ";
+						error=true;
+						throw new TooFewArgumentsException(errorMessage);
+					}
+				}
+
 	public void addProgram(String name,String description){
 		programName = name;
 		programDescription = description;
