@@ -166,12 +166,15 @@ public class ArgsParser{
 	}
 	
 	private int parseNamedArguments(int i, String[] values){
+		boolean b = false;
 		for(int j=0;j<namedArgumentsNames.size();j++){
-			if(values[i].equals("-h")||values[i].equals("--help")){
-				help=true;
-				throw new HelpMessageException(helpMessage);	
+			if(arguments.get(namedArgumentsNames.get(j)).getNumberOfValues() == 0 && values[i].equals(namedArgumentsNames.get(j))||values[i].equals("-h")){
+				arguments.get(namedArgumentsNames.get(j)).setValue(true);
+				if(values[i].equals("--help")||values[i].equals("-h")){
+					b=getValue("--help");
+				}
 			}
-			if(values[i].equals(namedArgumentsNames.get(j))){	
+			else if(values[i].equals(namedArgumentsNames.get(j))){	
 				boolean temp=true;
 				if(arguments.get(namedArgumentsNames.get(j)).getHasRestricted()){
 					String[] restrictedValues = arguments.get(namedArgumentsNames.get(j)).getRestrictedValues();
@@ -189,16 +192,18 @@ public class ArgsParser{
 				}
 				else{
 					arguments.get(namedArgumentsNames.get(j)).setValue(values[i+1]);
-					i+=2;	
+					i+=1+arguments.get(namedArgumentsNames.get(j)).getNumberOfValues();	
 				}	
 				help=true;
 			}
 		}
+		
+		if(b){
+				help=true;
+				throw new HelpMessageException(helpMessage);	
+			}
 		return i;
 	}
 	
-	public boolean getHelp(){
-		return help;
-	}
 	
 }

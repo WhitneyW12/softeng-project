@@ -15,7 +15,7 @@ public class ArgsParserKeywords{
 		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,0,"box",restrictedValues);
 		ap.addNamedArgument("--digits","prints help message",Argument.Type.STRING,0,"4");
 		try{
-		ap.parseValues(args);
+			ap.parseValues(args);
 		}
 		catch(TooManyArgumentsException|IndexOutOfBoundsException ex){};
 	}
@@ -91,7 +91,7 @@ public class ArgsParserKeywords{
 		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,0,"box",restrictedValues);
 		ap.addNamedArgument("--digits","prints help message",Argument.Type.BOOLEAN,0,4);
 		try{
-		ap.parseValues(args);
+			ap.parseValues(args);
 		}
 		catch(HelpMessageException|NumberFormatException ex){};
 		
