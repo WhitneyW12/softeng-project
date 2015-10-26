@@ -230,7 +230,7 @@ public class ArgsParser{
 				}	
 				help=true;
 				
-				
+				j=0;
 			}
 		}
 		

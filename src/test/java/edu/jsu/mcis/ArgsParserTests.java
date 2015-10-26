@@ -234,9 +234,34 @@ public class ArgsParserTests{
 		}
 	}
 	@Test
-	public void fixProblem()
+	public void TestMultipleNamedArguments()
 	{
 		String[] args = new String[] {"7","5","2","--type","ellipsoid","--digits","1"};
+		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
+		ap.addArgument("length","the length of the box",Argument.Type.STRING);
+		ap.addArgument("width","the width of the box",Argument.Type.STRING);
+		ap.addArgument("height","the height of the box",Argument.Type.STRING);
+		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false);
+		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box");
+		ap.addNamedArgument("--digits","prints help message",Argument.Type.STRING,1,"4");
+		ap.parseValues(args);
+		String length= ap.getValue("length");
+		String width= ap.getValue("width");
+		String height= ap.getValue("height");
+		String type = ap.getValue("--type");
+		String digits = ap.getValue("--digits");
+		
+		assertEquals("7",length);
+		assertEquals("5",width);
+		assertEquals("2",height);
+		assertEquals("ellipsoid",type);
+		assertEquals("1",digits);
+		
+	}
+		@Test
+	public void TestMultipleNamedArgumentsAnywhere()
+	{
+		String[] args = new String[] {"--type","ellipsoid","7","5","2","--digits","1"};
 		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
 		ap.addArgument("length","the length of the box",Argument.Type.STRING);
 		ap.addArgument("width","the width of the box",Argument.Type.STRING);
@@ -279,6 +304,56 @@ public class ArgsParserTests{
 		}
 		
 		
+		
+	}
+	@Test
+	public void TestBooleanNamedArg(){
+		String[] args = new String[] {"7","--test","true","5","2"};
+		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
+		ap.addArgument("length","the length of the box",Argument.Type.STRING);
+		ap.addArgument("width","the width of the box",Argument.Type.STRING);
+		ap.addArgument("height","the height of the box",Argument.Type.STRING);
+		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false);
+		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box");
+		ap.addNamedArgument("--digits","prints help message",Argument.Type.INTEGER,1,4);
+		ap.addNamedArgument("--test","prints help message",Argument.Type.BOOLEAN,1,false);
+		ap.parseValues(args);
+		boolean b = ap.getValue("--test");
+		assertTrue(b);
+	}
+	@Test
+	public void TestDoubleNamedArg(){
+		String[] args = new String[] {"7","--test","5","5","2"};
+		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
+		ap.addArgument("length","the length of the box",Argument.Type.STRING);
+		ap.addArgument("width","the width of the box",Argument.Type.STRING);
+		ap.addArgument("height","the height of the box",Argument.Type.STRING);
+		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false);
+		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box");
+		ap.addNamedArgument("--digits","prints help message",Argument.Type.INTEGER,1,4);
+		ap.addNamedArgument("--test","prints help message",Argument.Type.DOUBLE,1,false);
+		ap.parseValues(args);
+		double b = ap.getValue("--test");
+		assertEquals(5,b,.001);
+	}
+	@Test
+	public void TestDoubleNamedArgError(){
+		String[] args = new String[] {"7","--test","something","5","2"};
+		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
+		ap.addArgument("length","the length of the box",Argument.Type.STRING);
+		ap.addArgument("width","the width of the box",Argument.Type.STRING);
+		ap.addArgument("height","the height of the box",Argument.Type.STRING);
+		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false);
+		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box");
+		ap.addNamedArgument("--digits","prints help message",Argument.Type.INTEGER,1,4);
+		ap.addNamedArgument("--test","prints help message",Argument.Type.DOUBLE,1,false);
+		try{
+		ap.parseValues(args);
+		assertTrue(false);
+		}
+		catch(NumberFormatException ex ){
+			assertTrue(true);
+		}
 		
 	}
 	
