@@ -12,8 +12,8 @@ public class ArgsParserKeywords{
 		ap.addArgument("height","the height of the box",Argument.Type.STRING);
 		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false);
 		String [] restrictedValues= new String[]{"box","ellipsoid"};
-		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,0,"box",restrictedValues);
-		ap.addNamedArgument("--digits","prints help message",Argument.Type.STRING,0,"4");
+		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box",restrictedValues);
+		ap.addNamedArgument("--digits","prints help message",Argument.Type.STRING,1,"4");
 		try{
 			ap.parseValues(args);
 		}
@@ -56,7 +56,8 @@ public class ArgsParserKeywords{
 	
 	
 	public String getProgramOutput(){
-		if(ap.getHelp()){
+		boolean b=ap.getValue("--help");
+		if(b){
 			return ap.getHelpMessage();
 		}
 		if(ap.getError()){
@@ -88,8 +89,8 @@ public class ArgsParserKeywords{
 		ap.addArgument("height","the height of the box",Argument.Type.DOUBLE);
 		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false);
 		String [] restrictedValues= new String[]{"box","ellipsoid"};
-		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,0,"box",restrictedValues);
-		ap.addNamedArgument("--digits","prints help message",Argument.Type.BOOLEAN,0,4);
+		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box",restrictedValues);
+		ap.addNamedArgument("--digits","prints help message",Argument.Type.STRING,1,4);
 		try{
 			ap.parseValues(args);
 		}

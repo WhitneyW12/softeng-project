@@ -190,6 +190,7 @@ public class ArgsParserTests{
 	public void checkNamedArgumentValue(){
 		String[] args = new String[] {"--type", "elipsoid"};
 		ap.addNamedArgument("--type","",Argument.Type.STRING,1,"box");
+		ap.addNamedArgument("--digits","prints help message",Argument.Type.INTEGER,1,4);
 		ap.parseValues(args);
 		assertEquals("elipsoid", ap.getValue("--type"));
 	}
@@ -231,6 +232,54 @@ public class ArgsParserTests{
 		catch(RestrictedValuesException ex){
 			assertTrue(true);
 		}
+	}
+	@Test
+	public void fixProblem()
+	{
+		String[] args = new String[] {"7","5","2","--type","ellipsoid","--digits","1"};
+		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
+		ap.addArgument("length","the length of the box",Argument.Type.STRING);
+		ap.addArgument("width","the width of the box",Argument.Type.STRING);
+		ap.addArgument("height","the height of the box",Argument.Type.STRING);
+		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false);
+		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box");
+		ap.addNamedArgument("--digits","prints help message",Argument.Type.INTEGER,1,4);
+		ap.parseValues(args);
+		String length= ap.getValue("length");
+		String width= ap.getValue("width");
+		String height= ap.getValue("height");
+		String type = ap.getValue("--type");
+		int digits = ap.getValue("--digits");
+		
+		assertEquals("7",length);
+		assertEquals("5",width);
+		assertEquals("2",height);
+		assertEquals("ellipsoid",type);
+		assertEquals(1,digits);
+		
+	}
+	@Test
+	public void checkFlag()
+	{
+		String[] args = new String[] {"7","--help","5","2"};
+		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
+		ap.addArgument("length","the length of the box",Argument.Type.STRING);
+		ap.addArgument("width","the width of the box",Argument.Type.STRING);
+		ap.addArgument("height","the height of the box",Argument.Type.STRING);
+		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false);
+		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box");
+		ap.addNamedArgument("--digits","prints help message",Argument.Type.INTEGER,1,4);
+		try{
+		ap.parseValues(args);
+		}
+		catch(HelpMessageException ex){
+		boolean b = ap.getValue("--help");
+		assertTrue(b);
+		assertEquals(1,ap.getNumberOfValues("--type"));
+		}
+		
+		
+		
 	}
 	
 }

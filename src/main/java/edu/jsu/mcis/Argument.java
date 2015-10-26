@@ -8,17 +8,18 @@ public class Argument
 	private String[] restrictedValues;
 	private boolean hasRestricted; 
 	private int numberOfValues;
-	public Argument(Type type, String description, String[] restrictedValues){
+	public Argument(Type type, String description, String[] restrictedValues,int numberOfValues){
 		  argumentType = type;
 		 argumentValue = "";
 		 argumentDescription = description;
 		 hasRestricted = false;
 		 this.restrictedValues = restrictedValues;
-		 numberOfValues=1;
+		 this.numberOfValues=numberOfValues;
 		 
 	 }
 	public Argument(Type type, String description){
-		this(type,description,null);
+		this(type,description,null,1);
+		
 		 
 	 }
 	 

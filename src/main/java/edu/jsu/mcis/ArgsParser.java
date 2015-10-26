@@ -61,7 +61,7 @@ public class ArgsParser{
 			help = false;
 			i = parseNamedArguments(i, values);
 			setnumberofNamedargumentvalues();
-			if(values.length != argumentNames.size()&&!help){
+			if(!help){
 				checkForLengthOfArgumentExceptions(i, values);
 			}
 			parsePositionalArguments(i, values);
@@ -69,7 +69,7 @@ public class ArgsParser{
 	}
 	
 	private void parsePositionalArguments(int i, String[] values){
-		if(i<values.length){
+		if(i<values.length&&positionalvaluesparsed<argumentNames.size()){
 				positionalvaluesparsed++;
 				if(arguments.get(argumentNames.get(positionalvaluesparsed-1)).getType()==Argument.Type.STRING){
 					arguments.get(argumentNames.get(positionalvaluesparsed-1)).setValue(values[i]);
@@ -152,6 +152,17 @@ public class ArgsParser{
 	private void parseBoolean(int index,String value){
 		arguments.get(argumentNames.get(index)).setValue(Boolean.parseBoolean(value));
 	}
+	private void parseNamedDouble(int index,String value)throws NumberFormatException{
+		arguments.get(namedArgumentsNames.get(index)).setValue(Double.parseDouble(value));
+	}
+	
+	private void parseNamedInteger(int index,String value){
+		arguments.get(namedArgumentsNames.get(index)).setValue(Integer.parseInt(value));
+	}
+	
+	private void parseNamedBoolean(int index,String value){
+		arguments.get(namedArgumentsNames.get(index)).setValue(Boolean.parseBoolean(value));
+	}
 	
 	public String getErrorMessage(){
 		return errorMessage;
@@ -167,16 +178,20 @@ public class ArgsParser{
 	
 	private int parseNamedArguments(int i, String[] values){
 		boolean b = false;
-		for(int j=0;j<namedArgumentsNames.size();j++){
-			if(arguments.get(namedArgumentsNames.get(j)).getNumberOfValues() == 0 && values[i].equals(namedArgumentsNames.get(j))||values[i].equals("-h")){
+		for(int j=0;j<namedArgumentsNames.size()&&i<values.length;j++){
+			
+			 if(values[i].equals(namedArgumentsNames.get(j))){	
+				boolean temp=true;
+				if(arguments.get(namedArgumentsNames.get(j)).getNumberOfValues() == 0||values[i].equals("-h")){
 				arguments.get(namedArgumentsNames.get(j)).setValue(true);
 				if(values[i].equals("--help")||values[i].equals("-h")){
 					b=getValue("--help");
 				}
-			}
-			else if(values[i].equals(namedArgumentsNames.get(j))){	
-				boolean temp=true;
-				if(arguments.get(namedArgumentsNames.get(j)).getHasRestricted()){
+				i=i+1;
+				help=true;
+				
+				}
+				else if(arguments.get(namedArgumentsNames.get(j)).getHasRestricted()){
 					String[] restrictedValues = arguments.get(namedArgumentsNames.get(j)).getRestrictedValues();
 					for(int k =0; k<restrictedValues.length;k++){
 						if(values[i+1].equals(restrictedValues[k])){
@@ -184,6 +199,7 @@ public class ArgsParser{
 							i+=2;
 							temp=false;
 							k=restrictedValues.length;
+							j=namedArgumentsNames.size();
 						}	
 					}
 					if(temp){	
@@ -191,18 +207,41 @@ public class ArgsParser{
 					}
 				}
 				else{
+					if(arguments.get(namedArgumentsNames.get(j)).getType()==Argument.Type.STRING){
 					arguments.get(namedArgumentsNames.get(j)).setValue(values[i+1]);
-					i+=1+arguments.get(namedArgumentsNames.get(j)).getNumberOfValues();	
+				}
+				else if(arguments.get(namedArgumentsNames.get(j)).getType()==Argument.Type.DOUBLE){
+					try{
+						parseNamedDouble(j,values[i+1]);
+					}
+					catch(NumberFormatException e){
+						errorMessage = premessage+"\n"+programName+".java: error: argument "+argumentNames.get(i)+": invalid double value: "+values[i];
+						error = true;
+						throw new NumberFormatException(errorMessage);
+					}
+				}
+				else if(arguments.get(namedArgumentsNames.get(j)).getType()==Argument.Type.INTEGER){
+					parseNamedInteger(j,values[i+1]);
+				}
+				else{
+					parseNamedBoolean(j,values[i+1]);
+				}
+					i+=2;	
 				}	
 				help=true;
+				
+				
 			}
 		}
 		
 		if(b){
-				help=true;
+				
 				throw new HelpMessageException(helpMessage);	
 			}
 		return i;
+	}
+	public int getNumberOfValues(String name){
+		return arguments.get(name).getNumberOfValues();
 	}
 	
 	
