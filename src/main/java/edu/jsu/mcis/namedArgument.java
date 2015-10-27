@@ -1,11 +1,6 @@
 package edu.jsu.mcis;
 public class namedArgument extends Argument{
-	private int numberOfValues;
-	private Object[] argumentValues;
-	private boolean hasRestricted; 
-	private Object argumentValue;
-	private String shorthand;
-	private String argumentDescription;
+	
 
 	public namedArgument(Type type, String description, int numberOfValues, String[] restrictedValues){
 		 super(type,description,restrictedValues);
@@ -45,15 +40,6 @@ public class namedArgument extends Argument{
 		 return restrictedValues;
 	 }
 	 
-	 
-	 //public void setValues(Object[] myarray){
-		// for(int i=0;i<myarray.length;i++){
-			// argumentValues[i]=myarray[i];
-		 //}
-		 
-	 //}
-	// public object[]{}
 }
-	
 	
 	

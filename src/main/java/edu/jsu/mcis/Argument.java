@@ -8,6 +8,8 @@ abstract class Argument
 	protected String argumentDescription;
 	protected String[] restrictedValues;
 	protected boolean hasRestricted; 
+	protected int numberOfValues;
+	protected String shorthand;
 	
 	public Argument(Type type, String description, String[] restrictedValues){
 		 argumentType = type;
@@ -24,6 +26,8 @@ abstract class Argument
 	 public abstract void setValue(Object value);
 	 public abstract Object getValue();
 	 public abstract Type getType();
+	 public abstract String getDescription();
+	 public abstract int getNumberOfValues();
 	 
 	
 }

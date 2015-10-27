@@ -1,10 +1,8 @@
 package edu.jsu.mcis;
 
 public class positionalArgument extends Argument{
-	private Object argumentValue;
-	public positionalArgument(Type type, String description, Object argumentValue){
+	public positionalArgument(Type type, String description){
 		super(type, description);
-		this.argumentValue = argumentValue;
 	}
 	
 	 public void setValue(Object value){
@@ -16,6 +14,12 @@ public class positionalArgument extends Argument{
 	 }
 	 public Type getType(){
 		 return argumentType;
+	 }
+	 public  String getDescription(){
+		 return argumentDescription;
+	 }
+	 public  int getNumberOfValues(){
+		 return numberOfValues;
 	 }
 	
 }	
