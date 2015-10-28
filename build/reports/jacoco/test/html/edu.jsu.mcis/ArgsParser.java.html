@@ -178,7 +178,7 @@ public class ArgsParser{
 			
 <span class="fc bfc" id="L179" title="All 4 branches covered.">			 if(values[i].equals(namedArgumentsNames.get(j))||values[i].equals(arguments.get(namedArgumentsNames.get(j)).getShorthand())){	</span>
 <span class="fc" id="L180">				boolean temp=true;</span>
-<span class="pc bpc" id="L181" title="1 of 4 branches missed.">				if(arguments.get(namedArgumentsNames.get(j)).getNumberOfValues() == 0||values[i].equals(&quot;-h&quot;)){</span>
+<span class="fc bfc" id="L181" title="All 2 branches covered.">				if(arguments.get(namedArgumentsNames.get(j)).getNumberOfValues() == 0){</span>
 <span class="fc" id="L182">				arguments.get(namedArgumentsNames.get(j)).setValue(true);</span>
 <span class="pc bpc" id="L183" title="1 of 4 branches missed.">				if(values[i].equals(&quot;--help&quot;)||values[i].equals(&quot;-h&quot;)){</span>
 <span class="fc" id="L184">					b=getValue(&quot;--help&quot;);</span>

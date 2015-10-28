@@ -1,6 +1,6 @@
 package edu.jsu.mcis;
 
-abstract class Argument
+public abstract class Argument
 {   
 	public enum Type {DOUBLE, INTEGER, STRING, BOOLEAN};
 	protected Object argumentValue;
