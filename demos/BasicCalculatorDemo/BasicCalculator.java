@@ -5,11 +5,11 @@ public class BasicCalculator{
 		//args = new String[] {"--add","8","7"};
 		ArgsParser ap = new ArgsParser();
 		ap.addProgram("BasicCalculator","Add, subtract, and multiply numbers.");
-		ap.addArgument("firstNumber","The first number to do calculations on",Argument.Type.DOUBLE);
-		ap.addArgument("secondNumber","The second number to do calculations on",Argument.Type.DOUBLE);
-		ap.addNamedArgument("--add","Adds the numbers",Argument.Type.BOOLEAN,2,false);
-		ap.addNamedArgument("--subtract","Subtracts the numbers",Argument.Type.BOOLEAN,2,false);
-		ap.addNamedArgument("--multiply","Multiplies the numbers",Argument.Type.BOOLEAN,2,false);
+		ap.addPositionalArgument("firstNumber","The first number to do calculations on",Argument.Type.DOUBLE);
+		ap.addPositionalArgument("secondNumber","The second number to do calculations on",Argument.Type.DOUBLE);
+		ap.addNamedArgument("--add","Adds the numbers",Argument.Type.BOOLEAN,0,false,"-a");
+		ap.addNamedArgument("--subtract","Subtracts the numbers",Argument.Type.BOOLEAN,0,false,"-s");
+		ap.addNamedArgument("--multiply","Multiplies the numbers",Argument.Type.BOOLEAN,0,false,"-m");
 		ap.parseValues(args);
 		double firstNumber = ap.getValue("firstNumber");
 		double secondNumber = ap.getValue("secondNumber");
