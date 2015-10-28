@@ -3,24 +3,30 @@
 public class positionalArgument extends Argument{
 	public positionalArgument(Type type, String description){
 <span class="fc" id="L5">		super(type, description);</span>
-<span class="fc" id="L6">	}</span>
+<span class="fc" id="L6">		shorthand=&quot;&quot;;</span>
+<span class="fc" id="L7">	}</span>
 	
 	 public void setValue(Object value){
-<span class="fc" id="L9">		 argumentValue = value;</span>
-<span class="fc" id="L10">	 }</span>
+<span class="fc" id="L10">		 argumentValue = value;</span>
+<span class="fc" id="L11">	 }</span>
 
 	 public Object getValue(){
-<span class="fc" id="L13">		 return argumentValue;</span>
+<span class="fc" id="L14">		 return argumentValue;</span>
 	 }
 	 public Type getType(){
-<span class="fc" id="L16">		 return argumentType;</span>
+<span class="fc" id="L17">		 return argumentType;</span>
 	 }
 	 public  String getDescription(){
-<span class="fc" id="L19">		 return argumentDescription;</span>
+<span class="fc" id="L20">		 return argumentDescription;</span>
 	 }
 	 public  int getNumberOfValues(){
-<span class="nc" id="L22">		 return numberOfValues;</span>
+<span class="nc" id="L23">		 return numberOfValues;</span>
 	 }
-	
+	public void setShorthand(String s){
+<span class="nc" id="L26">		 shorthand = s;</span>
+<span class="nc" id="L27">	 }</span>
+	 public String getShorthand(){
+<span class="nc" id="L29">		 return shorthand;</span>
+	 }
 }	
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

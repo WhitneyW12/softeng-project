@@ -7,13 +7,12 @@ public class ArgsParserKeywords{
 	public void startVolumeCacluatorWithArguments(String[] args){
 		ap = new ArgsParser();
 		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
-		ap.addArgument("length","the length of the box",Argument.Type.STRING);
-		ap.addArgument("width","the width of the box",Argument.Type.STRING);
-		ap.addArgument("height","the height of the box",Argument.Type.STRING);
-		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false);
-		String [] restrictedValues= new String[]{"box","ellipsoid"};
-		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box",restrictedValues);
-		ap.addNamedArgument("--digits","prints help message",Argument.Type.STRING,1,"4");
+		ap.addPositionalArgument("length","the length of the box",Argument.Type.STRING);
+		ap.addPositionalArgument("width","the width of the box",Argument.Type.STRING);
+		ap.addPositionalArgument("height","the height of the box",Argument.Type.STRING);
+		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false,"-h");
+		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box","-t");
+		ap.addNamedArgument("--digits","prints help message",Argument.Type.STRING,1,"4","-d");
 		try{
 			ap.parseValues(args);
 		}
@@ -74,23 +73,22 @@ public class ArgsParserKeywords{
 	public void startAbsurdProgramWithArguments(String[] args){
 		ap = new ArgsParser();
 		ap.addProgram("VolumeCalculator","");
-		ap.addArgument("pet","",Argument.Type.STRING);
-		ap.addArgument("number","",Argument.Type.STRING);
-		ap.addArgument("rainy","",Argument.Type.STRING);
-		ap.addArgument("bathrooms","",Argument.Type.STRING);
+		ap.addPositionalArgument("pet","",Argument.Type.STRING);
+		ap.addPositionalArgument("number","",Argument.Type.STRING);
+		ap.addPositionalArgument("rainy","",Argument.Type.STRING);
+		ap.addPositionalArgument("bathrooms","",Argument.Type.STRING);
 		ap.parseValues(args);
 	}
 	
 	public void startProgramWithArguments(String[] args){
 		ap = new ArgsParser();
 		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
-		ap.addArgument("length","the length of the box",Argument.Type.DOUBLE);
-		ap.addArgument("width","the width of the box",Argument.Type.DOUBLE);
-		ap.addArgument("height","the height of the box",Argument.Type.DOUBLE);
-		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false);
-		String [] restrictedValues= new String[]{"box","ellipsoid"};
-		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box",restrictedValues);
-		ap.addNamedArgument("--digits","prints help message",Argument.Type.STRING,1,4);
+		ap.addPositionalArgument("length","the length of the box",Argument.Type.DOUBLE);
+		ap.addPositionalArgument("width","the width of the box",Argument.Type.DOUBLE);
+		ap.addPositionalArgument("height","the height of the box",Argument.Type.DOUBLE);
+		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false,"-h");
+		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box","-t");
+		ap.addNamedArgument("--digits","prints help message",Argument.Type.STRING,1,4,"-d");
 		try{
 			ap.parseValues(args);
 		}

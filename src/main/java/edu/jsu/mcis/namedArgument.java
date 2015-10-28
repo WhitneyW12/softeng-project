@@ -2,11 +2,11 @@ package edu.jsu.mcis;
 public class namedArgument extends Argument{
 	
 
-	public namedArgument(Type type, String description, int numberOfValues, String[] restrictedValues){
-		 super(type,description,restrictedValues);
+	public namedArgument(Type type, String description, int numberOfValues){
+		 super(type,description);
 		 this.numberOfValues = numberOfValues;
-		hasRestricted = false;
 		numberOfValues=1;
+		shorthand="";
 	 }
 
 	 public void setShorthand(String s){
@@ -32,14 +32,9 @@ public class namedArgument extends Argument{
 		 return numberOfValues;
 	 }
 	 
-	 public void setHasRestricted(boolean b){
-		 hasRestricted = b;
-	 }
 	 
-	 public String[] getRestrictedValues(){
-		 return restrictedValues;
-	 }
 	 
-}
+	 
+	}
 	
 	

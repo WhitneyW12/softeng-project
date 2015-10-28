@@ -2,32 +2,27 @@
 
 abstract class Argument
 {   
-<span class="pc" id="L5">	protected enum Type {DOUBLE, INTEGER, STRING, BOOLEAN};</span>
+<span class="pc" id="L5">	public enum Type {DOUBLE, INTEGER, STRING, BOOLEAN};</span>
 	protected Object argumentValue;
 	protected Type argumentType;
 	protected String argumentDescription;
-	protected String[] restrictedValues;
-	protected boolean hasRestricted; 
 	protected int numberOfValues;
 	protected String shorthand;
 	
-<span class="fc" id="L14">	public Argument(Type type, String description, String[] restrictedValues){</span>
-<span class="fc" id="L15">		 argumentType = type;</span>
-<span class="fc" id="L16">		 argumentValue = &quot;&quot;;</span>
-<span class="fc" id="L17">		 argumentDescription = description;</span>
-<span class="fc" id="L18">		 hasRestricted = false;</span>
-<span class="fc" id="L19">		 this.restrictedValues = restrictedValues; </span>
-<span class="fc" id="L20">	 }</span>
+<span class="fc" id="L12">	public Argument(Type type, String description){</span>
+<span class="fc" id="L13">		 argumentType = type;</span>
+<span class="fc" id="L14">		 argumentValue = &quot;&quot;;</span>
+<span class="fc" id="L15">		 argumentDescription = description;</span>
+<span class="fc" id="L16">	 }</span>
 	 
-	public Argument(Type type, String description){
-<span class="fc" id="L23">		this(type,description, null); </span>
-<span class="fc" id="L24">	 }</span>
 	
 	 public abstract void setValue(Object value);
 	 public abstract Object getValue();
 	 public abstract Type getType();
 	 public abstract String getDescription();
 	 public abstract int getNumberOfValues();
+	 public abstract String getShorthand();
+	 public abstract void setShorthand(String s);
 	 
 	
 }

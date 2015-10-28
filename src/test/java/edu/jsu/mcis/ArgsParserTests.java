@@ -53,9 +53,10 @@ public class ArgsParserTests{
 		ap.addPositionalArgument("length","the length of the box",Argument.Type.STRING);
 		ap.addPositionalArgument("width","the width of the box",Argument.Type.STRING);
 		ap.addPositionalArgument("height","the height of the box",Argument.Type.STRING);
-		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false);
+		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false,"-h");
 		try{
 			ap.parseValues(args);
+			assertTrue(false);
 		}
 		catch(HelpMessageException ex){
 			assertEquals("usage: java VolumeCalculator length width height \nCalculate the volume of a box\npositional arguments:\nlength the length of the box\nwidth the width of the box\nheight the height of the box\n",
@@ -70,7 +71,7 @@ public class ArgsParserTests{
 		ap.addPositionalArgument("length","the length of the box",Argument.Type.STRING);
 		ap.addPositionalArgument("width","the width of the box",Argument.Type.STRING);
 		ap.addPositionalArgument("height","the height of the box",Argument.Type.STRING);
-		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false);
+		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false,"-h");
 		try{
 			ap.parseValues(args);
 		}
@@ -87,7 +88,7 @@ public class ArgsParserTests{
 		ap.addPositionalArgument("length","the length of the box",Argument.Type.STRING);
 		ap.addPositionalArgument("width","the width of the box",Argument.Type.STRING);
 		ap.addPositionalArgument("height","the height of the box",Argument.Type.STRING);
-		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false);
+		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false,"-h");
 		assertEquals("usage: java VolumeCalculator length width height \nCalculate the volume of a box\npositional arguments:\nlength the length of the box\nwidth the width of the box\nheight the height of the box\n",
 		ap.getHelpMessage());
 	}
@@ -173,32 +174,25 @@ public class ArgsParserTests{
 	
 	@Test
 	public void makeNamedArgument(){
-		ap.addNamedArgument("length","the length of the box",Argument.Type.STRING,1,"");
+		ap.addNamedArgument("length","the length of the box",Argument.Type.STRING,1,"","-l");
 		assertEquals("", ap.getValue("length"));
 	}
 	
-	@Test
-	public void checkNamedArgumentWithRestrictedValue(){
-		String [] restrictedValues = new String[]{"box","elipsoid"};
-		String[] args = new String[] {"--type", "elipsoid"};
-		ap.addNamedArgument("--type","",Argument.Type.STRING,1,"box",restrictedValues);
-		ap.parseValues(args);
-		assertEquals("elipsoid", ap.getValue("--type"));	
-	}
+	
 	
 	@Test
 	public void checkNamedArgumentValue(){
 		String[] args = new String[] {"--type", "elipsoid"};
-		ap.addNamedArgument("--type","",Argument.Type.STRING,1,"box");
-		ap.addNamedArgument("--digits","prints help message",Argument.Type.INTEGER,1,4);
+		ap.addNamedArgument("--type","",Argument.Type.STRING,1,"box","-t");
+		ap.addNamedArgument("--digits","prints help message",Argument.Type.INTEGER,1,4,"-d");
 		ap.parseValues(args);
 		assertEquals("elipsoid", ap.getValue("--type"));
 	}
 	
 	@Test
 	public void checkNamedArgumentDefaultValue(){
-		String [] restrictedValues = new String[]{"box","elipsoid"};
-		ap.addNamedArgument("--type","",Argument.Type.STRING,1,"box",restrictedValues);
+		
+		ap.addNamedArgument("--type","",Argument.Type.STRING,1,"box","-t");
 		assertEquals("box", ap.getValue("--type"));
 	}
 	
@@ -229,21 +223,21 @@ public class ArgsParserTests{
 		ap.addPositionalArgument("length","the length of the box",Argument.Type.STRING);
 		ap.addPositionalArgument("width","the width of the box",Argument.Type.STRING);
 		ap.addPositionalArgument("height","the height of the box",Argument.Type.STRING);
-		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false);
-		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box");
-		ap.addNamedArgument("--digits","prints help message",Argument.Type.STRING,1,"4");
+		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false,"-h");
+		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box","-t");
+		ap.addNamedArgument("--digits","prints help message",Argument.Type.INTEGER,1,4,"-d");
 		ap.parseValues(args);
 		String length= ap.getValue("length");
 		String width= ap.getValue("width");
 		String height= ap.getValue("height");
 		String type = ap.getValue("--type");
-		String digits = ap.getValue("--digits");
+		int digits = ap.getValue("--digits");
 		
 		assertEquals("7",length);
 		assertEquals("5",width);
 		assertEquals("2",height);
 		assertEquals("ellipsoid",type);
-		assertEquals("1",digits);
+		assertEquals(1,digits);
 		
 	}
 		@Test
@@ -254,9 +248,9 @@ public class ArgsParserTests{
 		ap.addPositionalArgument("length","the length of the box",Argument.Type.STRING);
 		ap.addPositionalArgument("width","the width of the box",Argument.Type.STRING);
 		ap.addPositionalArgument("height","the height of the box",Argument.Type.STRING);
-		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false);
-		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box");
-		ap.addNamedArgument("--digits","prints help message",Argument.Type.INTEGER,1,4);
+		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false,"-h");
+		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box","-t");
+		ap.addNamedArgument("--digits","prints help message",Argument.Type.INTEGER,1,4,"-d");
 		ap.parseValues(args);
 		String length= ap.getValue("length");
 		String width= ap.getValue("width");
@@ -279,9 +273,9 @@ public class ArgsParserTests{
 		ap.addPositionalArgument("length","the length of the box",Argument.Type.STRING);
 		ap.addPositionalArgument("width","the width of the box",Argument.Type.STRING);
 		ap.addPositionalArgument("height","the height of the box",Argument.Type.STRING);
-		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false);
-		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box");
-		ap.addNamedArgument("--digits","prints help message",Argument.Type.INTEGER,1,4);
+		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false,"-h");
+		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box","-t");
+		ap.addNamedArgument("--digits","prints help message",Argument.Type.INTEGER,1,4,"-d");
 		try{
 		ap.parseValues(args);
 		}
@@ -301,10 +295,10 @@ public class ArgsParserTests{
 		ap.addPositionalArgument("length","the length of the box",Argument.Type.STRING);
 		ap.addPositionalArgument("width","the width of the box",Argument.Type.STRING);
 		ap.addPositionalArgument("height","the height of the box",Argument.Type.STRING);
-		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false);
-		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box");
-		ap.addNamedArgument("--digits","prints help message",Argument.Type.INTEGER,1,4);
-		ap.addNamedArgument("--test","prints help message",Argument.Type.BOOLEAN,1,false);
+		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false,"-h");
+		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box","-t");
+		ap.addNamedArgument("--digits","prints help message",Argument.Type.INTEGER,1,4,"-d");
+		ap.addNamedArgument("--test","prints help message",Argument.Type.BOOLEAN,1,false,"-e");
 		ap.parseValues(args);
 		boolean b = ap.getValue("--test");
 		assertTrue(b);
@@ -316,10 +310,10 @@ public class ArgsParserTests{
 		ap.addPositionalArgument("length","the length of the box",Argument.Type.STRING);
 		ap.addPositionalArgument("width","the width of the box",Argument.Type.STRING);
 		ap.addPositionalArgument("height","the height of the box",Argument.Type.STRING);
-		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false);
-		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box");
-		ap.addNamedArgument("--digits","prints help message",Argument.Type.INTEGER,1,4);
-		ap.addNamedArgument("--test","prints help message",Argument.Type.DOUBLE,1,false);
+		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false,"-h");
+		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box","-t");
+		ap.addNamedArgument("--digits","prints help message",Argument.Type.INTEGER,1,4,"-d");
+		ap.addNamedArgument("--test","prints help message",Argument.Type.DOUBLE,1,false,"-e");
 		ap.parseValues(args);
 		double b = ap.getValue("--test");
 		assertEquals(5,b,.001);
@@ -331,10 +325,10 @@ public class ArgsParserTests{
 		ap.addPositionalArgument("length","the length of the box",Argument.Type.STRING);
 		ap.addPositionalArgument("width","the width of the box",Argument.Type.STRING);
 		ap.addPositionalArgument("height","the height of the box",Argument.Type.STRING);
-		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false);
-		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box");
-		ap.addNamedArgument("--digits","prints help message",Argument.Type.INTEGER,1,4);
-		ap.addNamedArgument("--test","prints help message",Argument.Type.DOUBLE,1,false);
+		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false,"-h");
+		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box","-t");
+		ap.addNamedArgument("--digits","prints help message",Argument.Type.INTEGER,1,4,"-d");
+		ap.addNamedArgument("--test","prints help message",Argument.Type.DOUBLE,1,false,"-e");
 		try{
 		ap.parseValues(args);
 		assertTrue(false);
@@ -342,6 +336,21 @@ public class ArgsParserTests{
 		catch(NumberFormatException ex ){
 			assertTrue(true);
 		}
+		
+	}
+	@Test
+	public void twoValues(){
+		String[] args = new String[] {"7","--test","true","5","2"};
+		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
+		ap.addPositionalArgument("length","the length of the box",Argument.Type.STRING);
+		ap.addPositionalArgument("width","the width of the box",Argument.Type.STRING);
+		ap.addPositionalArgument("height","the height of the box",Argument.Type.STRING);
+		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false,"-h");
+		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box","-t");
+		ap.addNamedArgument("--digits","prints help message",Argument.Type.INTEGER,1,4,"-d");;
+		ap.addNamedArgument("--test","prints help message",Argument.Type.BOOLEAN,2,false,"-e");
+		assertEquals(2,ap.getNumberOfValues("--test"));
+		
 		
 	}
 	

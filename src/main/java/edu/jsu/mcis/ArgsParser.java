@@ -32,15 +32,11 @@ public class ArgsParser{
 		positionalvaluesparsed = 0;
 	}
 	
-	public void addNamedArgument(String name, String description, Argument.Type t, int numberOfValues,Object defaultvalue,String[] restrictedValues){
+	public void addNamedArgument(String name, String description, Argument.Type t, int numberOfValues,Object defaultvalue,String Shorthand){
 		namedArgumentsNames.add(name);
-		arguments.put(name,new namedArgument(t,description,numberOfValues, restrictedValues));
+		arguments.put(name,new namedArgument(t,description,numberOfValues));
 		arguments.get(name).setValue(defaultvalue);
-		
-	}
-	
-	public void addNamedArgument(String name, String description, Argument.Type t, int numberOfValues, Object defaultvalue){
-		addNamedArgument(name,description,t,numberOfValues,defaultvalue,null);
+		arguments.get(name).setShorthand(Shorthand);
 		
 	}
 	
@@ -180,9 +176,9 @@ public class ArgsParser{
 		boolean b = false;
 		for(int j=0;j<namedArgumentsNames.size()&&i<values.length;j++){
 			
-			 if(values[i].equals(namedArgumentsNames.get(j))){	
+			 if(values[i].equals(namedArgumentsNames.get(j))||values[i].equals(arguments.get(namedArgumentsNames.get(j)).getShorthand())){	
 				boolean temp=true;
-				if(arguments.get(namedArgumentsNames.get(j)).getNumberOfValues() == 0||values[i].equals("-h")){
+				if(arguments.get(namedArgumentsNames.get(j)).getNumberOfValues() == 0){
 				arguments.get(namedArgumentsNames.get(j)).setValue(true);
 				if(values[i].equals("--help")||values[i].equals("-h")){
 					b=getValue("--help");

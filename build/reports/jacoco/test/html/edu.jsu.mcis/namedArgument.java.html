@@ -2,18 +2,18 @@
 public class namedArgument extends Argument{
 	
 
-	public namedArgument(Type type, String description, int numberOfValues, String[] restrictedValues){
-<span class="fc" id="L6">		 super(type,description,restrictedValues);</span>
+	public namedArgument(Type type, String description, int numberOfValues){
+<span class="fc" id="L6">		 super(type,description);</span>
 <span class="fc" id="L7">		 this.numberOfValues = numberOfValues;</span>
-<span class="fc" id="L8">		hasRestricted = false;</span>
-<span class="fc" id="L9">		numberOfValues=1;</span>
+<span class="fc" id="L8">		numberOfValues=1;</span>
+<span class="fc" id="L9">		shorthand=&quot;&quot;;</span>
 <span class="fc" id="L10">	 }</span>
 
 	 public void setShorthand(String s){
-<span class="nc" id="L13">		 shorthand = s;</span>
-<span class="nc" id="L14">	 }</span>
+<span class="fc" id="L13">		 shorthand = s;</span>
+<span class="fc" id="L14">	 }</span>
 	 public String getShorthand(){
-<span class="nc" id="L16">		 return shorthand;</span>
+<span class="fc" id="L16">		 return shorthand;</span>
 	 }
 	 
 	 public void setValue(Object value){
@@ -32,15 +32,10 @@ public class namedArgument extends Argument{
 <span class="fc" id="L32">		 return numberOfValues;</span>
 	 }
 	 
-	 public void setHasRestricted(boolean b){
-<span class="nc" id="L36">		 hasRestricted = b;</span>
-<span class="nc" id="L37">	 }</span>
 	 
-	 public String[] getRestrictedValues(){
-<span class="nc" id="L40">		 return restrictedValues;</span>
-	 }
 	 
-}
+	 
+	}
 	
 	
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
