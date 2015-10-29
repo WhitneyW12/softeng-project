@@ -55,7 +55,9 @@ public class ArgsParser{
 	public void parseValues (String[] values){
 		for(int i=0;i<values.length;i++){
 			help = false;
-			i = parseNamedArguments(i, values);
+			if(values[i].substring(0,1).equals("-")){
+				i = parseNamedArguments(i, values);
+			}
 			setnumberofNamedargumentvalues();
 			if(!help){
 				checkForLengthOfArgumentExceptions(i, values);
@@ -174,48 +176,55 @@ public class ArgsParser{
 	
 	private int parseNamedArguments(int i, String[] values){
 		boolean b = false;
+		boolean found= false;
 		for(int j=0;j<namedArgumentsNames.size()&&i<values.length;j++){
-			
-			 if(values[i].equals(namedArgumentsNames.get(j))||values[i].equals(arguments.get(namedArgumentsNames.get(j)).getShorthand())){	
-				boolean temp=true;
-				if(arguments.get(namedArgumentsNames.get(j)).getNumberOfValues() == 0){
-				arguments.get(namedArgumentsNames.get(j)).setValue(true);
-				if(values[i].equals("--help")||values[i].equals("-h")){
-					b=getValue("--help");
-				}
-				i=i+1;
-				help=true;
-				
-				}
-				
-				else{
-					if(arguments.get(namedArgumentsNames.get(j)).getType()==Argument.Type.STRING){
-					arguments.get(namedArgumentsNames.get(j)).setValue(values[i+1]);
-				}
-				else if(arguments.get(namedArgumentsNames.get(j)).getType()==Argument.Type.DOUBLE){
-					try{
-						parseNamedDouble(j,values[i+1]);
+			if(values[i].substring(0,1).equals("-")){
+				found=false;
+				if(values[i].equals(namedArgumentsNames.get(j))||values[i].equals(arguments.get(namedArgumentsNames.get(j)).getShorthand())){	
+					boolean temp=true;
+					found=true;
+					if(arguments.get(namedArgumentsNames.get(j)).getNumberOfValues() == 0){
+					arguments.get(namedArgumentsNames.get(j)).setValue(true);
+					if(values[i].equals("--help")||values[i].equals("-h")){
+						b=getValue("--help");
 					}
-					catch(NumberFormatException e){
-						errorMessage = premessage+"\n"+programName+".java: error: argument "+positionalargumentNames.get(i)+": invalid double value: "+values[i];
-						error = true;
-						throw new NumberFormatException(errorMessage);
-					}
-				}
-				else if(arguments.get(namedArgumentsNames.get(j)).getType()==Argument.Type.INTEGER){
-					parseNamedInteger(j,values[i+1]);
-				}
-				else{
-					parseNamedBoolean(j,values[i+1]);
-				}
-					i+=2;	
-				}	
-				help=true;
+					i=i+1;
+					help=true;
 				
-				j=0;
-			}
+					}
+				
+					else{
+						if(arguments.get(namedArgumentsNames.get(j)).getType()==Argument.Type.STRING){
+						arguments.get(namedArgumentsNames.get(j)).setValue(values[i+1]);
+					}
+					else if(arguments.get(namedArgumentsNames.get(j)).getType()==Argument.Type.DOUBLE){
+						try{
+							parseNamedDouble(j,values[i+1]);
+						}
+						catch(NumberFormatException e){
+							errorMessage = premessage+"\n"+programName+".java: error: argument "+positionalargumentNames.get(i)+": invalid double value: "+values[i];
+							error = true;
+							throw new NumberFormatException(errorMessage);
+						}
+					}
+					else if(arguments.get(namedArgumentsNames.get(j)).getType()==Argument.Type.INTEGER){
+						parseNamedInteger(j,values[i+1]);
+					}
+					else{
+						parseNamedBoolean(j,values[i+1]);
+					}
+						i+=2;	
+					}	
+					help=true;
+				
+					j=0;
+				}
+				
 		}
-		
+		}
+		if(!found){
+			throw new NoSuchArgumentException("");
+		}
 		if(b){
 				
 				throw new HelpMessageException(helpMessage);	

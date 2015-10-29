@@ -353,5 +353,26 @@ public class ArgsParserTests{
 		
 		
 	}
+	@Test
+	public void FalseArgument(){
+		String[] args = new String[] {"7","--myarg","something","5","2"};
+		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
+		ap.addPositionalArgument("length","the length of the box",Argument.Type.STRING);
+		ap.addPositionalArgument("width","the width of the box",Argument.Type.STRING);
+		ap.addPositionalArgument("height","the height of the box",Argument.Type.STRING);
+		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false,"-h");
+		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box","-t");
+		ap.addNamedArgument("--digits","prints help message",Argument.Type.INTEGER,1,4,"-d");
+		ap.addNamedArgument("--test","prints help message",Argument.Type.BOOLEAN,1,false,"-e");
+		try{
+		ap.parseValues(args);
+		assertTrue(false);
+		}
+		catch(NoSuchArgumentException ex){
+			assertTrue(true);
+		}
+		
+		
+	}
 	
 }
