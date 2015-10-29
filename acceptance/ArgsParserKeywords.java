@@ -16,7 +16,7 @@ public class ArgsParserKeywords{
 		try{
 			ap.parseValues(args);
 		}
-		catch(TooManyArgumentsException|IndexOutOfBoundsException ex){};
+		catch(RuntimeException ex){};
 	}
 	
 	public <T> T getLength(){
@@ -92,7 +92,7 @@ public class ArgsParserKeywords{
 		try{
 			ap.parseValues(args);
 		}
-		catch(HelpMessageException|NumberFormatException ex){};
+		catch(RuntimeException ex){};
 		
 	}
 }

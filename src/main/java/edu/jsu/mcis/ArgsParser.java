@@ -79,14 +79,28 @@ public class ArgsParser{
 					catch(NumberFormatException e){
 						errorMessage = premessage+"\n"+programName+".java: error: argument "+positionalargumentNames.get(i)+": invalid double value: "+values[i];
 						error = true;
-						throw new NumberFormatException(errorMessage);
+						throw new WrongFormatException(errorMessage);
 					}
 				}
 				else if(arguments.get(positionalargumentNames.get(positionalvaluesparsed-1)).getType()==Argument.Type.INTEGER){
+					try{
 					parseInteger(positionalvaluesparsed-1,values[i]);
+					}
+					catch(NumberFormatException e){
+						errorMessage = premessage+"\n"+programName+".java: error: argument "+positionalargumentNames.get(i)+": invalid int value: "+values[i];
+						error = true;
+						throw new WrongFormatException(errorMessage);
+					}
 				}
 				else{
-					parseBoolean(positionalvaluesparsed-1,values[i]);
+					if(values[i].equals("false")||values[i].equals("true")){
+						parseBoolean(positionalvaluesparsed-1,values[i]);
+					}
+					else{
+						errorMessage = premessage+"\n"+programName+".java: error: argument "+positionalargumentNames.get(i)+": invalid boolean value: "+values[i];
+						error = true;
+						throw new WrongFormatException(errorMessage);
+					}
 				}
 			}
 	}
@@ -143,7 +157,7 @@ public class ArgsParser{
 		arguments.get(positionalargumentNames.get(index)).setValue(Double.parseDouble(value));
 	}
 	
-	private void parseInteger(int index,String value){
+	private void parseInteger(int index,String value)throws NumberFormatException{
 		arguments.get(positionalargumentNames.get(index)).setValue(Integer.parseInt(value));
 	}
 	
@@ -154,7 +168,7 @@ public class ArgsParser{
 		arguments.get(namedArgumentsNames.get(index)).setValue(Double.parseDouble(value));
 	}
 	
-	private void parseNamedInteger(int index,String value){
+	private void parseNamedInteger(int index,String value)throws NumberFormatException{
 		arguments.get(namedArgumentsNames.get(index)).setValue(Integer.parseInt(value));
 	}
 	
@@ -196,23 +210,38 @@ public class ArgsParser{
 					else{
 						if(arguments.get(namedArgumentsNames.get(j)).getType()==Argument.Type.STRING){
 						arguments.get(namedArgumentsNames.get(j)).setValue(values[i+1]);
-					}
-					else if(arguments.get(namedArgumentsNames.get(j)).getType()==Argument.Type.DOUBLE){
-						try{
-							parseNamedDouble(j,values[i+1]);
 						}
-						catch(NumberFormatException e){
-							errorMessage = premessage+"\n"+programName+".java: error: argument "+positionalargumentNames.get(i)+": invalid double value: "+values[i];
-							error = true;
-							throw new NumberFormatException(errorMessage);
+						else if(arguments.get(namedArgumentsNames.get(j)).getType()==Argument.Type.DOUBLE){
+							try{
+								parseNamedDouble(j,values[i+1]);
+							}
+							catch(NumberFormatException e){
+								errorMessage = premessage+"\n"+programName+".java: error: argument "+positionalargumentNames.get(i)+": invalid double value: "+values[i];
+								error = true;
+								throw new WrongFormatException(errorMessage);
+							}
 						}
-					}
-					else if(arguments.get(namedArgumentsNames.get(j)).getType()==Argument.Type.INTEGER){
-						parseNamedInteger(j,values[i+1]);
-					}
-					else{
-						parseNamedBoolean(j,values[i+1]);
-					}
+						else if(arguments.get(namedArgumentsNames.get(j)).getType()==Argument.Type.INTEGER){
+							try{
+							parseNamedInteger(j,values[i+1]);
+							}
+							catch(NumberFormatException e){
+								errorMessage = premessage+"\n"+programName+".java: error: argument "+positionalargumentNames.get(i)+": invalid int value: "+values[i];
+								error = true;
+								throw new WrongFormatException(errorMessage);
+							}
+						}
+						else{
+							if(values[i+1].equals("false")||values[i+1].equals("true")){
+								parseNamedBoolean(j,values[i+1]);
+							}
+							else{
+								errorMessage = premessage+"\n"+programName+".java: error: argument "+positionalargumentNames.get(i)+": invalid boolean value: "+values[i];
+								error = true;
+								throw new WrongFormatException(errorMessage);
+							}
+						
+						}
 						i+=2;	
 					}	
 					help=true;

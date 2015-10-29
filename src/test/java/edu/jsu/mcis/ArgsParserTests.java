@@ -58,7 +58,7 @@ public class ArgsParserTests{
 			ap.parseValues(args);
 			assertTrue(false);
 		}
-		catch(HelpMessageException ex){
+		catch(RuntimeException ex){
 			assertEquals("usage: java VolumeCalculator length width height \nCalculate the volume of a box\npositional arguments:\nlength the length of the box\nwidth the width of the box\nheight the height of the box\n",
 			ap.getHelpMessage());
 		}
@@ -75,7 +75,7 @@ public class ArgsParserTests{
 		try{
 			ap.parseValues(args);
 		}
-		catch(HelpMessageException ex){
+		catch(RuntimeException ex){
 			assertEquals("usage: java VolumeCalculator length width height \nCalculate the volume of a box\npositional arguments:\nlength the length of the box\nwidth the width of the box\nheight the height of the box\n",
 			ap.getHelpMessage());
 		}
@@ -136,7 +136,7 @@ public class ArgsParserTests{
 		try{
 			ap.parseValues(args);
 		}
-		catch(TooManyArgumentsException e){
+		catch(RuntimeException e){
 			assertEquals("usage: java VolumeCalculator length width height \nVolumeCalculator.java: error: unrecognized arguments: 43",ap.getErrorMessage());
 		}
 	}
@@ -151,7 +151,7 @@ public class ArgsParserTests{
 		try{
 			ap.parseValues(args);
 		}
-		catch(TooFewArgumentsException e){
+		catch(RuntimeException e){
 			assertEquals("usage: java VolumeCalculator length width height \nVolumeCalculator.java: error: the following arguments are required: height ",ap.getErrorMessage());
 		}
 	}
@@ -166,7 +166,7 @@ public class ArgsParserTests{
 		try{
 			ap.parseValues(args);
 		}
-		catch(NumberFormatException e){
+		catch(RuntimeException e){
 			assertTrue(ap.getError());
 			assertEquals("usage: java VolumeCalculator length width height \nVolumeCalculator.java: error: argument width: invalid double value: something",ap.getErrorMessage());
 		}
@@ -279,7 +279,7 @@ public class ArgsParserTests{
 		try{
 		ap.parseValues(args);
 		}
-		catch(HelpMessageException ex){
+		catch(RuntimeException ex){
 		boolean b = ap.getValue("--help");
 		assertTrue(b);
 		assertEquals(1,ap.getNumberOfValues("--type"));
@@ -290,7 +290,7 @@ public class ArgsParserTests{
 	}
 	@Test
 	public void TestBooleanNamedArg(){
-		String[] args = new String[] {"7","--test","true","5","2"};
+		String[] args = new String[] {"7","--test","false","5","2"};
 		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
 		ap.addPositionalArgument("length","the length of the box",Argument.Type.STRING);
 		ap.addPositionalArgument("width","the width of the box",Argument.Type.STRING);
@@ -301,7 +301,7 @@ public class ArgsParserTests{
 		ap.addNamedArgument("--test","prints help message",Argument.Type.BOOLEAN,1,false,"-e");
 		ap.parseValues(args);
 		boolean b = ap.getValue("--test");
-		assertTrue(b);
+		assertFalse(b);
 	}
 	@Test
 	public void TestDoubleNamedArg(){
@@ -333,7 +333,7 @@ public class ArgsParserTests{
 		ap.parseValues(args);
 		assertTrue(false);
 		}
-		catch(NumberFormatException ex ){
+		catch(RuntimeException ex ){
 			assertTrue(true);
 		}
 		
@@ -368,11 +368,91 @@ public class ArgsParserTests{
 		ap.parseValues(args);
 		assertTrue(false);
 		}
-		catch(NoSuchArgumentException ex){
+		catch(RuntimeException ex){
 			assertTrue(true);
 		}
 		
 		
+	}
+	@Test
+	public void TestIntNamedArgException(){
+		String[] args = new String[] {"7","--test","something","5","2"};
+		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
+		ap.addPositionalArgument("length","the length of the box",Argument.Type.STRING);
+		ap.addPositionalArgument("width","the width of the box",Argument.Type.STRING);
+		ap.addPositionalArgument("height","the height of the box",Argument.Type.STRING);
+		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false,"-h");
+		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box","-t");
+		ap.addNamedArgument("--digits","prints help message",Argument.Type.INTEGER,1,4,"-d");
+		ap.addNamedArgument("--test","prints help message",Argument.Type.INTEGER,1,false,"-e");
+		try{
+		ap.parseValues(args);
+		assertTrue(false);
+		}
+		catch(RuntimeException ex){
+			assertTrue(true);
+		}
+		
+	}
+	@Test
+	public void TestBooleanNamedArgException(){
+		String[] args = new String[] {"7","--test","something","5","2"};
+		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
+		ap.addPositionalArgument("length","the length of the box",Argument.Type.STRING);
+		ap.addPositionalArgument("width","the width of the box",Argument.Type.STRING);
+		ap.addPositionalArgument("height","the height of the box",Argument.Type.STRING);
+		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false,"-h");
+		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box","-t");
+		ap.addNamedArgument("--digits","prints help message",Argument.Type.INTEGER,1,4,"-d");
+		ap.addNamedArgument("--test","prints help message",Argument.Type.BOOLEAN,1,false,"-e");
+		try{
+		ap.parseValues(args);
+		assertTrue(false);
+		}
+		catch(RuntimeException ex){
+			assertTrue(true);
+		}
+		
+	}
+	@Test
+	public void TestBooleanPositionalArgException(){
+		
+		String[] args = new String[] {"7","5","2"};
+		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
+		ap.addPositionalArgument("length","the length of the box",Argument.Type.STRING);
+		ap.addPositionalArgument("width","the width of the box",Argument.Type.STRING);
+		ap.addPositionalArgument("height","the height of the box",Argument.Type.BOOLEAN);
+		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false,"-h");
+		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box","-t");
+		ap.addNamedArgument("--digits","prints help message",Argument.Type.INTEGER,1,4,"-d");
+		ap.addNamedArgument("--test","prints help message",Argument.Type.BOOLEAN,1,false,"-e");
+		try{
+		ap.parseValues(args);
+		assertTrue(false);
+		}
+		catch(RuntimeException ex){
+			assertTrue(true);
+		}
+	}
+	@Test
+	public void TestIntPositionalArgException(){
+		
+		String[] args = new String[] {"7","5","bob"};
+		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
+		ap.addPositionalArgument("length","the length of the box",Argument.Type.STRING);
+		ap.addPositionalArgument("width","the width of the box",Argument.Type.STRING);
+		ap.addPositionalArgument("height","the height of the box",Argument.Type.INTEGER);
+		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false,"-h");
+		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box","-t");
+		ap.addNamedArgument("--digits","prints help message",Argument.Type.INTEGER,1,4,"-d");
+		ap.addNamedArgument("--test","prints help message",Argument.Type.BOOLEAN,1,false,"-e");
+		try{
+		ap.parseValues(args);
+		assertTrue(false);
+		}
+		catch(RuntimeException ex){
+			assertTrue(true);
+		}
 	}
 	
 }
