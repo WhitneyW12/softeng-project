@@ -19,9 +19,6 @@ public class positionalArgument extends Argument{
 	 public  String getDescription(){
 		 return argumentDescription;
 	 }
-	 public  int getNumberOfValues(){
-		 return numberOfValues;
-	 }
 	public void setShorthand(String s){
 		 shorthand = s;
 	 }

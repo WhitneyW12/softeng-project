@@ -30,11 +30,12 @@ public class ArgsParser{
 		help = false;
 		numofNamedArgValues = 0;
 		positionalvaluesparsed = 0;
+		addNamedArgument("--help","gets help message",Argument.Type.BOOLEAN,false,"-h");
 	}
 	
-	public void addNamedArgument(String name, String description, Argument.Type t, int numberOfValues,Object defaultvalue,String Shorthand){
+	public void addNamedArgument(String name, String description, Argument.Type t,Object defaultvalue,String Shorthand){
 		namedArgumentsNames.add(name);
-		arguments.put(name,new namedArgument(t,description,numberOfValues));
+		arguments.put(name,new namedArgument(t,description));
 		arguments.get(name).setValue(defaultvalue);
 		arguments.get(name).setShorthand(Shorthand);
 		
@@ -46,24 +47,21 @@ public class ArgsParser{
 		setPremessage();
 	}
 	
-	private void setnumberofNamedargumentvalues(){
-		for(int i =0;i<namedArgumentsNames.size();i++){
-			numofNamedArgValues+=arguments.get(namedArgumentsNames.get(i)).getNumberOfValues();
-		}
-	}
 	
 	public void parseValues (String[] values){
+		//parse(values);
+		
 		for(int i=0;i<values.length;i++){
 			help = false;
 			if(values[i].substring(0,1).equals("-")){
 				i = parseNamedArguments(i, values);
 			}
-			setnumberofNamedargumentvalues();
 			if(!help){
 				checkForLengthOfArgumentExceptions(i, values);
 			}
 			parsePositionalArguments(i, values);
 		}
+		
 	}
 	
 	private void parsePositionalArguments(int i, String[] values){
@@ -172,10 +170,6 @@ public class ArgsParser{
 		arguments.get(namedArgumentsNames.get(index)).setValue(Integer.parseInt(value));
 	}
 	
-	private void parseNamedBoolean(int index,String value){
-		arguments.get(namedArgumentsNames.get(index)).setValue(Boolean.parseBoolean(value));
-	}
-	
 	public String getErrorMessage(){
 		return errorMessage;
 	}
@@ -187,6 +181,58 @@ public class ArgsParser{
 	public Argument.Type getArgumentType(String name){
 		return arguments.get(name).getType();
 	}
+
+	
+	
+	/*private void parse(String[] args) {
+		Queue<String> queue = new LinkedList<String>();
+		for(int i = 0; i < args.length; i++) {
+			queue.add(args[i]);
+		}
+		while(!queue.isEmpty()) {
+			String arg = queue.remove();
+			if(arg.startsWith("-")) {
+				// named argument
+				Argument a = arguments.get(arg);
+				if(a == null) a = shorthand.get(arg);
+				if(a != null) {
+					if(a.getType() == Argument.Type.BOOLEAN) {
+						a.setValue(true);
+					}
+					else {
+						String val = queue.remove(); // What if I pull from an empty queue? Probably should be a NotEnoughArgumentsException or something.
+						try {
+							a.setValue(val);
+						}
+						catch(Exception e) {
+							
+						}
+					}
+				}
+				else {
+					throw new NoSuchArgumentException();
+				}
+			}
+			else {
+				// positional argument
+				String pname = positionalargumentNames.get(positionalvaluesparsed);
+				positionalvaluesparsed++;
+				Argument a = arguments.get(pname);
+				try {
+					a.setValue(arg);
+				}
+				catch(ExceptionA e) {
+					//throw new 
+				}
+				catch(ExceptionB e) {
+					
+				}
+			}
+		}
+		
+	}*/
+	
+	
 	
 	private int parseNamedArguments(int i, String[] values){
 		boolean b = false;
@@ -194,10 +240,9 @@ public class ArgsParser{
 		for(int j=0;j<namedArgumentsNames.size()&&i<values.length;j++){
 			if(values[i].substring(0,1).equals("-")){
 				found=false;
-				if(values[i].equals(namedArgumentsNames.get(j))||values[i].equals(arguments.get(namedArgumentsNames.get(j)).getShorthand())){	
-					boolean temp=true;
+				if(values[i].equals(namedArgumentsNames.get(j)) || values[i].equals(arguments.get(namedArgumentsNames.get(j)).getShorthand())){	
 					found=true;
-					if(arguments.get(namedArgumentsNames.get(j)).getNumberOfValues() == 0){
+					if(arguments.get(namedArgumentsNames.get(j)).getType()==Argument.Type.BOOLEAN){
 					arguments.get(namedArgumentsNames.get(j)).setValue(true);
 					if(values[i].equals("--help")||values[i].equals("-h")){
 						b=getValue("--help");
@@ -231,17 +276,7 @@ public class ArgsParser{
 								throw new WrongFormatException(errorMessage);
 							}
 						}
-						else{
-							if(values[i+1].equals("false")||values[i+1].equals("true")){
-								parseNamedBoolean(j,values[i+1]);
-							}
-							else{
-								errorMessage = premessage+"\n"+programName+".java: error: argument "+positionalargumentNames.get(i)+": invalid boolean value: "+values[i];
-								error = true;
-								throw new WrongFormatException(errorMessage);
-							}
 						
-						}
 						i+=2;	
 					}	
 					help=true;
@@ -260,9 +295,7 @@ public class ArgsParser{
 			}
 		return i;
 	}
-	public int getNumberOfValues(String name){
-		return arguments.get(name).getNumberOfValues();
-	}
+	
 	
 	
 }

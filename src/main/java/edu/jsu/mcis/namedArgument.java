@@ -2,10 +2,8 @@ package edu.jsu.mcis;
 public class namedArgument extends Argument{
 	
 
-	public namedArgument(Type type, String description, int numberOfValues){
+	public namedArgument(Type type, String description){
 		 super(type,description);
-		 this.numberOfValues = numberOfValues;
-		numberOfValues=1;
 		shorthand="";
 	 }
 
@@ -28,9 +26,7 @@ public class namedArgument extends Argument{
 	 public Type getType(){
 		 return argumentType;
 	 }
-	 public int getNumberOfValues(){
-		 return numberOfValues;
-	 }
+	 
 	 
 	 
 	 
