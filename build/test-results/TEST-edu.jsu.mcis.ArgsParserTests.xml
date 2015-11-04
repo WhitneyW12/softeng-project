@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.jsu.mcis.ArgsParserTests" tests="27" skipped="0" failures="0" errors="0" timestamp="2015-11-04T17:30:12" hostname="MSI" time="0.014">
+<testsuite name="edu.jsu.mcis.ArgsParserTests" tests="27" skipped="0" failures="0" errors="0" timestamp="2015-11-04T18:10:48" hostname="MSI" time="0.014">
   <properties/>
   <testcase name="parseStringToInt" classname="edu.jsu.mcis.ArgsParserTests" time="0.007"/>
   <testcase name="TestIntNamedArgException" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
@@ -10,19 +10,19 @@
   <testcase name="forceNumberFormatException" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
   <testcase name="TestIntPositionalArgException" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
   <testcase name="TestBooleanNamedArgException" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
-  <testcase name="TestMultipleNamedArguments" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
+  <testcase name="TestMultipleNamedArguments" classname="edu.jsu.mcis.ArgsParserTests" time="0.001"/>
   <testcase name="forceTooManyArguments" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
-  <testcase name="TestBooleanPositionalArgException" classname="edu.jsu.mcis.ArgsParserTests" time="0.001"/>
+  <testcase name="TestBooleanPositionalArgException" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
   <testcase name="checkArgumentDescription" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
   <testcase name="TestDoubleNamedArgError" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
-  <testcase name="testFalseArgument" classname="edu.jsu.mcis.ArgsParserTests" time="0.001"/>
+  <testcase name="testFalseArgument" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
   <testcase name="checkFlag" classname="edu.jsu.mcis.ArgsParserTests" time="0.001"/>
-  <testcase name="checkHelpMessage" classname="edu.jsu.mcis.ArgsParserTests" time="0.001"/>
+  <testcase name="checkHelpMessage" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
   <testcase name="checkNamedArgumentDefaultValue" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
   <testcase name="checkNamedArgumentValue" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
   <testcase name="TestDoubleNamedArg" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
   <testcase name="checkIfDashDashHelpThrowsException" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
-  <testcase name="parseStringToBool" classname="edu.jsu.mcis.ArgsParserTests" time="0.001"/>
+  <testcase name="parseStringToBool" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
   <testcase name="makeNamedArgument" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
   <testcase name="checkArgumentValues" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>
   <testcase name="forceTooFewArguments" classname="edu.jsu.mcis.ArgsParserTests" time="0.0"/>

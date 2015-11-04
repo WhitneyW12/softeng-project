@@ -30,10 +30,10 @@ public class ArgsParser{
 		help = false;
 		numofNamedArgValues = 0;
 		positionalvaluesparsed = 0;
-		addNamedArgument("--help","gets help message",Argument.Type.BOOLEAN,false,"-h");
+		addNamedArgument("--help","gets help message",Argument.Type.BOOLEAN,"false","-h");
 	}
 	
-	public void addNamedArgument(String name, String description, Argument.Type t,Object defaultvalue,String Shorthand){
+	public void addNamedArgument(String name, String description, Argument.Type t,String defaultvalue,String Shorthand){
 		namedArgumentsNames.add(name);
 		arguments.put(name,new namedArgument(t,description));
 		arguments.get(name).setValue(defaultvalue);
@@ -67,38 +67,25 @@ public class ArgsParser{
 	private void parsePositionalArguments(int i, String[] values){
 		if(i<values.length&&positionalvaluesparsed<positionalargumentNames.size()){
 				positionalvaluesparsed++;
-				if(arguments.get(positionalargumentNames.get(positionalvaluesparsed-1)).getType()==Argument.Type.STRING){
+				try{
 					arguments.get(positionalargumentNames.get(positionalvaluesparsed-1)).setValue(values[i]);
 				}
-				else if(arguments.get(positionalargumentNames.get(positionalvaluesparsed-1)).getType()==Argument.Type.DOUBLE){
-					try{
-						parseDouble(positionalvaluesparsed-1,values[i]);
-					}
-					catch(NumberFormatException e){
-						errorMessage = premessage+"\n"+programName+".java: error: argument "+positionalargumentNames.get(i)+": invalid double value: "+values[i];
+				catch(NumberFormatException ex){
+					if(arguments.get(positionalargumentNames.get(positionalvaluesparsed-1)).getType() == Argument.Type.INTEGER){
+						errorMessage = premessage+"\n"+programName+".java: error: argument "+positionalargumentNames.get(positionalvaluesparsed-1)+": invalid int value: "+values[i];
 						error = true;
-						throw new WrongFormatException(errorMessage);
-					}
-				}
-				else if(arguments.get(positionalargumentNames.get(positionalvaluesparsed-1)).getType()==Argument.Type.INTEGER){
-					try{
-					parseInteger(positionalvaluesparsed-1,values[i]);
-					}
-					catch(NumberFormatException e){
-						errorMessage = premessage+"\n"+programName+".java: error: argument "+positionalargumentNames.get(i)+": invalid int value: "+values[i];
-						error = true;
-						throw new WrongFormatException(errorMessage);
-					}
-				}
-				else{
-					if(values[i].equals("false")||values[i].equals("true")){
-						parseBoolean(positionalvaluesparsed-1,values[i]);
 					}
 					else{
-						errorMessage = premessage+"\n"+programName+".java: error: argument "+positionalargumentNames.get(i)+": invalid boolean value: "+values[i];
+						errorMessage = premessage+"\n"+programName+".java: error: argument "+positionalargumentNames.get(positionalvaluesparsed-1)+": invalid double value: "+values[i];
 						error = true;
-						throw new WrongFormatException(errorMessage);
 					}
+					throw new WrongFormatException(errorMessage);
+				}
+				catch(WrongFormatException ex){
+					errorMessage = premessage+"\n"+programName+".java: error: argument "+positionalargumentNames.get(positionalvaluesparsed-1)+": invalid boolean value: "+values[i];
+					error = true;
+					throw new WrongFormatException(errorMessage);
+					
 				}
 			}
 	}
@@ -149,25 +136,6 @@ public class ArgsParser{
 
 	public <T> T getValue(String name){
 		return (T)arguments.get(name).getValue();
-	}
-	
-	private void parseDouble(int index,String value)throws NumberFormatException{
-		arguments.get(positionalargumentNames.get(index)).setValue(Double.parseDouble(value));
-	}
-	
-	private void parseInteger(int index,String value)throws NumberFormatException{
-		arguments.get(positionalargumentNames.get(index)).setValue(Integer.parseInt(value));
-	}
-	
-	private void parseBoolean(int index,String value){
-		arguments.get(positionalargumentNames.get(index)).setValue(Boolean.parseBoolean(value));
-	}
-	private void parseNamedDouble(int index,String value)throws NumberFormatException{
-		arguments.get(namedArgumentsNames.get(index)).setValue(Double.parseDouble(value));
-	}
-	
-	private void parseNamedInteger(int index,String value)throws NumberFormatException{
-		arguments.get(namedArgumentsNames.get(index)).setValue(Integer.parseInt(value));
 	}
 	
 	public String getErrorMessage(){
@@ -243,7 +211,7 @@ public class ArgsParser{
 				if(values[i].equals(namedArgumentsNames.get(j)) || values[i].equals(arguments.get(namedArgumentsNames.get(j)).getShorthand())){	
 					found=true;
 					if(arguments.get(namedArgumentsNames.get(j)).getType()==Argument.Type.BOOLEAN){
-					arguments.get(namedArgumentsNames.get(j)).setValue(true);
+					arguments.get(namedArgumentsNames.get(j)).setValue("true");
 					if(values[i].equals("--help")||values[i].equals("-h")){
 						b=getValue("--help");
 					}
@@ -253,28 +221,19 @@ public class ArgsParser{
 					}
 				
 					else{
-						if(arguments.get(namedArgumentsNames.get(j)).getType()==Argument.Type.STRING){
-						arguments.get(namedArgumentsNames.get(j)).setValue(values[i+1]);
+						try{
+							arguments.get(namedArgumentsNames.get(j)).setValue(values[i+1]);
 						}
-						else if(arguments.get(namedArgumentsNames.get(j)).getType()==Argument.Type.DOUBLE){
-							try{
-								parseNamedDouble(j,values[i+1]);
-							}
-							catch(NumberFormatException e){
-								errorMessage = premessage+"\n"+programName+".java: error: argument "+positionalargumentNames.get(i)+": invalid double value: "+values[i];
+						catch(NumberFormatException ex){
+							if(arguments.get(namedArgumentsNames.get(j)).getType() == Argument.Type.INTEGER){
+								errorMessage = premessage+"\n"+programName+".java: error: argument "+namedArgumentsNames.get(j)+": invalid int value: "+values[i];
 								error = true;
-								throw new WrongFormatException(errorMessage);
 							}
-						}
-						else if(arguments.get(namedArgumentsNames.get(j)).getType()==Argument.Type.INTEGER){
-							try{
-							parseNamedInteger(j,values[i+1]);
-							}
-							catch(NumberFormatException e){
-								errorMessage = premessage+"\n"+programName+".java: error: argument "+positionalargumentNames.get(i)+": invalid int value: "+values[i];
+							else{
+								errorMessage = premessage+"\n"+programName+".java: error: argument "+namedArgumentsNames.get(j)+": invalid double value: "+values[i];
 								error = true;
-								throw new WrongFormatException(errorMessage);
 							}
+							throw new WrongFormatException(errorMessage);
 						}
 						
 						i+=2;	
