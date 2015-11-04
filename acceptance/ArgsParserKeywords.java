@@ -10,9 +10,8 @@ public class ArgsParserKeywords{
 		ap.addPositionalArgument("length","the length of the box",Argument.Type.STRING);
 		ap.addPositionalArgument("width","the width of the box",Argument.Type.STRING);
 		ap.addPositionalArgument("height","the height of the box",Argument.Type.STRING);
-		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false,"-h");
-		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box","-t");
-		ap.addNamedArgument("--digits","prints help message",Argument.Type.STRING,1,"4","-d");
+		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,"box","-t");
+		ap.addNamedArgument("--digits","prints help message",Argument.Type.STRING,"4","-d");
 		try{
 			ap.parseValues(args);
 		}
@@ -86,9 +85,8 @@ public class ArgsParserKeywords{
 		ap.addPositionalArgument("length","the length of the box",Argument.Type.DOUBLE);
 		ap.addPositionalArgument("width","the width of the box",Argument.Type.DOUBLE);
 		ap.addPositionalArgument("height","the height of the box",Argument.Type.DOUBLE);
-		ap.addNamedArgument("--help","prints help message",Argument.Type.BOOLEAN,0,false,"-h");
-		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,1,"box","-t");
-		ap.addNamedArgument("--digits","prints help message",Argument.Type.STRING,1,4,"-d");
+		ap.addNamedArgument("--type","prints help message",Argument.Type.STRING,"box","-t");
+		ap.addNamedArgument("--digits","prints help message",Argument.Type.STRING,"4","-d");
 		try{
 			ap.parseValues(args);
 		}
