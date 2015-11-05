@@ -246,7 +246,7 @@ public class ArgsParser{
 		}
 		}
 		if(!found){
-			errorMessage = premessage+"\n"+programName+".java: error: "+values[i]+"is not an argument";
+			errorMessage = premessage+"\n"+programName+".java: error: "+values[i]+" is not an argument";
 			throw new NoSuchArgumentException(errorMessage);
 		}
 		if(b){
