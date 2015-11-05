@@ -425,5 +425,20 @@ public class ArgsParserTests{
 			assertTrue(true);
 		}
 	}
+	@Test 
+	public void testOrderofArguments(){
+		String[] args = new String[] {"-s","5","bob"};
+		ap.addProgram("Calculator","Calculate addition, subtraction or multiplication");
+		ap.addPositionalArgument("length","the length of the box",Argument.Type.INTEGER);
+		ap.addPositionalArgument("width","the width of the box",Argument.Type.INTEGER);
+		ap.addNamedArgument("--add","prints help message",Argument.Type.BOOLEAN,"false","-a");
+		ap.addNamedArgument("--subtract","prints help message",Argument.Type.BOOLEAN,"false","-s");
+		try{
+		ap.parseValues(args);
+		}
+		catch(RuntimeException ex){
+			assertTrue(true);
+		}
+	}
 	
 }
