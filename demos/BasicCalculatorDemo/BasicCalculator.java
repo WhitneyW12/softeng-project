@@ -7,9 +7,9 @@ public class BasicCalculator{
 		ap.addProgram("BasicCalculator","Add, subtract, and multiply numbers.");
 		ap.addPositionalArgument("firstNumber","The first number to do calculations on",Argument.Type.DOUBLE);
 		ap.addPositionalArgument("secondNumber","The second number to do calculations on",Argument.Type.DOUBLE);
-		ap.addNamedArgument("--add","Adds the numbers",Argument.Type.BOOLEAN,0,false,"-a");
-		ap.addNamedArgument("--subtract","Subtracts the numbers",Argument.Type.BOOLEAN,0,false,"-s");
-		ap.addNamedArgument("--multiply","Multiplies the numbers",Argument.Type.BOOLEAN,0,false,"-m");
+		ap.addNamedArgument("--add","Adds the numbers",Argument.Type.BOOLEAN,"false","-a");
+		ap.addNamedArgument("--subtract","Subtracts the numbers",Argument.Type.BOOLEAN,"false","-s");
+		ap.addNamedArgument("--multiply","Multiplies the numbers",Argument.Type.BOOLEAN,"false","-m");
 		ap.parseValues(args);
 		double firstNumber = ap.getValue("firstNumber");
 		double secondNumber = ap.getValue("secondNumber");
