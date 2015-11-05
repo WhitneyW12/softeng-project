@@ -16,9 +16,11 @@ public class ArgsParser{
 	private boolean help;
 	private int numofNamedArgValues;
 	private int positionalvaluesparsed;
+	private Map<String,String> shorthand;
 	
 	public ArgsParser(){
 		arguments = new HashMap<String,Argument>();
+		shorthand = new HashMap<String,String>();
 		namedArgumentsNames = new ArrayList<String>();
 		positionalargumentNames= new ArrayList<String>();
 		programName = "";
@@ -37,7 +39,7 @@ public class ArgsParser{
 		namedArgumentsNames.add(name);
 		arguments.put(name,new namedArgument(t,description));
 		arguments.get(name).setValue(defaultvalue);
-		arguments.get(name).setShorthand(Shorthand);
+		shorthand.put(Shorthand,name);
 		
 	}
 	
@@ -49,61 +51,10 @@ public class ArgsParser{
 	
 	
 	public void parseValues (String[] values){
-		//parse(values);
-		
-		for(int i=0;i<values.length;i++){
-			help = false;
-			if(values[i].substring(0,1).equals("-")){
-				i = parseNamedArguments(i, values);
-			}
-			if(!help){
-				checkForLengthOfArgumentExceptions(i, values);
-			}
-			parsePositionalArguments(i, values);
-		}
+		parse(values);
 		
 	}
 	
-	private void parsePositionalArguments(int i, String[] values){
-		if(i<values.length&&positionalvaluesparsed<positionalargumentNames.size()){
-				positionalvaluesparsed++;
-				try{
-					arguments.get(positionalargumentNames.get(positionalvaluesparsed-1)).setValue(values[i]);
-				}
-				catch(NumberFormatException ex){
-					if(arguments.get(positionalargumentNames.get(positionalvaluesparsed-1)).getType() == Argument.Type.INTEGER){
-						errorMessage = premessage+"\n"+programName+".java: error: argument "+positionalargumentNames.get(positionalvaluesparsed-1)+": invalid int value: "+values[i];
-						error = true;
-					}
-					else{
-						errorMessage = premessage+"\n"+programName+".java: error: argument "+positionalargumentNames.get(positionalvaluesparsed-1)+": invalid double value: "+values[i];
-						error = true;
-					}
-					throw new WrongFormatException(errorMessage);
-				}
-				catch(WrongFormatException ex){
-					errorMessage = premessage+"\n"+programName+".java: error: argument "+positionalargumentNames.get(positionalvaluesparsed-1)+": invalid boolean value: "+values[i];
-					error = true;
-					throw new WrongFormatException(errorMessage);
-					
-				}
-			}
-	}
-	private void checkForLengthOfArgumentExceptions(int i, String[] values){
-				if( positionalvaluesparsed==positionalargumentNames.size()){
-					errorMessage = premessage+"\n"+programName+".java: error: unrecognized arguments: "+values[i];
-					error=true;
-					throw new TooManyArgumentsException(errorMessage);
-				} 
-				else if (values.length < positionalargumentNames.size()&& i==values.length-1){
-					errorMessage = premessage+"\n"+programName+".java: error: the following arguments are required: ";
-					for(int j=i+1;j<positionalargumentNames.size();j++)
-						errorMessage+=positionalargumentNames.get(j)+" ";
-						error=true;
-						throw new TooFewArgumentsException(errorMessage);
-					}
-				}
-
 	public void addProgram(String name,String description){
 		programName = name;
 		programDescription = description;
@@ -152,7 +103,7 @@ public class ArgsParser{
 
 	
 	
-	/*private void parse(String[] args) {
+	private void parse(String[] args) {
 		Queue<String> queue = new LinkedList<String>();
 		for(int i = 0; i < args.length; i++) {
 			queue.add(args[i]);
@@ -162,99 +113,81 @@ public class ArgsParser{
 			if(arg.startsWith("-")) {
 				// named argument
 				Argument a = arguments.get(arg);
-				if(a == null) a = shorthand.get(arg);
+				if(a == null) a = arguments.get(shorthand.get(arg));
 				if(a != null) {
 					if(a.getType() == Argument.Type.BOOLEAN) {
-						a.setValue(true);
+						a.setValue("true");
 					}
 					else {
 						String val = queue.remove(); // What if I pull from an empty queue? Probably should be a NotEnoughArgumentsException or something.
 						try {
 							a.setValue(val);
 						}
-						catch(Exception e) {
-							
+						catch(NumberFormatException ex){
+							if(a.getType() == Argument.Type.INTEGER){
+								errorMessage = premessage+"\n"+programName+".java: error: argument "+arg+": invalid int value: "+val;
+								error = true;
+							}
+							else{
+								errorMessage = premessage+"\n"+programName+".java: error: argument "+arg+": invalid double value: "+val;
+								error = true;
+							}
+							throw new WrongFormatException(errorMessage);
 						}
 					}
 				}
 				else {
-					throw new NoSuchArgumentException();
+					errorMessage = premessage+"\n"+programName+".java: error: "+arg+" is not an argument";
+					throw new NoSuchArgumentException(errorMessage);
 				}
 			}
 			else {
 				// positional argument
+				
+				if( positionalvaluesparsed==positionalargumentNames.size()){
+					errorMessage = premessage+"\n"+programName+".java: error: unrecognized arguments: "+arg;
+					error=true;
+					throw new TooManyArgumentsException(errorMessage);
+				} 
 				String pname = positionalargumentNames.get(positionalvaluesparsed);
 				positionalvaluesparsed++;
 				Argument a = arguments.get(pname);
 				try {
 					a.setValue(arg);
 				}
-				catch(ExceptionA e) {
-					//throw new 
+				catch(NumberFormatException ex){
+					if(a.getType() == Argument.Type.INTEGER){
+						errorMessage = premessage+"\n"+programName+".java: error: argument "+positionalargumentNames.get(positionalvaluesparsed-1)+": invalid int value: "+arg;
+						error = true;
+					}
+					else{
+						errorMessage = premessage+"\n"+programName+".java: error: argument "+positionalargumentNames.get(positionalvaluesparsed-1)+": invalid double value: "+arg;
+						error = true;
+					}
+					throw new WrongFormatException(errorMessage);
 				}
-				catch(ExceptionB e) {
+				catch(WrongFormatException ex){
+					errorMessage = premessage+"\n"+programName+".java: error: argument "+positionalargumentNames.get(positionalvaluesparsed-1)+": invalid boolean value: "+arg;
+					error = true;
+					throw new WrongFormatException(errorMessage);
 					
 				}
 			}
 		}
+		for(int i = 0; i < positionalargumentNames.size();i++)
+			if (arguments.get(positionalargumentNames.get(i)).getValue().equals("")){
+						errorMessage = premessage+"\n"+programName+".java: error: the following arguments are required: ";
+						for(int j=i;j<positionalargumentNames.size();j++)
+							errorMessage+=positionalargumentNames.get(j)+" ";
+							error=true;
+							throw new TooFewArgumentsException(errorMessage);
+						}
 		
-	}*/
-	
-	
-	
-	private int parseNamedArguments(int i, String[] values){
-		boolean b = false;
-		boolean found= false;
-		for(int j=0;j<namedArgumentsNames.size()&&i<values.length;j++){
-			if(values[i].substring(0,1).equals("-")){
-				found=false;
-				if(values[i].equals(namedArgumentsNames.get(j)) || values[i].equals(arguments.get(namedArgumentsNames.get(j)).getShorthand())){	
-					found=true;
-					if(arguments.get(namedArgumentsNames.get(j)).getType()==Argument.Type.BOOLEAN){
-					arguments.get(namedArgumentsNames.get(j)).setValue("true");
-					if(values[i].equals("--help")||values[i].equals("-h")){
-						b=getValue("--help");
-					}
-					i=i+1;
-					help=true;
-				
-					}
-				
-					else{
-						try{
-							arguments.get(namedArgumentsNames.get(j)).setValue(values[i+1]);
-						}
-						catch(NumberFormatException ex){
-							if(arguments.get(namedArgumentsNames.get(j)).getType() == Argument.Type.INTEGER){
-								errorMessage = premessage+"\n"+programName+".java: error: argument "+namedArgumentsNames.get(j)+": invalid int value: "+values[i];
-								error = true;
-							}
-							else{
-								errorMessage = premessage+"\n"+programName+".java: error: argument "+namedArgumentsNames.get(j)+": invalid double value: "+values[i];
-								error = true;
-							}
-							throw new WrongFormatException(errorMessage);
-						}
-						
-						i+=2;	
-					}	
-					help=true;
-				
-					j=0;
-				}
-				
-		}
-		}
-		if(!found){
-			errorMessage = premessage+"\n"+programName+".java: error: "+values[i]+" is not an argument";
-			throw new NoSuchArgumentException(errorMessage);
-		}
-		if(b){
-				
-				throw new HelpMessageException(helpMessage);	
-			}
-		return i;
 	}
+	
+	
+	
+	
 	
 	
 	

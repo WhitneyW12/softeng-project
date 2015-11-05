@@ -6,17 +6,6 @@ public class namedArgument extends Argument{
 		 super(type,description);
 		shorthand="";
 	 }
-
-	 public void setShorthand(String s){
-		 shorthand = s;
-	 }
-	 public String getShorthand(){
-		 return shorthand;
-	 }
-	 
-	 public void setValue(Object value){
-		 argumentValue = value;
-	 }
 	 public String getDescription(){
 		 return argumentDescription;
 	 }

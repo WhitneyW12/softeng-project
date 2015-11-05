@@ -5,11 +5,6 @@ public class positionalArgument extends Argument{
 		super(type, description);
 		shorthand="";
 	}
-	
-	 public void setValue(Object value){
-		 argumentValue = value;
-	 }
-
 	 public Object getValue(){
 		 return argumentValue;
 	 }
@@ -19,10 +14,4 @@ public class positionalArgument extends Argument{
 	 public  String getDescription(){
 		 return argumentDescription;
 	 }
-	public void setShorthand(String s){
-		 shorthand = s;
-	 }
-	 public String getShorthand(){
-		 return shorthand;
-	 }
-}	
+}
