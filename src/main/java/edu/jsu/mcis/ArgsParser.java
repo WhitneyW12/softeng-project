@@ -32,14 +32,14 @@ public class ArgsParser{
 		help = false;
 		numofNamedArgValues = 0;
 		positionalvaluesparsed = 0;
-		addNamedArgument("--help","gets help message",Argument.Type.BOOLEAN,"false","-h");
+		addNamedArgument("help","gets help message",Argument.Type.BOOLEAN,"false","-h");
 	}
 	
 	public void addNamedArgument(String name, String description, Argument.Type t,String defaultvalue,String Shorthand){
-		namedArgumentsNames.add(name);
-		arguments.put(name,new namedArgument(t,description));
-		arguments.get(name).setValue(defaultvalue);
-		shorthand.put(Shorthand,name);
+		namedArgumentsNames.add("--"+name);
+		arguments.put("--"+name,new namedArgument(t,description));
+		arguments.get("--"+name).setValue(defaultvalue);
+		shorthand.put("-"+Shorthand,"--"+name);
 		
 	}
 	
@@ -86,6 +86,9 @@ public class ArgsParser{
 	}
 
 	public <T> T getValue(String name){
+		if(namedArgumentsNames.contains("--"+name)){
+			return (T)arguments.get("--"+name).getValue();
+		}
 		return (T)arguments.get(name).getValue();
 	}
 	
