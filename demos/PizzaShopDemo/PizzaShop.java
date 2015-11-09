@@ -8,11 +8,11 @@ public class PizzaShop{
 		ap.addPositionalArgument("shape","The shape of the pizza(round, square).",Argument.Type.STRING);
 		ap.addPositionalArgument("toppings","The number of toppings.",Argument.Type.INTEGER);
 		ap.addPositionalArgument("quantity","The number of this type of pizza.",Argument.Type.INTEGER);
-		ap.addNamedArgument("--drink","What drink will you have?",Argument.Type.STRING,"no drink","-d");
-		ap.addNamedArgument("--togo","Is the order togo?",Argument.Type.BOOLEAN,"false","-t");
+		ap.addNamedArgument("drink","What drink will you have?",Argument.Type.STRING,"no drink","d");
+		ap.addNamedArgument("togo","Is the order togo?",Argument.Type.BOOLEAN,"false","t");
 		ap.parseValues(args);
-		System.out.println("You have ordered " + ap.getValue("quantity") + " " + ap.getValue("size") + ", " + ap.getValue("shape") + " " + ap.getValue("toppings") + "-topping pizza(s) with " + ap.getValue("--drink") + ".");
-		boolean togo = ap.getValue("--togo");
+		System.out.println("You have ordered " + ap.getValue("quantity") + " " + ap.getValue("size") + ", " + ap.getValue("shape") + " " + ap.getValue("toppings") + "-topping pizza(s) with " + ap.getValue("drink") + ".");
+		boolean togo = ap.getValue("togo");
 		if (togo){
 			System.out.println("The order is togo.");
 		}
