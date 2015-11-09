@@ -112,9 +112,13 @@ public class ArgsParser{
 			queue.add(args[i]);
 		}
 		while(!queue.isEmpty()) {
+			 help = getValue("help");
+			if(help)
+			{
+				throw new HelpMessageException(helpMessage);
+			}
 			String arg = queue.remove();
 			if(arg.startsWith("-")) {
-				// named argument
 				Argument a = arguments.get(arg);
 				if(a == null) a = arguments.get(shorthand.get(arg));
 				if(a != null) {
