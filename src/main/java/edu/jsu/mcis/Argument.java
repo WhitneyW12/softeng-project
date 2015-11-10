@@ -6,7 +6,6 @@ public abstract class Argument
 	protected Object argumentValue;
 	protected Type argumentType;
 	protected String argumentDescription;
-	protected String shorthand;
 	
 	public Argument(Type type, String description){
 		 argumentType = type;

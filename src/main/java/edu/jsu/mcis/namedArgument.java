@@ -4,7 +4,6 @@ public class namedArgument extends Argument{
 
 	public namedArgument(Type type, String description){
 		 super(type,description);
-		shorthand="";
 	 }
 	 public String getDescription(){
 		 return argumentDescription;
