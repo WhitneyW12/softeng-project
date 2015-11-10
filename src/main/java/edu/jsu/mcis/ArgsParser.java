@@ -119,15 +119,13 @@ public class ArgsParser{
 			}
 			String arg = queue.remove();
 			if(arg.startsWith("-")) {
-<<<<<<< HEAD
-=======
+
 				// named argument
 				if (arg.equals("--help")||arg.equals("-h")){
 					arguments.get("--help").setValue("true");
 					setHelpMessage();
 					throw new HelpMessageException(helpMessage);
 				}
->>>>>>> origin/master
 				Argument a = arguments.get(arg);
 				if(a == null) a = arguments.get(shorthand.get(arg));
 				if(a != null) {
