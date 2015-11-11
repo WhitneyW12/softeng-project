@@ -3,6 +3,20 @@ package edu.jsu.mcis;
 import java.util.*;
 import java.lang.*;
 
+import java.io.File;
+ 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+ 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+
 public class ArgsParser{
 	private List<String> positionalargumentNames;
 	private List<String> namedArgumentsNames;
@@ -10,6 +24,7 @@ public class ArgsParser{
 	private String premessage;
 	private String helpMessage;
 	private String programName;
+	//private String XMLData;
 	private String programDescription;
 	private String errorMessage;
 	private boolean error;
@@ -17,8 +32,22 @@ public class ArgsParser{
 	private int numofNamedArgValues;
 	private int positionalvaluesparsed;
 	private Map<String,String> shorthand;
+	private DocumentBuilderFactory dbFactory;
+	
+	
+	private DocumentBuilder dBuilder;
+	private Document doc;
 	
 	public ArgsParser(){
+		dbFactory = DocumentBuilderFactory.newInstance();
+		dBuilder = dbFactory.newDocumentBuilder();
+		doc = dBuilder.newDocument();
+		
+		Element rootElement = doc.createElementRoot("SoftwareEngineeringI");
+		doc.appendChild(rootElement);
+		
+		rootElement.appendChild(getProgram(doc, ))
+		
 		arguments = new HashMap<String,Argument>();
 		shorthand = new HashMap<String,String>();
 		namedArgumentsNames = new ArrayList<String>();
@@ -27,6 +56,10 @@ public class ArgsParser{
 		programDescription = "";
 		helpMessage = "";
 		premessage = "";
+		//XMLData = "<?xml version="1.0" encoding="UTF-8"?>\n"
+			//		"\t<config>\n"
+				//	"\t<program>\n"
+				  
 		errorMessage = "";
 		error = false;
 		help = false;
@@ -40,6 +73,10 @@ public class ArgsParser{
 		arguments.put("--"+name,new namedArgument(t,description));
 		arguments.get("--"+name).setValue(defaultvalue);
 		shorthand.put("-"+Shorthand,"--"+name);
+		//XMLData += "<namedArgument>" + "<name>" + name + "</name>" + 
+		//"<type>" + t + "</type>" + "<description>" + description + "</description>\n"
+		// + "<default>" + defaultvalue + "</default>" + "<shorthand>" + Shorthand + "</shorthand>\n";
+
 		
 	}
 	
@@ -47,6 +84,8 @@ public class ArgsParser{
 		positionalargumentNames.add(name);
 		arguments.put(name,new positionalArgument(t,description));
 		setPremessage();
+		//XMLData += "<positionalArgument>" + "<name>" + name + "</name>" + 
+		//"<type>" + t + "</type>" + "<description>" + description + "</description>\n";
 	}
 	
 	
@@ -59,6 +98,7 @@ public class ArgsParser{
 		programName = name;
 		programDescription = description;
 		setPremessage();
+		//XMLData += "<name>" + name + "</name>\n" + "<description>" + description + "</description>\n" "<arguments>";
 	}
 	
 	public String getDescription(String name){
@@ -102,6 +142,10 @@ public class ArgsParser{
 	
 	public Argument.Type getArgumentType(String name){
 		return arguments.get(name).getType();
+	}
+	
+	public void saveXML(String filepath){
+		
 	}
 
 	

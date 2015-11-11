@@ -6,10 +6,10 @@ xsi:schemaLocation="http://www.w3schools.com readXML.xsd">
   <arguments>
 <config>
   <program>
-			<name>pizzashop</name>
-			<description>order a pizza</description>
- 
-			
+		<name>pizzashop</name>
+		
+		<description>order a pizza</description>
+		
 		<arguments>
 
   
