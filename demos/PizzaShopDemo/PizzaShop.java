@@ -11,6 +11,7 @@ public class PizzaShop{
 		ap.addNamedArgument("drink","What drink will you have?",Argument.Type.STRING,"no drink","d");
 		ap.addNamedArgument("togo","Is the order togo?",Argument.Type.BOOLEAN,"false","t");
 		ap.parseValues(args);
+		ap.saveXML();
 		System.out.println("You have ordered " + ap.getValue("quantity") + " " + ap.getValue("size") + ", " + ap.getValue("shape") + " " + ap.getValue("toppings") + "-topping pizza(s) with " + ap.getValue("drink") + ".");
 		boolean togo = ap.getValue("togo");
 		if (togo){
