@@ -85,24 +85,28 @@ public class readWriteXML extends DefaultHandler{
 			System.out.println("type : " + new String(ch, start, length));
 			type = false;
 			typeAttributes.append(ch,start,length);
-			typeAttributes.append("");
+			typeAttributes.append(" ");
 		}
 
 		if (description) {
 			System.out.println("description : " + new String(ch, start, length));
 			description = false;
 			descriptionAttributes.append(ch,start,length);
-			descriptionAttributes.append("");
+			descriptionAttributes.append(" ");
 		}
 		
 		if (defaults) {
 			System.out.println("defaults : " + new String(ch, start, length));
 			defaults = false;
+			defaultAttributes.append(ch,start,length);
+			defaultAttributes.append(" ");
 		}
 		
 		if (shorthand) {
 			System.out.println("shorthand : " + new String(ch, start, length));
 			shorthand= false;
+			shortHandAttributes.append(ch,start,length);
+			shortHandAttributes.append(" ");
 		}
 	}
 	};
@@ -111,21 +115,17 @@ public class readWriteXML extends DefaultHandler{
 		return nameAttributes.toString();
 	}
 	public String getType(){
-		String s = "";
-		return s;
+		return typeAttributes.toString();
 	}
 	public String getDescription(){
 		
-		String s = "";
-		return s;
+		return descriptionAttributes.toString();
 	}
 	public String getDefault(){
-		String s="";
-		return s;
+		return defaultAttributes.toString();
 	}
 	public String getShortHand(){
-		String s="";
-		return s;
+		return shortHandAttributes.toString();
 	}
    public static void main(String argv[]) {
 	readWriteXML rw = new readWriteXML();
@@ -144,6 +144,8 @@ public class readWriteXML extends DefaultHandler{
        e.printStackTrace();
      }
 	 System.out.println(rw.getNames());
+	  System.out.println(rw.getType());
+	  
 	}
 
 
