@@ -145,7 +145,7 @@ readWriteXML rw = new readWriteXML();
 	}
 	};
 	
-	public ArgsParser getArgParser(){
+	public ArgsParser getArgsParser(){
 		return ap;
 	}
 

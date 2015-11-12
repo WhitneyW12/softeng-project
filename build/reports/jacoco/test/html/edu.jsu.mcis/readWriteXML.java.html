@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>readWriteXML.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">softeng-project</a> &gt; <a href="index.source.html" class="el_package">edu.jsu.mcis</a> &gt; <span class="el_source">readWriteXML.java</span></div><h1>readWriteXML.java</h1><pre class="source lang-java linenums">package edu.jsu.mcis;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+import java.util.*;
+import java.io.*;
+public class readWriteXML extends DefaultHandler{
+	
+	private boolean name ;
+	private boolean type ;
+	private boolean description;
+	private boolean defaults;
+	private boolean shorthand;
+	private StringBuilder nameAttributes;
+	private StringBuilder typeAttributes;
+	private StringBuilder descriptionAttributes;
+	private StringBuilder defaultAttributes;
+	private StringBuilder shortHandAttributes;
+	private ArgsParser ap;
+	private String aname;
+	private String adescription;
+	private String ashorthand;
+	private String adefault;
+	private Argument.Type atype;
+/*
+readWriteXML rw = new readWriteXML();
+	
+    try {
+	InputStream xmlInput = new FileInputStream(&quot;readXML.xsl&quot;);
+	SAXParserFactory factory = SAXParserFactory.newInstance();
+	SAXParser saxParser = factory.newSAXParser();
+	
+	
+	
+	saxParser.parse(xmlInput,rw.handler);
+	**/
+	
+<span class="fc" id="L40">	public readWriteXML(){</span>
+<span class="fc" id="L41">		nameAttributes= new StringBuilder();</span>
+<span class="fc" id="L42">		typeAttributes=new StringBuilder();</span>
+<span class="fc" id="L43">		descriptionAttributes = new StringBuilder();</span>
+<span class="fc" id="L44">		defaultAttributes = new StringBuilder();</span>
+<span class="fc" id="L45">		shortHandAttributes = new StringBuilder();</span>
+<span class="fc" id="L46">		name = false;</span>
+<span class="fc" id="L47">		type = false;</span>
+<span class="fc" id="L48">		description = false;</span>
+<span class="fc" id="L49">		defaults = false;</span>
+<span class="fc" id="L50">		shorthand = false;</span>
+<span class="fc" id="L51">		ap =	new ArgsParser();	</span>
+<span class="fc" id="L52">		aname=&quot;&quot;;</span>
+<span class="fc" id="L53">		adescription=&quot;&quot;;</span>
+<span class="fc" id="L54">		ashorthand=&quot;&quot;;</span>
+<span class="fc" id="L55">		atype= Argument.Type.STRING;</span>
+<span class="fc" id="L56">	}</span>
+	
+<span class="fc" id="L58">	DefaultHandler handler = new DefaultHandler(){</span>
+	public void startElement(String uri, String localName,String qName, 
+                Attributes attributes) throws SAXException {
+
+<span class="fc" id="L62">		System.out.println(&quot;Start Element :&quot; + qName);</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">		if(qName.equals(&quot;arguments&quot;)){</span>
+<span class="fc" id="L64">			ap.addProgram(aname,adescription);</span>
+		}
+
+<span class="fc bfc" id="L67" title="All 2 branches covered.">		if (qName.equalsIgnoreCase(&quot;name&quot;)) {</span>
+<span class="fc" id="L68">			name = true;</span>
+			
+		}
+
+<span class="fc bfc" id="L72" title="All 2 branches covered.">		if (qName.equalsIgnoreCase(&quot;type&quot;)) {</span>
+<span class="fc" id="L73">			type = true;</span>
+			
+		}
+
+<span class="fc bfc" id="L77" title="All 2 branches covered.">		if (qName.equalsIgnoreCase(&quot;description&quot;)) {</span>
+<span class="fc" id="L78">			description = true;</span>
+			 
+		}
+		
+<span class="pc bpc" id="L82" title="1 of 2 branches missed.">		if (qName.equalsIgnoreCase(&quot;defaults&quot;)) {</span>
+<span class="nc" id="L83">			defaults = true;</span>
+		}
+<span class="fc bfc" id="L85" title="All 2 branches covered.">		if (qName.equalsIgnoreCase(&quot;shorthand&quot;)) {</span>
+<span class="fc" id="L86">			shorthand = true;</span>
+		}
+			
+<span class="fc" id="L89">	}</span>
+	
+	public void endElement(String uri, String localName,
+		String qName) throws SAXException {
+<span class="fc bfc" id="L93" title="All 2 branches covered.">		if(qName.equals(&quot;positionalArgument&quot;)){</span>
+<span class="fc" id="L94">			ap.addPositionalArgument(aname,adescription,atype);</span>
+		}
+<span class="pc bpc" id="L96" title="1 of 2 branches missed.">		if(qName.equals(&quot;namedArgument&quot;)){</span>
+<span class="nc" id="L97">			ap.addNamedArgument(aname,adescription,atype,adefault,ashorthand);</span>
+		}
+<span class="fc" id="L99">		System.out.println(&quot;End Element :&quot; + qName);</span>
+		
+
+<span class="fc" id="L102">	}</span>
+	
+	
+	public void characters(char ch[], int start, int length) throws SAXException {
+
+<span class="fc bfc" id="L107" title="All 2 branches covered.">		if (name) {</span>
+<span class="fc" id="L108">			aname=new String(ch, start, length);</span>
+<span class="fc" id="L109">			System.out.println(&quot;name : &quot; + new String(ch, start, length));</span>
+<span class="fc" id="L110">			name = false;</span>
+			
+		}
+
+<span class="fc bfc" id="L114" title="All 2 branches covered.">		if (type) {</span>
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">			if(new String(ch, start, length).equals(&quot;DOUBLE&quot;)){</span>
+<span class="nc" id="L116">				atype=Argument.Type.DOUBLE;</span>
+			}
+<span class="fc bfc" id="L118" title="All 2 branches covered.">			else if (new String(ch, start, length).equals(&quot;INTEGER&quot;)){</span>
+<span class="fc" id="L119">				atype=Argument.Type.INTEGER;</span>
+			}
+			else{
+<span class="fc" id="L122">				atype=Argument.Type.BOOLEAN;</span>
+			}
+<span class="fc" id="L124">			System.out.println(&quot;type : &quot; + new String(ch, start, length));</span>
+<span class="fc" id="L125">			type = false;</span>
+		}
+
+<span class="fc bfc" id="L128" title="All 2 branches covered.">		if (description) {</span>
+<span class="fc" id="L129">			adescription=new String(ch, start, length);</span>
+<span class="fc" id="L130">			System.out.println(&quot;description : &quot; + new String(ch, start, length));</span>
+<span class="fc" id="L131">			description = false;</span>
+		}
+		
+<span class="pc bpc" id="L134" title="1 of 2 branches missed.">		if (defaults) {</span>
+<span class="nc" id="L135">			adefault=new String(ch, start, length);</span>
+<span class="nc" id="L136">			System.out.println(&quot;defaults : &quot; + new String(ch, start, length));</span>
+<span class="nc" id="L137">			defaults = false;</span>
+		}
+		
+<span class="fc bfc" id="L140" title="All 2 branches covered.">		if (shorthand) {</span>
+<span class="fc" id="L141">			ashorthand= new String(ch, start, length);</span>
+<span class="fc" id="L142">			System.out.println(&quot;shorthand : &quot; + new String(ch, start, length));</span>
+<span class="fc" id="L143">			shorthand= false;</span>
+		}
+<span class="fc" id="L145">	}</span>
+	};
+	
+	public ArgsParser getArgsParser(){
+<span class="fc" id="L149">		return ap;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
