@@ -1,22 +1,7 @@
 package edu.jsu.mcis;
-
 import java.util.*;
 import java.lang.*;
-
-import java.io.File;
- 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
- 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-
+import java.io.*;
 public class ArgsParser{
 	private List<String> positionalargumentNames;
 	private List<String> namedArgumentsNames;
@@ -24,7 +9,7 @@ public class ArgsParser{
 	private String premessage;
 	private String helpMessage;
 	private String programName;
-	//private String XMLData;
+	private String XMLData;
 	private String programDescription;
 	private String errorMessage;
 	private boolean error;
@@ -32,22 +17,7 @@ public class ArgsParser{
 	private int numofNamedArgValues;
 	private int positionalvaluesparsed;
 	private Map<String,String> shorthand;
-	private DocumentBuilderFactory dbFactory;
-	
-	
-	private DocumentBuilder dBuilder;
-	private Document doc;
-	
 	public ArgsParser(){
-		dbFactory = DocumentBuilderFactory.newInstance();
-		dBuilder = dbFactory.newDocumentBuilder();
-		doc = dBuilder.newDocument();
-		
-		Element rootElement = doc.createElementRoot("SoftwareEngineeringI");
-		doc.appendChild(rootElement);
-		
-		rootElement.appendChild(getProgram(doc, ))
-		
 		arguments = new HashMap<String,Argument>();
 		shorthand = new HashMap<String,String>();
 		namedArgumentsNames = new ArrayList<String>();
@@ -56,55 +26,47 @@ public class ArgsParser{
 		programDescription = "";
 		helpMessage = "";
 		premessage = "";
-		//XMLData = "<?xml version="1.0" encoding="UTF-8"?>\n"
-			//		"\t<config>\n"
-				//	"\t<program>\n"
+		XMLData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"+
+					"<config>\n"+
+					"<program>\n";
 				  
 		errorMessage = "";
 		error = false;
 		help = false;
 		numofNamedArgValues = 0;
 		positionalvaluesparsed = 0;
-		addNamedArgument("help","gets help message",Argument.Type.BOOLEAN,"false","-h");
 	}
-	
 	public void addNamedArgument(String name, String description, Argument.Type t,String defaultvalue,String Shorthand){
 		namedArgumentsNames.add("--"+name);
 		arguments.put("--"+name,new namedArgument(t,description));
 		arguments.get("--"+name).setValue(defaultvalue);
 		shorthand.put("-"+Shorthand,"--"+name);
-		//XMLData += "<namedArgument>" + "<name>" + name + "</name>" + 
-		//"<type>" + t + "</type>" + "<description>" + description + "</description>\n"
-		// + "<default>" + defaultvalue + "</default>" + "<shorthand>" + Shorthand + "</shorthand>\n";
+		XMLData += "<namedArgument>" + "<name>" + name + "</name>\n" + 
+		"<type>" + t + "</type>\n" + "<description>" + description + "</description>\n"
+		 + "<default>" + defaultvalue + "</default>\n" + "<shorthand>" + Shorthand + "</shorthand>\n</namedArgument>\n";
 
 		
 	}
-	
 	public void addPositionalArgument(String name, String description, Argument.Type t){
 		positionalargumentNames.add(name);
 		arguments.put(name,new positionalArgument(t,description));
 		setPremessage();
-		//XMLData += "<positionalArgument>" + "<name>" + name + "</name>" + 
-		//"<type>" + t + "</type>" + "<description>" + description + "</description>\n";
+		XMLData += "<positionalArgument>\n" + "<name>" + name + "</name>\n" + 
+		"<type>" + t + "</type>\n" + "<description>" + description + "</description>\n</positionalArgument>\n";
 	}
-	
-	
 	public void parseValues (String[] values){
 		parse(values);
 		
 	}
-	
 	public void addProgram(String name,String description){
 		programName = name;
 		programDescription = description;
 		setPremessage();
-		//XMLData += "<name>" + name + "</name>\n" + "<description>" + description + "</description>\n" "<arguments>";
+		XMLData += "<name>" + name + "</name>\n" + "<description>" + description + "</description>\n" +"<arguments>\n";
 	}
-	
 	public String getDescription(String name){
 		return arguments.get(name).getDescription();
 	}
-	
 	private void setHelpMessage(){
 		helpMessage = premessage;
 		helpMessage += "\n"+programDescription+"\npositional arguments:\n";
@@ -112,61 +74,58 @@ public class ArgsParser{
 			helpMessage += positionalargumentNames.get(i)+" "+arguments.get(positionalargumentNames.get(i)).getDescription()+"\n";
 		}
 	}
-	
 	private void setPremessage(){
 		premessage = "usage: java "+programName+" ";
 		for (int i=0; i<positionalargumentNames.size();i++){
 			premessage += positionalargumentNames.get(i)+" ";
 		}
 	}  
-	
 	public String getHelpMessage(){
 		setHelpMessage();
 		return helpMessage;
 	}
-
 	public <T> T getValue(String name){
 		if(namedArgumentsNames.contains("--"+name)){
 			return (T)arguments.get("--"+name).getValue();
 		}
 		return (T)arguments.get(name).getValue();
 	}
-	
 	public String getErrorMessage(){
 		return errorMessage;
 	}
-	
 	public boolean getError(){
 		return error;
 	}
-	
 	public Argument.Type getArgumentType(String name){
 		return arguments.get(name).getType();
 	}
-	
 	public void saveXML(String filepath){
+		XMLData+= "</arguments>\n</program>\n</config>\n";
+		File outfile = new File(filepath);	
+		try{
+		Writer writer = new BufferedWriter(new OutputStreamWriter(
+		new FileOutputStream(outfile), "utf-8")); 
+		writer.write(XMLData);
+		writer.close();
+		}
+		catch(IOException e){
+			throw new HelpMessageException("");
+		}
+		
 		
 	}
-
-	
-	
 	private void parse(String[] args) {
 		Queue<String> queue = new LinkedList<String>();
 		for(int i = 0; i < args.length; i++) {
 			queue.add(args[i]);
 		}
 		while(!queue.isEmpty()) {
-			 help = getValue("help");
-			if(help)
-			{
-				throw new HelpMessageException(helpMessage);
-			}
+			 
+				
+			
 			String arg = queue.remove();
 			if(arg.startsWith("-")) {
-
-				// named argument
 				if (arg.equals("--help")||arg.equals("-h")){
-					arguments.get("--help").setValue("true");
 					setHelpMessage();
 					throw new HelpMessageException(helpMessage);
 				}
@@ -177,7 +136,7 @@ public class ArgsParser{
 						a.setValue("true");
 					}
 					else {
-						String val = queue.remove(); // What if I pull from an empty queue? Probably should be a NotEnoughArgumentsException or something.
+						String val = queue.remove(); 
 						try {
 							a.setValue(val);
 						}
@@ -200,8 +159,6 @@ public class ArgsParser{
 				}
 			}
 			else {
-				// positional argument
-				
 				if( positionalvaluesparsed==positionalargumentNames.size()){
 					errorMessage = premessage+"\n"+programName+".java: error: unrecognized arguments: "+arg;
 					error=true;
@@ -240,13 +197,5 @@ public class ArgsParser{
 							error=true;
 							throw new TooFewArgumentsException(errorMessage);
 						}
-		
-	}
-	
-	
-	
-	
-	
-	
-	
+	}	
 }

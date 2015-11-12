@@ -263,18 +263,19 @@ public class ArgsParserTests{
 	@Test
 	public void checkFlag()
 	{
-		String[] args = new String[] {"7","--help","5","2"};
+		String[] args = new String[] {"7","--test","5","2"};
 		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
 		ap.addPositionalArgument("length","the length of the box",Argument.Type.STRING);
 		ap.addPositionalArgument("width","the width of the box",Argument.Type.STRING);
 		ap.addPositionalArgument("height","the height of the box",Argument.Type.STRING);
 		ap.addNamedArgument("type","prints help message",Argument.Type.STRING,"box","t");
 		ap.addNamedArgument("digits","prints help message",Argument.Type.INTEGER,"4","d");
+		ap.addNamedArgument("test","prints help message",Argument.Type.BOOLEAN,"false","e");
 		try{
 		ap.parseValues(args);
 		}
 		catch(RuntimeException ex){
-		boolean b = ap.getValue("help");
+		boolean b = ap.getValue("test");
 		assertTrue(b);
 		}
 		
@@ -441,4 +442,15 @@ public class ArgsParserTests{
 		}
 	}
 	
+
+@Test
+public void testSavingtoXMLFile(){
+	ap.addProgram("Calculator","Calculate addition, subtraction or multiplication");
+		ap.addPositionalArgument("length","the length of the box",Argument.Type.INTEGER);
+		ap.addPositionalArgument("width","the width of the box",Argument.Type.INTEGER);
+		ap.addNamedArgument("add","prints help message",Argument.Type.BOOLEAN,"false","a");
+		ap.addNamedArgument("subtract","prints help message",Argument.Type.BOOLEAN,"false","s");
+		ap.saveXML("newXML.xml");
+	
+}
 }

@@ -3,7 +3,7 @@ package edu.jsu.mcis;
 public class positionalArgument extends Argument{
 	public positionalArgument(Type type, String description){
 		super(type, description);
-		shorthand="";
+		
 	}
 	 public Object getValue(){
 		 return argumentValue;

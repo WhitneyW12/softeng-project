@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+<program>
+<name>Calculator</name>
+<description>Calculate addition, subtraction or multiplication</description>
+<arguments>
+<positionalArgument>
+<name>length</name>
+<type>INTEGER</type>
+<description>the length of the box</description>
+</positionalArgument>
+<positionalArgument>
+<name>width</name>
+<type>INTEGER</type>
+<description>the width of the box</description>
+</positionalArgument>
+<namedArgument><name>add</name>
+<type>BOOLEAN</type>
+<description>prints help message</description>
+<default>false</default>
+<shorthand>a</shorthand>
+</namedArgument>
+<namedArgument><name>subtract</name>
+<type>BOOLEAN</type>
+<description>prints help message</description>
+<default>false</default>
+<shorthand>s</shorthand>
+</namedArgument>
+</arguments>
+</program>
+</config>
