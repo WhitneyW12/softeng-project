@@ -1,3 +1,4 @@
+package edu.jsu.mcis;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.Attributes;
@@ -5,8 +6,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 import java.util.*;
 import java.io.*;
-import edu.jsu.mcis.*;
-
 public class readWriteXML extends DefaultHandler{
 	
 	private boolean name ;
@@ -25,6 +24,7 @@ public class readWriteXML extends DefaultHandler{
 	private String ashorthand;
 	private String adefault;
 	private Argument.Type atype;
+	//saxParser.parse(xmlInput,rw.handler);
 	
 	public readWriteXML(){
 		nameAttributes= new StringBuilder();
@@ -37,7 +37,7 @@ public class readWriteXML extends DefaultHandler{
 		description = false;
 		defaults = false;
 		shorthand = false;
-		ap =	new ArgParser();	
+		ap =	new ArgsParser();	
 		aname="";
 		adescription="";
 		ashorthand="";
@@ -105,10 +105,10 @@ public class readWriteXML extends DefaultHandler{
 				atype=Argument.Type.DOUBLE;
 			}
 			else if (new String(ch, start, length).equals("INTEGER")){
-				atype=ARGUMENT.Type.INTEGER;
+				atype=Argument.Type.INTEGER;
 			}
 			else{
-				atype=ARGUMENT.Type.BOOLEAN;
+				atype=Argument.Type.BOOLEAN;
 			}
 			System.out.println("type : " + new String(ch, start, length));
 			type = false;
@@ -134,29 +134,8 @@ public class readWriteXML extends DefaultHandler{
 	}
 	};
 	
-	public ArgParser getArgParser(){
+	public ArgsParser getArgParser(){
 		return ap;
 	}
-   public static void main(String argv[]) {
-	readWriteXML rw = new readWriteXML();
-	
-    try {
-	InputStream xmlInput = new FileInputStream("readXML.xsl");
-	SAXParserFactory factory = SAXParserFactory.newInstance();
-	SAXParser saxParser = factory.newSAXParser();
-	
-	
-	
-	saxParser.parse(xmlInput,rw.handler);
-
-	//DefaultHandler handler = new DefaultHandler() {
-	} catch (Exception e) {
-       e.printStackTrace();
-     }
-	 System.out.println(rw.getNames());
-	  System.out.println(rw.getType());
-	  
-	}
-
 
 }
