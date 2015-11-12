@@ -24,7 +24,18 @@ public class readWriteXML extends DefaultHandler{
 	private String ashorthand;
 	private String adefault;
 	private Argument.Type atype;
-	//saxParser.parse(xmlInput,rw.handler);
+/*
+readWriteXML rw = new readWriteXML();
+	
+    try {
+	InputStream xmlInput = new FileInputStream("readXML.xsl");
+	SAXParserFactory factory = SAXParserFactory.newInstance();
+	SAXParser saxParser = factory.newSAXParser();
+	
+	
+	
+	saxParser.parse(xmlInput,rw.handler);
+	**/
 	
 	public readWriteXML(){
 		nameAttributes= new StringBuilder();
