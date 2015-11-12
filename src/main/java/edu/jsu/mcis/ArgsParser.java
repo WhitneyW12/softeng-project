@@ -127,6 +127,7 @@ public class ArgsParser{
 			if(arg.startsWith("-")) {
 				if (arg.equals("--help")||arg.equals("-h")){
 					setHelpMessage();
+					help = true;
 					throw new HelpMessageException(helpMessage);
 				}
 				Argument a = arguments.get(arg);
@@ -198,4 +199,7 @@ public class ArgsParser{
 							throw new TooFewArgumentsException(errorMessage);
 						}
 	}	
+	public boolean getHelp(){
+		return help;
+	}
 }
