@@ -41,7 +41,7 @@ public class ArgsParser{
 <span class="fc" id="L41">		arguments.put(&quot;--&quot;+name,new namedArgument(t,description));</span>
 <span class="fc" id="L42">		arguments.get(&quot;--&quot;+name).setValue(defaultvalue);</span>
 <span class="fc" id="L43">		shorthand.put(&quot;-&quot;+Shorthand,&quot;--&quot;+name);</span>
-<span class="fc" id="L44">		XMLData += &quot;&lt;namedArgument&gt;&quot; + &quot;&lt;name&gt;&quot; + name + &quot;&lt;/name&gt;\n&quot; + </span>
+<span class="fc" id="L44">		XMLData += &quot;&lt;namedArgument&gt;\n&quot; + &quot;&lt;name&gt;&quot; + name + &quot;&lt;/name&gt;\n&quot; + </span>
 		&quot;&lt;type&gt;&quot; + t + &quot;&lt;/type&gt;\n&quot; + &quot;&lt;description&gt;&quot; + description + &quot;&lt;/description&gt;\n&quot;
 		 + &quot;&lt;default&gt;&quot; + defaultvalue + &quot;&lt;/default&gt;\n&quot; + &quot;&lt;shorthand&gt;&quot; + Shorthand + &quot;&lt;/shorthand&gt;\n&lt;/namedArgument&gt;\n&quot;;
 

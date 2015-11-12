@@ -41,7 +41,7 @@ public class ArgsParser{
 		arguments.put("--"+name,new namedArgument(t,description));
 		arguments.get("--"+name).setValue(defaultvalue);
 		shorthand.put("-"+Shorthand,"--"+name);
-		XMLData += "<namedArgument>" + "<name>" + name + "</name>\n" + 
+		XMLData += "<namedArgument>\n" + "<name>" + name + "</name>\n" + 
 		"<type>" + t + "</type>\n" + "<description>" + description + "</description>\n"
 		 + "<default>" + defaultvalue + "</default>\n" + "<shorthand>" + Shorthand + "</shorthand>\n</namedArgument>\n";
 

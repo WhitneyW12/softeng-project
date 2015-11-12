@@ -446,10 +446,11 @@ public class ArgsParserTests{
 @Test
 public void testSavingtoXMLFile(){
 	ap.addProgram("Calculator","Calculate addition, subtraction or multiplication");
-		ap.addPositionalArgument("length","the length of the box",Argument.Type.INTEGER);
-		ap.addPositionalArgument("width","the width of the box",Argument.Type.INTEGER);
-		ap.addNamedArgument("add","prints help message",Argument.Type.BOOLEAN,"false","a");
-		ap.addNamedArgument("subtract","prints help message",Argument.Type.BOOLEAN,"false","s");
+		ap.addPositionalArgument("number1","the first number",Argument.Type.INTEGER);
+		ap.addPositionalArgument("number2","the second number",Argument.Type.INTEGER);
+		ap.addNamedArgument("add","adds the two numbers",Argument.Type.BOOLEAN,"false","a");
+		ap.addNamedArgument("subtract","subtracts the two numbers",Argument.Type.BOOLEAN,"false","s");
+		ap.addNamedArgument("multiply","multiplies the two numbers",Argument.Type.BOOLEAN,"false","m");
 		ap.saveXML("newXML.xml");
 	
 }

@@ -5,26 +5,35 @@
 <description>Calculate addition, subtraction or multiplication</description>
 <arguments>
 <positionalArgument>
-<name>length</name>
+<name>number1</name>
 <type>INTEGER</type>
-<description>the length of the box</description>
+<description>the first number</description>
 </positionalArgument>
 <positionalArgument>
-<name>width</name>
+<name>number2</name>
 <type>INTEGER</type>
-<description>the width of the box</description>
+<description>the second number</description>
 </positionalArgument>
-<namedArgument><name>add</name>
+<namedArgument>
+<name>add</name>
 <type>BOOLEAN</type>
-<description>prints help message</description>
+<description>adds the two numbers</description>
 <default>false</default>
 <shorthand>a</shorthand>
 </namedArgument>
-<namedArgument><name>subtract</name>
+<namedArgument>
+<name>subtract</name>
 <type>BOOLEAN</type>
-<description>prints help message</description>
+<description>subtracts the two numbers</description>
 <default>false</default>
 <shorthand>s</shorthand>
+</namedArgument>
+<namedArgument>
+<name>multiply</name>
+<type>BOOLEAN</type>
+<description>multiplies the two numbers</description>
+<default>false</default>
+<shorthand>m</shorthand>
 </namedArgument>
 </arguments>
 </program>
