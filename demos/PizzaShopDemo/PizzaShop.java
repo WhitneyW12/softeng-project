@@ -1,15 +1,26 @@
 import edu.jsu.mcis.*;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+import java.util.*;
+import java.io.*;
 
 public class PizzaShop{
 	public static void main(String[] args){
-		ArgsParser ap = new ArgsParser();
-		ap.addProgram("PizzaShop","Order a pizza.");
-		ap.addPositionalArgument("size","The size of the pizza(small, medium, large).",Argument.Type.STRING);
-		ap.addPositionalArgument("shape","The shape of the pizza(round, square).",Argument.Type.STRING);
-		ap.addPositionalArgument("toppings","The number of toppings.",Argument.Type.INTEGER);
-		ap.addPositionalArgument("quantity","The number of this type of pizza.",Argument.Type.INTEGER);
-		ap.addNamedArgument("drink","What drink will you have?",Argument.Type.STRING,"no drink","d");
-		ap.addNamedArgument("togo","Is the order togo?",Argument.Type.BOOLEAN,"false","t");
+		ArgsParser ap;
+		readWriteXML rw = new readWriteXML();
+		try {
+			InputStream xmlInput = new FileInputStream("newPizzaShop.xml");
+			SAXParserFactory factory = SAXParserFactory.newInstance();
+			SAXParser saxParser = factory.newSAXParser();
+			saxParser.parse(xmlInput,rw.handler);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		ap=rw.getArgsParser();
 		ap.parseValues(args);
 		ap.saveXML("newPizzaShop.xml");
 		System.out.println("You have ordered " + ap.getValue("quantity") + " " + ap.getValue("size") + ", " + ap.getValue("shape") + " " + ap.getValue("toppings") + "-topping pizza(s) with " + ap.getValue("drink") + ".");

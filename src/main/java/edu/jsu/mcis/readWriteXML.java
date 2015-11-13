@@ -55,11 +55,10 @@ readWriteXML rw = new readWriteXML();
 		atype= Argument.Type.STRING;
 	}
 	
-	DefaultHandler handler = new DefaultHandler(){
+	public DefaultHandler handler = new DefaultHandler(){
 	public void startElement(String uri, String localName,String qName, 
                 Attributes attributes) throws SAXException {
 
-		System.out.println("Start Element :" + qName);
 		if(qName.equals("arguments")){
 			ap.addProgram(aname,adescription);
 		}
@@ -79,7 +78,7 @@ readWriteXML rw = new readWriteXML();
 			 
 		}
 		
-		if (qName.equalsIgnoreCase("defaults")) {
+		if (qName.equalsIgnoreCase("default")) {
 			defaults = true;
 		}
 		if (qName.equalsIgnoreCase("shorthand")) {
@@ -96,7 +95,6 @@ readWriteXML rw = new readWriteXML();
 		if(qName.equals("namedArgument")){
 			ap.addNamedArgument(aname,adescription,atype,adefault,ashorthand);
 		}
-		System.out.println("End Element :" + qName);
 		
 
 	}
@@ -106,40 +104,39 @@ readWriteXML rw = new readWriteXML();
 
 		if (name) {
 			aname=new String(ch, start, length);
-			System.out.println("name : " + new String(ch, start, length));
 			name = false;
 			
 		}
 
 		if (type) {
-			if(new String(ch, start, length).equals("DOUBLE")){
+			if(new String(ch, start, length).equals("STRING")){
+				atype=Argument.Type.STRING;
+			}
+			else if(new String(ch, start, length).equals("DOUBLE")){
 				atype=Argument.Type.DOUBLE;
 			}
 			else if (new String(ch, start, length).equals("INTEGER")){
 				atype=Argument.Type.INTEGER;
 			}
-			else{
+			else {
 				atype=Argument.Type.BOOLEAN;
 			}
-			System.out.println("type : " + new String(ch, start, length));
 			type = false;
 		}
 
 		if (description) {
 			adescription=new String(ch, start, length);
-			System.out.println("description : " + new String(ch, start, length));
+		
 			description = false;
 		}
 		
 		if (defaults) {
 			adefault=new String(ch, start, length);
-			System.out.println("defaults : " + new String(ch, start, length));
 			defaults = false;
 		}
 		
 		if (shorthand) {
 			ashorthand= new String(ch, start, length);
-			System.out.println("shorthand : " + new String(ch, start, length));
 			shorthand= false;
 		}
 	}
