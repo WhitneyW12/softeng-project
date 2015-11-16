@@ -9,9 +9,9 @@ public class DollarRestaurant{
 		ap.addPositionalArgument("entree","What would you like as your entree?",Argument.Type.STRING);
 		ap.addPositionalArgument("paymentType","What will you pay with(1. cash, 2. card, 3. check)?",Argument.Type.INTEGER);
 		ap.addNamedArgument("sides","How many sides would you like?",Argument.Type.INTEGER,"0","s");
-		ap.addNamedArgument("drink","What would you like to drink?",Argument.Type.STRING,"no drink","dr");
+		ap.addNamedArgument("drink","What would you like to drink?",Argument.Type.STRING,"no drink","d");
 		ap.addNamedArgument("appetizer","What would you like as an appetizer?",Argument.Type.STRING,"no appetizer","a");
-		ap.addNamedArgument("dessert","What would you like for dessert?",Argument.Type.STRING,"no dessert","de");
+		ap.addNamedArgument("dessert","What would you like for dessert?",Argument.Type.STRING,"no dessert","e");
 		ap.addNamedArgument("tip","Would you like to leave a tip?",Argument.Type.BOOLEAN,"false","t");
 		ap.parseValues(args);
 		
