@@ -130,20 +130,20 @@ public class readWriteXML extends DefaultHandler{
 <span class="fc" id="L130">	}</span>
 	};
 	
-	public ArgsParser getArgsParser(){
+	private ArgsParser getArgsParser(){
 <span class="fc" id="L134">		return ap;</span>
 	}
 	public ArgsParser parseXML(String filepath){
 		try {
-<span class="nc" id="L138">			InputStream xmlInput = new FileInputStream(filepath);</span>
-<span class="nc" id="L139">			SAXParserFactory factory = SAXParserFactory.newInstance();</span>
-<span class="nc" id="L140">			SAXParser saxParser = factory.newSAXParser();</span>
-<span class="nc" id="L141">			saxParser.parse(xmlInput,handler);</span>
+<span class="fc" id="L138">			InputStream xmlInput = new FileInputStream(filepath);</span>
+<span class="fc" id="L139">			SAXParserFactory factory = SAXParserFactory.newInstance();</span>
+<span class="fc" id="L140">			SAXParser saxParser = factory.newSAXParser();</span>
+<span class="fc" id="L141">			saxParser.parse(xmlInput,handler);</span>
 		}
 <span class="nc" id="L143">		catch (Exception e) {</span>
 <span class="nc" id="L144">			e.printStackTrace();</span>
-<span class="nc" id="L145">		}</span>
-<span class="nc" id="L146">		return getArgsParser();</span>
+<span class="fc" id="L145">		}</span>
+<span class="fc" id="L146">		return getArgsParser();</span>
 	}
 
 }

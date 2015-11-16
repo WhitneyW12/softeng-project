@@ -37,170 +37,179 @@ public class ArgsParser{
 <span class="fc" id="L37">		positionalvaluesparsed = 0;</span>
 <span class="fc" id="L38">	}</span>
 	public void addNamedArgument(String name, String description, Argument.Type t,String defaultvalue,String Shorthand){
-<span class="fc" id="L40">		namedArgumentsNames.add(&quot;--&quot;+name);</span>
-<span class="fc" id="L41">		arguments.put(&quot;--&quot;+name,new namedArgument(t,description));</span>
-<span class="fc" id="L42">		arguments.get(&quot;--&quot;+name).setValue(defaultvalue);</span>
-<span class="fc" id="L43">		shorthand.put(&quot;-&quot;+Shorthand,&quot;--&quot;+name);</span>
-<span class="fc" id="L44">		XMLData += &quot;&lt;namedArgument&gt;\n&quot; + &quot;&lt;name&gt;&quot; + name + &quot;&lt;/name&gt;\n&quot; + </span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">		if(Shorthand.length()&gt;1){</span>
+<span class="fc" id="L41">			throw new InvalidNameException(Shorthand +&quot; is an invalid name&quot;);</span>
+		}
+<span class="fc" id="L43">		namedArgumentsNames.add(name);</span>
+<span class="fc" id="L44">		arguments.put(&quot;--&quot;+name,new namedArgument(t,description));</span>
+<span class="fc" id="L45">		arguments.get(&quot;--&quot;+name).setValue(defaultvalue);</span>
+<span class="fc" id="L46">		shorthand.put(&quot;-&quot;+Shorthand,&quot;--&quot;+name);</span>
+<span class="fc" id="L47">		XMLData += &quot;&lt;namedArgument&gt;\n&quot; + &quot;&lt;name&gt;&quot; + name + &quot;&lt;/name&gt;\n&quot; + </span>
 		&quot;&lt;type&gt;&quot; + t + &quot;&lt;/type&gt;\n&quot; + &quot;&lt;description&gt;&quot; + description + &quot;&lt;/description&gt;\n&quot;
 		 + &quot;&lt;default&gt;&quot; + defaultvalue + &quot;&lt;/default&gt;\n&quot; + &quot;&lt;shorthand&gt;&quot; + Shorthand + &quot;&lt;/shorthand&gt;\n&lt;/namedArgument&gt;\n&quot;;
 
 		
-<span class="fc" id="L49">	}</span>
+<span class="fc" id="L52">	}</span>
 	public void addPositionalArgument(String name, String description, Argument.Type t){
-<span class="fc" id="L51">		positionalargumentNames.add(name);</span>
-<span class="fc" id="L52">		arguments.put(name,new positionalArgument(t,description));</span>
-<span class="fc" id="L53">		setPremessage();</span>
-<span class="fc" id="L54">		XMLData += &quot;&lt;positionalArgument&gt;\n&quot; + &quot;&lt;name&gt;&quot; + name + &quot;&lt;/name&gt;\n&quot; + </span>
+<span class="fc" id="L54">		positionalargumentNames.add(name);</span>
+<span class="fc" id="L55">		arguments.put(name,new positionalArgument(t,description));</span>
+<span class="fc" id="L56">		setPremessage();</span>
+<span class="fc" id="L57">		XMLData += &quot;&lt;positionalArgument&gt;\n&quot; + &quot;&lt;name&gt;&quot; + name + &quot;&lt;/name&gt;\n&quot; + </span>
 		&quot;&lt;type&gt;&quot; + t + &quot;&lt;/type&gt;\n&quot; + &quot;&lt;description&gt;&quot; + description + &quot;&lt;/description&gt;\n&lt;/positionalArgument&gt;\n&quot;;
-<span class="fc" id="L56">	}</span>
+<span class="fc" id="L59">	}</span>
 	public void parseValues (String[] values){
-<span class="fc" id="L58">		parse(values);</span>
+<span class="fc" id="L61">		parse(values);</span>
 		
-<span class="fc" id="L60">	}</span>
+<span class="fc" id="L63">	}</span>
 	public void addProgram(String name,String description){
-<span class="fc" id="L62">		programName = name;</span>
-<span class="fc" id="L63">		programDescription = description;</span>
-<span class="fc" id="L64">		setPremessage();</span>
-<span class="fc" id="L65">		XMLData += &quot;&lt;name&gt;&quot; + name + &quot;&lt;/name&gt;\n&quot; + &quot;&lt;description&gt;&quot; + description + &quot;&lt;/description&gt;\n&quot; +&quot;&lt;arguments&gt;\n&quot;;</span>
-<span class="fc" id="L66">	}</span>
+<span class="fc" id="L65">		programName = name;</span>
+<span class="fc" id="L66">		programDescription = description;</span>
+<span class="fc" id="L67">		setPremessage();</span>
+<span class="fc" id="L68">		XMLData += &quot;&lt;name&gt;&quot; + name + &quot;&lt;/name&gt;\n&quot; + &quot;&lt;description&gt;&quot; + description + &quot;&lt;/description&gt;\n&quot; +&quot;&lt;arguments&gt;\n&quot;;</span>
+<span class="fc" id="L69">	}</span>
 	public String getDescription(String name){
-<span class="fc" id="L68">		return arguments.get(name).getDescription();</span>
+<span class="fc" id="L71">		return arguments.get(name).getDescription();</span>
 	}
 	private void setHelpMessage(){
-<span class="fc" id="L71">		helpMessage = premessage;</span>
-<span class="fc" id="L72">		helpMessage += &quot;\n&quot;+programDescription+&quot;\npositional arguments:\n&quot;;</span>
-<span class="fc bfc" id="L73" title="All 2 branches covered.">		for(int i =0; i&lt;positionalargumentNames.size();i++){</span>
-<span class="fc" id="L74">			helpMessage += positionalargumentNames.get(i)+&quot; &quot;+arguments.get(positionalargumentNames.get(i)).getDescription()+&quot;\n&quot;;</span>
+<span class="fc" id="L74">		helpMessage = premessage;</span>
+<span class="fc" id="L75">		helpMessage += &quot;\n&quot;+programDescription+&quot;\npositional arguments:\n&quot;;</span>
+<span class="fc bfc" id="L76" title="All 2 branches covered.">		for(int i =0; i&lt;positionalargumentNames.size();i++){</span>
+<span class="fc" id="L77">			helpMessage += positionalargumentNames.get(i)+&quot; &quot;+arguments.get(positionalargumentNames.get(i)).getDescription()+&quot;\n&quot;;</span>
 		}
-<span class="fc" id="L76">	}</span>
+<span class="pc bpc" id="L79" title="1 of 2 branches missed.">		if(namedArgumentsNames.size()!=0){</span>
+<span class="nc" id="L80">			helpMessage += &quot;Named arguments:\n&quot;;</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">			for(int i =0; i&lt;namedArgumentsNames.size();i++){</span>
+<span class="nc" id="L82">				helpMessage += namedArgumentsNames.get(i)+&quot; &quot;+arguments.get(&quot;--&quot;+namedArgumentsNames.get(i)).getDescription()+&quot;\n&quot;;</span>
+			}
+		}
+<span class="fc" id="L85">	}</span>
 	private void setPremessage(){
-<span class="fc" id="L78">		premessage = &quot;usage: java &quot;+programName+&quot; &quot;;</span>
-<span class="fc bfc" id="L79" title="All 2 branches covered.">		for (int i=0; i&lt;positionalargumentNames.size();i++){</span>
-<span class="fc" id="L80">			premessage += positionalargumentNames.get(i)+&quot; &quot;;</span>
+<span class="fc" id="L87">		premessage = &quot;usage: java &quot;+programName+&quot; &quot;;</span>
+<span class="fc bfc" id="L88" title="All 2 branches covered.">		for (int i=0; i&lt;positionalargumentNames.size();i++){</span>
+<span class="fc" id="L89">			premessage += positionalargumentNames.get(i)+&quot; &quot;;</span>
 		}
-<span class="fc" id="L82">	}  </span>
+<span class="fc" id="L91">	}  </span>
 	public String getHelpMessage(){
-<span class="fc" id="L84">		setHelpMessage();</span>
-<span class="fc" id="L85">		return helpMessage;</span>
+<span class="fc" id="L93">		setHelpMessage();</span>
+<span class="fc" id="L94">		return helpMessage;</span>
 	}
 	public &lt;T&gt; T getValue(String name){
-<span class="fc bfc" id="L88" title="All 2 branches covered.">		if(namedArgumentsNames.contains(&quot;--&quot;+name)){</span>
-<span class="fc" id="L89">			return (T)arguments.get(&quot;--&quot;+name).getValue();</span>
+<span class="fc bfc" id="L97" title="All 2 branches covered.">		if(namedArgumentsNames.contains(name)){</span>
+<span class="fc" id="L98">			return (T)arguments.get(&quot;--&quot;+name).getValue();</span>
 		}
-<span class="fc" id="L91">		return (T)arguments.get(name).getValue();</span>
+<span class="fc" id="L100">		return (T)arguments.get(name).getValue();</span>
 	}
 	public String getErrorMessage(){
-<span class="fc" id="L94">		return errorMessage;</span>
+<span class="fc" id="L103">		return errorMessage;</span>
 	}
 	public boolean getError(){
-<span class="fc" id="L97">		return error;</span>
+<span class="fc" id="L106">		return error;</span>
 	}
 	public Argument.Type getArgumentType(String name){
-<span class="fc" id="L100">		return arguments.get(name).getType();</span>
+<span class="fc" id="L109">		return arguments.get(name).getType();</span>
 	}
 	public void saveXML(String filepath){
-<span class="fc" id="L103">		XMLData+= &quot;&lt;/arguments&gt;\n&lt;/program&gt;\n&lt;/config&gt;\n&quot;;</span>
-<span class="fc" id="L104">		File outfile = new File(filepath);	</span>
+<span class="fc" id="L112">		XMLData+= &quot;&lt;/arguments&gt;\n&lt;/program&gt;\n&lt;/config&gt;\n&quot;;</span>
+<span class="fc" id="L113">		File outfile = new File(filepath);	</span>
 		try{
-<span class="fc" id="L106">		Writer writer = new BufferedWriter(new OutputStreamWriter(</span>
+<span class="fc" id="L115">		Writer writer = new BufferedWriter(new OutputStreamWriter(</span>
 		new FileOutputStream(outfile), &quot;utf-8&quot;)); 
-<span class="fc" id="L108">		writer.write(XMLData);</span>
-<span class="fc" id="L109">		writer.close();</span>
+<span class="fc" id="L117">		writer.write(XMLData);</span>
+<span class="fc" id="L118">		writer.close();</span>
 		}
-<span class="nc" id="L111">		catch(IOException e){</span>
-<span class="nc" id="L112">			throw new HelpMessageException(&quot;&quot;);</span>
-<span class="fc" id="L113">		}</span>
+<span class="nc" id="L120">		catch(IOException e){</span>
+<span class="nc" id="L121">			throw new HelpMessageException(&quot;&quot;);</span>
+<span class="fc" id="L122">		}</span>
 		
 		
-<span class="fc" id="L116">	}</span>
+<span class="fc" id="L125">	}</span>
 	private void parse(String[] args) {
-<span class="fc" id="L118">		Queue&lt;String&gt; queue = new LinkedList&lt;String&gt;();</span>
-<span class="fc bfc" id="L119" title="All 2 branches covered.">		for(int i = 0; i &lt; args.length; i++) {</span>
-<span class="fc" id="L120">			queue.add(args[i]);</span>
+<span class="fc" id="L127">		Queue&lt;String&gt; queue = new LinkedList&lt;String&gt;();</span>
+<span class="fc bfc" id="L128" title="All 2 branches covered.">		for(int i = 0; i &lt; args.length; i++) {</span>
+<span class="fc" id="L129">			queue.add(args[i]);</span>
 		}
-<span class="fc bfc" id="L122" title="All 2 branches covered.">		while(!queue.isEmpty()) {</span>
+<span class="fc bfc" id="L131" title="All 2 branches covered.">		while(!queue.isEmpty()) {</span>
 			 
 				
 			
-<span class="fc" id="L126">			String arg = queue.remove();</span>
-<span class="fc bfc" id="L127" title="All 2 branches covered.">			if(arg.startsWith(&quot;-&quot;)) {</span>
-<span class="fc bfc" id="L128" title="All 4 branches covered.">				if (arg.equals(&quot;--help&quot;)||arg.equals(&quot;-h&quot;)){</span>
-<span class="fc" id="L129">					setHelpMessage();</span>
-<span class="fc" id="L130">					help = true;</span>
-<span class="fc" id="L131">					throw new HelpMessageException(helpMessage);</span>
+<span class="fc" id="L135">			String arg = queue.remove();</span>
+<span class="fc bfc" id="L136" title="All 2 branches covered.">			if(arg.startsWith(&quot;-&quot;)) {</span>
+<span class="fc bfc" id="L137" title="All 4 branches covered.">				if (arg.equals(&quot;--help&quot;)||arg.equals(&quot;-h&quot;)){</span>
+<span class="fc" id="L138">					setHelpMessage();</span>
+<span class="fc" id="L139">					help = true;</span>
+<span class="fc" id="L140">					throw new HelpMessageException(helpMessage);</span>
 				}
-<span class="fc" id="L133">				Argument a = arguments.get(arg);</span>
-<span class="fc bfc" id="L134" title="All 2 branches covered.">				if(a == null) a = arguments.get(shorthand.get(arg));</span>
-<span class="fc bfc" id="L135" title="All 2 branches covered.">				if(a != null) {</span>
-<span class="fc bfc" id="L136" title="All 2 branches covered.">					if(a.getType() == Argument.Type.BOOLEAN) {</span>
-<span class="fc" id="L137">						a.setValue(&quot;true&quot;);</span>
+<span class="fc" id="L142">				Argument a = arguments.get(arg);</span>
+<span class="fc bfc" id="L143" title="All 2 branches covered.">				if(a == null) a = arguments.get(shorthand.get(arg));</span>
+<span class="fc bfc" id="L144" title="All 2 branches covered.">				if(a != null) {</span>
+<span class="fc bfc" id="L145" title="All 2 branches covered.">					if(a.getType() == Argument.Type.BOOLEAN) {</span>
+<span class="fc" id="L146">						a.setValue(&quot;true&quot;);</span>
 					}
 					else {
-<span class="fc" id="L140">						String val = queue.remove(); </span>
+<span class="fc" id="L149">						String val = queue.remove(); </span>
 						try {
-<span class="fc" id="L142">							a.setValue(val);</span>
+<span class="fc" id="L151">							a.setValue(val);</span>
 						}
-<span class="fc" id="L144">						catch(NumberFormatException ex){</span>
-<span class="fc bfc" id="L145" title="All 2 branches covered.">							if(a.getType() == Argument.Type.INTEGER){</span>
-<span class="fc" id="L146">								errorMessage = premessage+&quot;\n&quot;+programName+&quot;.java: error: argument &quot;+arg+&quot;: invalid int value: &quot;+val;</span>
-<span class="fc" id="L147">								error = true;</span>
+<span class="fc" id="L153">						catch(NumberFormatException ex){</span>
+<span class="fc bfc" id="L154" title="All 2 branches covered.">							if(a.getType() == Argument.Type.INTEGER){</span>
+<span class="fc" id="L155">								errorMessage = premessage+&quot;\n&quot;+programName+&quot;.java: error: argument &quot;+arg+&quot;: invalid int value: &quot;+val;</span>
+<span class="fc" id="L156">								error = true;</span>
 							}
 							else{
-<span class="fc" id="L150">								errorMessage = premessage+&quot;\n&quot;+programName+&quot;.java: error: argument &quot;+arg+&quot;: invalid double value: &quot;+val;</span>
-<span class="fc" id="L151">								error = true;</span>
+<span class="fc" id="L159">								errorMessage = premessage+&quot;\n&quot;+programName+&quot;.java: error: argument &quot;+arg+&quot;: invalid double value: &quot;+val;</span>
+<span class="fc" id="L160">								error = true;</span>
 							}
-<span class="fc" id="L153">							throw new WrongFormatException(errorMessage);</span>
-<span class="fc" id="L154">						}</span>
-<span class="fc" id="L155">					}</span>
+<span class="fc" id="L162">							throw new WrongFormatException(errorMessage);</span>
+<span class="fc" id="L163">						}</span>
+<span class="fc" id="L164">					}</span>
 				}
 				else {
-<span class="fc" id="L158">					errorMessage = premessage+&quot;\n&quot;+programName+&quot;.java: error: &quot;+arg+&quot; is not an argument&quot;;</span>
-<span class="fc" id="L159">					throw new NoSuchArgumentException(errorMessage);</span>
+<span class="fc" id="L167">					errorMessage = premessage+&quot;\n&quot;+programName+&quot;.java: error: &quot;+arg+&quot; is not an argument&quot;;</span>
+<span class="fc" id="L168">					throw new NoSuchArgumentException(errorMessage);</span>
 				}
-<span class="fc" id="L161">			}</span>
+<span class="fc" id="L170">			}</span>
 			else {
-<span class="fc bfc" id="L163" title="All 2 branches covered.">				if( positionalvaluesparsed==positionalargumentNames.size()){</span>
-<span class="fc" id="L164">					errorMessage = premessage+&quot;\n&quot;+programName+&quot;.java: error: unrecognized arguments: &quot;+arg;</span>
-<span class="fc" id="L165">					error=true;</span>
-<span class="fc" id="L166">					throw new TooManyArgumentsException(errorMessage);</span>
+<span class="fc bfc" id="L172" title="All 2 branches covered.">				if( positionalvaluesparsed==positionalargumentNames.size()){</span>
+<span class="fc" id="L173">					errorMessage = premessage+&quot;\n&quot;+programName+&quot;.java: error: unrecognized arguments: &quot;+arg;</span>
+<span class="fc" id="L174">					error=true;</span>
+<span class="fc" id="L175">					throw new TooManyArgumentsException(errorMessage);</span>
 				} 
-<span class="fc" id="L168">				String pname = positionalargumentNames.get(positionalvaluesparsed);</span>
-<span class="fc" id="L169">				positionalvaluesparsed++;</span>
-<span class="fc" id="L170">				Argument a = arguments.get(pname);</span>
+<span class="fc" id="L177">				String pname = positionalargumentNames.get(positionalvaluesparsed);</span>
+<span class="fc" id="L178">				positionalvaluesparsed++;</span>
+<span class="fc" id="L179">				Argument a = arguments.get(pname);</span>
 				try {
-<span class="fc" id="L172">					a.setValue(arg);</span>
+<span class="fc" id="L181">					a.setValue(arg);</span>
 				}
-<span class="fc" id="L174">				catch(NumberFormatException ex){</span>
-<span class="fc bfc" id="L175" title="All 2 branches covered.">					if(a.getType() == Argument.Type.INTEGER){</span>
-<span class="fc" id="L176">						errorMessage = premessage+&quot;\n&quot;+programName+&quot;.java: error: argument &quot;+positionalargumentNames.get(positionalvaluesparsed-1)+&quot;: invalid int value: &quot;+arg;</span>
-<span class="fc" id="L177">						error = true;</span>
+<span class="fc" id="L183">				catch(NumberFormatException ex){</span>
+<span class="fc bfc" id="L184" title="All 2 branches covered.">					if(a.getType() == Argument.Type.INTEGER){</span>
+<span class="fc" id="L185">						errorMessage = premessage+&quot;\n&quot;+programName+&quot;.java: error: argument &quot;+positionalargumentNames.get(positionalvaluesparsed-1)+&quot;: invalid int value: &quot;+arg;</span>
+<span class="fc" id="L186">						error = true;</span>
 					}
 					else{
-<span class="fc" id="L180">						errorMessage = premessage+&quot;\n&quot;+programName+&quot;.java: error: argument &quot;+positionalargumentNames.get(positionalvaluesparsed-1)+&quot;: invalid double value: &quot;+arg;</span>
-<span class="fc" id="L181">						error = true;</span>
+<span class="fc" id="L189">						errorMessage = premessage+&quot;\n&quot;+programName+&quot;.java: error: argument &quot;+positionalargumentNames.get(positionalvaluesparsed-1)+&quot;: invalid double value: &quot;+arg;</span>
+<span class="fc" id="L190">						error = true;</span>
 					}
-<span class="fc" id="L183">					throw new WrongFormatException(errorMessage);</span>
+<span class="fc" id="L192">					throw new WrongFormatException(errorMessage);</span>
 				}
-<span class="fc" id="L185">				catch(WrongFormatException ex){</span>
-<span class="fc" id="L186">					errorMessage = premessage+&quot;\n&quot;+programName+&quot;.java: error: argument &quot;+positionalargumentNames.get(positionalvaluesparsed-1)+&quot;: invalid boolean value: &quot;+arg;</span>
-<span class="fc" id="L187">					error = true;</span>
-<span class="fc" id="L188">					throw new WrongFormatException(errorMessage);</span>
+<span class="fc" id="L194">				catch(WrongFormatException ex){</span>
+<span class="fc" id="L195">					errorMessage = premessage+&quot;\n&quot;+programName+&quot;.java: error: argument &quot;+positionalargumentNames.get(positionalvaluesparsed-1)+&quot;: invalid boolean value: &quot;+arg;</span>
+<span class="fc" id="L196">					error = true;</span>
+<span class="fc" id="L197">					throw new WrongFormatException(errorMessage);</span>
 					
-<span class="fc" id="L190">				}</span>
+<span class="fc" id="L199">				}</span>
 			}
-<span class="fc" id="L192">		}</span>
-<span class="fc bfc" id="L193" title="All 2 branches covered.">		for(int i = 0; i &lt; positionalargumentNames.size();i++)</span>
-<span class="fc bfc" id="L194" title="All 2 branches covered.">			if (arguments.get(positionalargumentNames.get(i)).getValue().equals(&quot;&quot;)){</span>
-<span class="fc" id="L195">						errorMessage = premessage+&quot;\n&quot;+programName+&quot;.java: error: the following arguments are required: &quot;;</span>
-<span class="fc bfc" id="L196" title="All 2 branches covered.">						for(int j=i;j&lt;positionalargumentNames.size();j++)</span>
-<span class="fc" id="L197">							errorMessage+=positionalargumentNames.get(j)+&quot; &quot;;</span>
-<span class="fc" id="L198">							error=true;</span>
-<span class="fc" id="L199">							throw new TooFewArgumentsException(errorMessage);</span>
+<span class="fc" id="L201">		}</span>
+<span class="fc bfc" id="L202" title="All 2 branches covered.">		for(int i = 0; i &lt; positionalargumentNames.size();i++)</span>
+<span class="fc bfc" id="L203" title="All 2 branches covered.">			if (arguments.get(positionalargumentNames.get(i)).getValue().equals(&quot;&quot;)){</span>
+<span class="fc" id="L204">						errorMessage = premessage+&quot;\n&quot;+programName+&quot;.java: error: the following arguments are required: &quot;;</span>
+<span class="fc bfc" id="L205" title="All 2 branches covered.">						for(int j=i;j&lt;positionalargumentNames.size();j++)</span>
+<span class="fc" id="L206">							errorMessage+=positionalargumentNames.get(j)+&quot; &quot;;</span>
+<span class="fc" id="L207">							error=true;</span>
+<span class="fc" id="L208">							throw new TooFewArgumentsException(errorMessage);</span>
 						}
-<span class="fc" id="L201">	}	</span>
+<span class="fc" id="L210">	}	</span>
 	public boolean getHelp(){
-<span class="nc" id="L203">		return help;</span>
+<span class="nc" id="L212">		return help;</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

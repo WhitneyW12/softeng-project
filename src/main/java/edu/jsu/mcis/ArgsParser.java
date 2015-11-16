@@ -37,7 +37,10 @@ public class ArgsParser{
 		positionalvaluesparsed = 0;
 	}
 	public void addNamedArgument(String name, String description, Argument.Type t,String defaultvalue,String Shorthand){
-		namedArgumentsNames.add("--"+name);
+		if(Shorthand.length()>1){
+			throw new InvalidNameException(Shorthand +" is an invalid name");
+		}
+		namedArgumentsNames.add(name);
 		arguments.put("--"+name,new namedArgument(t,description));
 		arguments.get("--"+name).setValue(defaultvalue);
 		shorthand.put("-"+Shorthand,"--"+name);
@@ -73,6 +76,12 @@ public class ArgsParser{
 		for(int i =0; i<positionalargumentNames.size();i++){
 			helpMessage += positionalargumentNames.get(i)+" "+arguments.get(positionalargumentNames.get(i)).getDescription()+"\n";
 		}
+		if(namedArgumentsNames.size()!=0){
+			helpMessage += "Named arguments:\n";
+			for(int i =0; i<namedArgumentsNames.size();i++){
+				helpMessage += namedArgumentsNames.get(i)+" "+arguments.get("--"+namedArgumentsNames.get(i)).getDescription()+"\n";
+			}
+		}
 	}
 	private void setPremessage(){
 		premessage = "usage: java "+programName+" ";
@@ -85,7 +94,7 @@ public class ArgsParser{
 		return helpMessage;
 	}
 	public <T> T getValue(String name){
-		if(namedArgumentsNames.contains("--"+name)){
+		if(namedArgumentsNames.contains(name)){
 			return (T)arguments.get("--"+name).getValue();
 		}
 		return (T)arguments.get(name).getValue();

@@ -1,13 +1,7 @@
 package edu.jsu.mcis;
 import org.junit.*;
 import static org.junit.Assert.*;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
-import java.util.*;
-import java.io.*;
+
 public class ArgsParserTests{
 	private ArgsParser ap;
 
@@ -465,23 +459,18 @@ public void testSavingtoXMLFile(){
 public void testXMLparser(){
 	String[] args = new String[] {"s","5","4"};
 	readWriteXML rw = new readWriteXML();
-	
-    try {
-		InputStream xmlInput = new FileInputStream("newXML.xml");
-		SAXParserFactory factory = SAXParserFactory.newInstance();
-		SAXParser saxParser = factory.newSAXParser();
-	
-	
-	
-		saxParser.parse(xmlInput,rw.handler);
-	}
-	catch (Exception e) {
-       e.printStackTrace();
-     }
-	ap=rw.getArgsParser();
+	ap=rw.parseXML("newXML.xml");
 	assertEquals(Argument.Type.INTEGER,ap.getArgumentType("number1"));
-	//ap.parseValues(args);
-	//int num = ap.getValue("number1");
-	//assertEquals(5,num);
+}
+@Test
+public void testInvalidNameException(){
+	try{
+	ap.addNamedArgument("add","adds the two numbers",Argument.Type.BOOLEAN,"false","ab");
+	assertTrue(false);
+	}
+	catch(InvalidNameException ex){
+		assertTrue(true);
+	}
+	
 }
 }

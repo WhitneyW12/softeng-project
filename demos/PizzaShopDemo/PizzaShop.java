@@ -8,7 +8,6 @@ public class PizzaShop{
 		readWriteXML rw = new readWriteXML();
 		ap=rw.parseXML("newPizzaShop.xml");
 		ap.parseValues(args);
-		ap.saveXML("newPizzaShop.xml");
 		System.out.println("You have ordered " + ap.getValue("quantity") + " " + ap.getValue("size") + ", " + ap.getValue("shape") + " " + ap.getValue("toppings") + "-topping pizza(s) with " + ap.getValue("drink") + ".");
 		boolean togo = ap.getValue("togo");
 		if (togo){
