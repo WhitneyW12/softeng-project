@@ -85,8 +85,6 @@ public class ArgsParserKeywords{
 		ap.addPositionalArgument("length","the length of the box",Argument.Type.DOUBLE);
 		ap.addPositionalArgument("width","the width of the box",Argument.Type.DOUBLE);
 		ap.addPositionalArgument("height","the height of the box",Argument.Type.DOUBLE);
-		ap.addNamedArgument("type","prints help message",Argument.Type.STRING,"box","t");
-		ap.addNamedArgument("digits","prints help message",Argument.Type.STRING,"4","d");
 		try{
 			ap.parseValues(args);
 		}
