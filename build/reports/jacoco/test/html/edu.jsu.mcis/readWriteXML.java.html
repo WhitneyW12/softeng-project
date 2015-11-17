@@ -97,11 +97,11 @@ public class readWriteXML extends DefaultHandler{
 		}
 
 <span class="fc bfc" id="L99" title="All 2 branches covered.">		if (type) {</span>
-<span class="pc bpc" id="L100" title="1 of 2 branches missed.">			if(new String(ch, start, length).equals(&quot;STRING&quot;)){</span>
-<span class="nc" id="L101">				atype=Argument.Type.STRING;</span>
+<span class="fc bfc" id="L100" title="All 2 branches covered.">			if(new String(ch, start, length).equals(&quot;STRING&quot;)){</span>
+<span class="fc" id="L101">				atype=Argument.Type.STRING;</span>
 			}
-<span class="pc bpc" id="L103" title="1 of 2 branches missed.">			else if(new String(ch, start, length).equals(&quot;DOUBLE&quot;)){</span>
-<span class="nc" id="L104">				atype=Argument.Type.DOUBLE;</span>
+<span class="fc bfc" id="L103" title="All 2 branches covered.">			else if(new String(ch, start, length).equals(&quot;DOUBLE&quot;)){</span>
+<span class="fc" id="L104">				atype=Argument.Type.DOUBLE;</span>
 			}
 <span class="fc bfc" id="L106" title="All 2 branches covered.">			else if (new String(ch, start, length).equals(&quot;INTEGER&quot;)){</span>
 <span class="fc" id="L107">				atype=Argument.Type.INTEGER;</span>
@@ -140,8 +140,8 @@ public class readWriteXML extends DefaultHandler{
 <span class="fc" id="L140">			SAXParser saxParser = factory.newSAXParser();</span>
 <span class="fc" id="L141">			saxParser.parse(xmlInput,handler);</span>
 		}
-<span class="nc" id="L143">		catch (Exception e) {</span>
-<span class="nc" id="L144">			e.printStackTrace();</span>
+<span class="fc" id="L143">		catch (Exception e) {</span>
+<span class="fc" id="L144">			e.printStackTrace();</span>
 <span class="fc" id="L145">		}</span>
 <span class="fc" id="L146">		return getArgsParser();</span>
 	}

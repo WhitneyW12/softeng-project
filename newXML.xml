@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<config>
 <program>
 <name>Calculator</name>
 <description>Calculate addition, subtraction or multiplication</description>
@@ -37,4 +36,3 @@
 </namedArgument>
 </arguments>
 </program>
-</config>

@@ -27,7 +27,6 @@ public class ArgsParser{
 		helpMessage = "";
 		premessage = "";
 		XMLData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"+
-					"<config>\n"+
 					"<program>\n";
 				  
 		errorMessage = "";
@@ -109,7 +108,7 @@ public class ArgsParser{
 		return arguments.get(name).getType();
 	}
 	public void saveXML(String filepath){
-		XMLData+= "</arguments>\n</program>\n</config>\n";
+		XMLData+= "</arguments>\n</program>";
 		File outfile = new File(filepath);	
 		try{
 		Writer writer = new BufferedWriter(new OutputStreamWriter(

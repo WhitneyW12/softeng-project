@@ -397,9 +397,11 @@ public class ArgsParserTests{
 		ap.addPositionalArgument("length","the length of the box",Argument.Type.STRING);
 		ap.addPositionalArgument("width","the width of the box",Argument.Type.STRING);
 		ap.addPositionalArgument("height","the height of the box",Argument.Type.BOOLEAN);
+		ap.addPositionalArgument("number","it is  number",Argument.Type.DOUBLE);
 		ap.addNamedArgument("type","prints help message",Argument.Type.STRING,"box","t");
 		ap.addNamedArgument("digits","prints help message",Argument.Type.INTEGER,"4","d");
 		ap.addNamedArgument("test","prints help message",Argument.Type.BOOLEAN,"false","e");
+		ap.saveXML("hahaha.xml");
 		try{
 		ap.parseValues(args);
 		assertTrue(false);
@@ -473,4 +475,31 @@ public void testInvalidNameException(){
 	}
 	
 }
+@Test
+public void testXMLparserwithDOUBLES(){
+	String[] args = new String[] {"s","5","4"};
+	readWriteXML rw = new readWriteXML();
+	ArgsParser a = rw.parseXML("hahaha.xml");
+	assertEquals(Argument.Type.DOUBLE,a.getArgumentType("number"));
+}
+@Test
+	public void Testhelpmessagewithnamedarguments(){
+		
+		String[] args = new String[] {"7","5","--help"};
+		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
+		ap.addPositionalArgument("length","the length of the box",Argument.Type.STRING);
+		ap.addPositionalArgument("width","the width of the box",Argument.Type.STRING);
+		ap.addPositionalArgument("height","the height of the box",Argument.Type.INTEGER);
+		ap.addNamedArgument("type","prints help message",Argument.Type.STRING,"box","t");
+		ap.addNamedArgument("digits","prints help message",Argument.Type.INTEGER,"4","d");
+		try{
+		ap.parseValues(args);
+		assertTrue(false);
+		}
+		catch(RuntimeException ex){
+			assertEquals("usage: java VolumeCalculator length width height \nCalculate the volume of a box\npositional arguments:\nlength the length of the box\nwidth the width of the box\nheight the height of the box\nNamed arguments:\ntype prints help message\ndigits prints help message\n",
+			ap.getHelpMessage());
+			assertTrue(ap.getHelp());
+		}
+	}
 }
