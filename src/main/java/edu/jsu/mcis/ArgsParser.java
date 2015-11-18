@@ -1,3 +1,12 @@
+/**
+ *This program allows the user to add arguments and enter data values into them from the command line.
+ *
+ *@author BabaTunde Idumu
+ *@author Michael Quattrochi
+ *@author Wesley Schultz
+ *@author James Thomas
+ *@author Whitney Wood
+ */
 package edu.jsu.mcis;
 import java.util.*;
 import java.lang.*;
@@ -35,6 +44,17 @@ public class ArgsParser{
 		numofNamedArgValues = 0;
 		positionalvaluesparsed = 0;
 	}
+	
+	/**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param name The name of the argument.
+	 *@param description The description of the argument.
+	 *@param t The data type of the argument(String, Integer, Double, Boolean).
+	 *@param defaultvalue The default value of the argument.
+	 *@param Shorthand The one letter short name of the argument.
+	 *@throws InvalidNameException
+	 */
 	public void addNamedArgument(String name, String description, Argument.Type t,String defaultvalue,String Shorthand){
 		if(Shorthand.length()>1){
 			throw new InvalidNameException(Shorthand +" is an invalid name");
@@ -45,10 +65,16 @@ public class ArgsParser{
 		shorthand.put("-"+Shorthand,"--"+name);
 		XMLData += "<namedArgument>\n" + "<name>" + name + "</name>\n" + 
 		"<type>" + t + "</type>\n" + "<description>" + description + "</description>\n"
-		 + "<default>" + defaultvalue + "</default>\n" + "<shorthand>" + Shorthand + "</shorthand>\n</namedArgument>\n";
-
-		
+		 + "<default>" + defaultvalue + "</default>\n" + "<shorthand>" + Shorthand + "</shorthand>\n</namedArgument>\n";	
 	}
+	
+	/**
+	 *This method adds a positional argument to the program.
+	 *
+	 *@param name The name of the argument.
+	 *@param description The description of the argument.
+	 *@param t The data type of the argument(String, Integer, Double, Boolean).
+	 */
 	public void addPositionalArgument(String name, String description, Argument.Type t){
 		positionalargumentNames.add(name);
 		arguments.put(name,new positionalArgument(t,description));
@@ -56,19 +82,42 @@ public class ArgsParser{
 		XMLData += "<positionalArgument>\n" + "<name>" + name + "</name>\n" + 
 		"<type>" + t + "</type>\n" + "<description>" + description + "</description>\n</positionalArgument>\n";
 	}
+	
+	/**
+	 *This method calls parse to parse the values.
+	 *
+	 *@param values The string array of values.
+	 */
 	public void parseValues (String[] values){
 		parse(values);
-		
 	}
+	
+	/**
+	 *This method adds a program.
+	 *
+	 *@param name The name of the program.
+	 *@param description The description of the program.
+	 */
 	public void addProgram(String name,String description){
 		programName = name;
 		programDescription = description;
 		setPremessage();
 		XMLData += "<name>" + name + "</name>\n" + "<description>" + description + "</description>\n" +"<arguments>\n";
 	}
+	
+	/**
+	 *This method returns the description of an argument.
+	 *
+	 *@param name The name of the arument to get the description of.
+	 *@return The description of the argument.
+	 */
 	public String getDescription(String name){
 		return arguments.get(name).getDescription();
 	}
+	
+	/**
+	 *This method sets the help message of the program.
+	 */
 	private void setHelpMessage(){
 		helpMessage = premessage;
 		helpMessage += "\n"+programDescription+"\npositional arguments:\n";
@@ -82,31 +131,70 @@ public class ArgsParser{
 			}
 		}
 	}
+	
+	/**
+	 *This method sets the premessage for all of the exceptions.
+	 */
 	private void setPremessage(){
 		premessage = "usage: java "+programName+" ";
 		for (int i=0; i<positionalargumentNames.size();i++){
 			premessage += positionalargumentNames.get(i)+" ";
 		}
-	}  
+	}
+	
+	/**
+	 *This method returns the help message.
+	 *
+	 *@return The help message.
+	 */
 	public String getHelpMessage(){
 		setHelpMessage();
 		return helpMessage;
 	}
+	
+	/**
+	 *This method returns the value of the argument.
+	 *
+	 *@param name The name of the argument.
+	 *@return The value.
+	 */
 	public <T> T getValue(String name){
 		if(namedArgumentsNames.contains(name)){
 			return (T)arguments.get("--"+name).getValue();
 		}
 		return (T)arguments.get(name).getValue();
 	}
+	
+	/**
+	 *This method returns the error message.
+	 *@return The error message.
+	 */
 	public String getErrorMessage(){
 		return errorMessage;
 	}
+	
+	/**
+	 *This method returns if an error has happened.
+	 *@return The error.
+	 */
 	public boolean getError(){
 		return error;
 	}
+	
+	/**
+	 *This method returns the type of the argument.
+	 *@return The type.
+	 */
 	public Argument.Type getArgumentType(String name){
 		return arguments.get(name).getType();
 	}
+	
+	/**
+	 *This method saves the program and its arguments to an XML file.
+	 *
+	 *@param filepath The filepath of the file to be saved.
+	 *@throws HelpMessageException
+	 */
 	public void saveXML(String filepath){
 		XMLData+= "</arguments>\n</program>";
 		File outfile = new File(filepath);	
@@ -206,7 +294,12 @@ public class ArgsParser{
 							error=true;
 							throw new TooFewArgumentsException(errorMessage);
 						}
-	}	
+	}
+	
+	/**
+	 *This method returns true if the HelpMessageException has been thrown.
+	 *@return Help is true or false.
+	 */
 	public boolean getHelp(){
 		return help;
 	}
