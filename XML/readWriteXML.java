@@ -7,6 +7,11 @@ import java.util.*;
 import java.io.*;
 import edu.jsu.mcis.*;
 
+/**
+ *Creates a new class to parse an XML file.
+ *Class extends from DefaultHandler superclass.
+ */
+
 public class readWriteXML extends DefaultHandler{
 	
 	private boolean name ;
@@ -44,7 +49,19 @@ public class readWriteXML extends DefaultHandler{
 		atype= Argument.Type.STRING;
 	}
 	
+	/**
+	 *New instance of DefaultHandler class is created called "handler".
+	 */
 	DefaultHandler handler = new DefaultHandler(){
+	/**
+	 * This method prints start element tags for xml formatting
+	 * if attribute name, type, description, defaults, and shorthand are equal
+	 * to the specified string in the corresponding java file.
+	 * @param uri 
+	 * @param localName
+	 * @param qName
+	 * @param attributes
+	 */
 	public void startElement(String uri, String localName,String qName, 
                 Attributes attributes) throws SAXException {
 
@@ -53,36 +70,41 @@ public class readWriteXML extends DefaultHandler{
 			ap.addProgram(aname,adescription);
 		}
 
-		if (qName.equalsIgnoreCase("name")) {
-			name = true;
-			
+		else if (qName.equalsIgnoreCase("name")) {
+			name = true;	
 		}
 
-		if (qName.equalsIgnoreCase("type")) {
+		else if (qName.equalsIgnoreCase("type")) {
 			type = true;
 			
 		}
-
-		if (qName.equalsIgnoreCase("description")) {
+		else if (qName.equalsIgnoreCase("description")) {
 			description = true;
 			 
 		}
-		
-		if (qName.equalsIgnoreCase("defaults")) {
+		else if (qName.equalsIgnoreCase("defaults")) {
 			defaults = true;
 		}
-		if (qName.equalsIgnoreCase("shorthand")) {
+		else (qName.equalsIgnoreCase("shorthand")) {
 			shorthand = true;
 		}
 			
 	}
 	
+	/**
+	 * This method formats the end element tags from the xml file being
+	 * being parsed.
+	 * Throws a SAXException...
+	 * @param uri
+	 * @param localName
+	 * @param qName
+	 */
 	public void endElement(String uri, String localName,
 		String qName) throws SAXException {
 		if(qName.equals("positionalArgument")){
 			ap.addPositionalArgument(aname,adescription,atype);
 		}
-		if(qName.equals("namedArgument")){
+		else(qName.equals("namedArgument")){
 			ap.addNamedArgument(aname,adescription,atype,adefault,ashorthand);
 		}
 		System.out.println("End Element :" + qName);
@@ -90,7 +112,13 @@ public class readWriteXML extends DefaultHandler{
 
 	}
 	
-	
+	/**
+	 * This method...
+	 * Throws a SAXException..
+	 * @param ch
+	 * @param start
+	 * @param length
+	 */
 	public void characters(char ch[], int start, int length) throws SAXException {
 
 		if (name) {
@@ -134,9 +162,16 @@ public class readWriteXML extends DefaultHandler{
 	}
 	};
 	
+	/**
+	 *
+	 */
 	public ArgParser getArgParser(){
 		return ap;
 	}
+	
+	/**
+	 *
+	 */
    public static void main(String argv[]) {
 	readWriteXML rw = new readWriteXML();
 	
