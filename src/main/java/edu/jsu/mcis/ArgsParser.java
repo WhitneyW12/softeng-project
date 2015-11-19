@@ -210,6 +210,17 @@ public class ArgsParser{
 		
 		
 	}
+	
+	/**
+	 *This method takes in the argument values from the user's program and assignes them to the appropriate argument.
+	 *
+	 *@param args A string array of the values.
+	 *@throws HelpMessageException
+	 *@throws WrongFormatException
+	 *@throws NoSuchArgumentException
+	 *@throws TooManyArgumentsException
+	 *@throws TooFewArgumentsException
+	 */
 	private void parse(String[] args) {
 		Queue<String> queue = new LinkedList<String>();
 		for(int i = 0; i < args.length; i++) {
