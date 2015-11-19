@@ -1,3 +1,12 @@
+/**
+ *This is the abstract class that is the parent class for the namedArgument and positionalArgument classes.
+ *
+ *@author BabaTunde Idumu
+ *@author Michael Quattrochi
+ *@author Wesley Schultz
+ *@author James Thomas
+ *@author Whitney Wood
+ */
 package edu.jsu.mcis;
 
 public abstract class Argument
@@ -8,25 +17,26 @@ public abstract class Argument
 	protected String argumentDescription;
 	
 	public Argument(Type type, String description){
-		 argumentType = type;
-		 argumentValue = "";
-		 argumentDescription = description;
-	 }
+		argumentType = type;
+		argumentValue = "";
+		argumentDescription = description;
+	}
 	 
-	
-	 public  void setValue(String value){
+	/**
+	 *This method takes in a value and sets it as the argument's value. The argument type is used to set the argument to the correct data type.
+	 *
+	 *@param value The new argument value.
+	 *@throws WrongFormatException
+	 */
+	public  void setValue(String value){
 		if(argumentType == Argument.Type.STRING){
 			argumentValue = value;
 		}
 		else if(argumentType == Argument.Type.DOUBLE){
-			
-				argumentValue = Double.parseDouble(value);
-			
+			argumentValue = Double.parseDouble(value);
 		}
 		else if(argumentType == Argument.Type.INTEGER){
-			
-				argumentValue = Integer.parseInt(value);
-			
+			argumentValue = Integer.parseInt(value);
 		}
 		else{
 			if (value.equals("true")||value.equals("false")){
@@ -36,11 +46,10 @@ public abstract class Argument
 				throw new WrongFormatException("");
 			}
 		}
-		 
-	 }
-	 public abstract Object getValue();
-	 public abstract Type getType();
-	 public abstract String getDescription();
+	}
+	public abstract Object getValue();
+	public abstract Type getType();
+	public abstract String getDescription();
 	 
 	
 }
