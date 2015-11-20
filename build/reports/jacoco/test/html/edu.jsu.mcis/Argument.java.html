@@ -1,46 +1,55 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Argument.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">softeng-project</a> &gt; <a href="index.source.html" class="el_package">edu.jsu.mcis</a> &gt; <span class="el_source">Argument.java</span></div><h1>Argument.java</h1><pre class="source lang-java linenums">package edu.jsu.mcis;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Argument.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">softeng-project</a> &gt; <a href="index.source.html" class="el_package">edu.jsu.mcis</a> &gt; <span class="el_source">Argument.java</span></div><h1>Argument.java</h1><pre class="source lang-java linenums">/**
+ *This is the abstract class that is the parent class for the namedArgument and positionalArgument classes.
+ *
+ *@author BabaTunde Idumu
+ *@author Michael Quattrochi
+ *@author Wesley Schultz
+ *@author James Thomas
+ *@author Whitney Wood
+ */
+package edu.jsu.mcis;
 
 public abstract class Argument
 {   
-<span class="pc" id="L5">	public enum Type {DOUBLE, INTEGER, STRING, BOOLEAN};</span>
+<span class="pc" id="L14">	public enum Type {DOUBLE, INTEGER, STRING, BOOLEAN};</span>
 	protected Object argumentValue;
 	protected Type argumentType;
 	protected String argumentDescription;
 	
-<span class="fc" id="L10">	public Argument(Type type, String description){</span>
-<span class="fc" id="L11">		 argumentType = type;</span>
-<span class="fc" id="L12">		 argumentValue = &quot;&quot;;</span>
-<span class="fc" id="L13">		 argumentDescription = description;</span>
-<span class="fc" id="L14">	 }</span>
+<span class="fc" id="L19">	public Argument(Type type, String description){</span>
+<span class="fc" id="L20">		argumentType = type;</span>
+<span class="fc" id="L21">		argumentValue = &quot;&quot;;</span>
+<span class="fc" id="L22">		argumentDescription = description;</span>
+<span class="fc" id="L23">	}</span>
 	 
-	
-	 public  void setValue(String value){
-<span class="fc bfc" id="L18" title="All 2 branches covered.">		if(argumentType == Argument.Type.STRING){</span>
-<span class="fc" id="L19">			argumentValue = value;</span>
+	/**
+	 *This method takes in a value and sets it as the argument's value. The argument type is used to set the argument to the correct data type.
+	 *
+	 *@param value The new argument value.
+	 *@throws WrongFormatException
+	 */
+	public  void setValue(String value){
+<span class="fc bfc" id="L32" title="All 2 branches covered.">		if(argumentType == Argument.Type.STRING){</span>
+<span class="fc" id="L33">			argumentValue = value;</span>
 		}
-<span class="fc bfc" id="L21" title="All 2 branches covered.">		else if(argumentType == Argument.Type.DOUBLE){</span>
-			
-<span class="fc" id="L23">				argumentValue = Double.parseDouble(value);</span>
-			
+<span class="fc bfc" id="L35" title="All 2 branches covered.">		else if(argumentType == Argument.Type.DOUBLE){</span>
+<span class="fc" id="L36">			argumentValue = Double.parseDouble(value);</span>
 		}
-<span class="fc bfc" id="L26" title="All 2 branches covered.">		else if(argumentType == Argument.Type.INTEGER){</span>
-			
-<span class="fc" id="L28">				argumentValue = Integer.parseInt(value);</span>
-			
+<span class="fc bfc" id="L38" title="All 2 branches covered.">		else if(argumentType == Argument.Type.INTEGER){</span>
+<span class="fc" id="L39">			argumentValue = Integer.parseInt(value);</span>
 		}
 		else{
-<span class="fc bfc" id="L32" title="All 4 branches covered.">			if (value.equals(&quot;true&quot;)||value.equals(&quot;false&quot;)){</span>
-<span class="fc" id="L33">				argumentValue = Boolean.parseBoolean(value);</span>
+<span class="fc bfc" id="L42" title="All 4 branches covered.">			if (value.equals(&quot;true&quot;)||value.equals(&quot;false&quot;)){</span>
+<span class="fc" id="L43">				argumentValue = Boolean.parseBoolean(value);</span>
 			}
 			else{
-<span class="fc" id="L36">				throw new WrongFormatException(&quot;&quot;);</span>
+<span class="fc" id="L46">				throw new WrongFormatException(&quot;&quot;);</span>
 			}
 		}
-		 
-<span class="fc" id="L40">	 }</span>
-	 public abstract Object getValue();
-	 public abstract Type getType();
-	 public abstract String getDescription();
+<span class="fc" id="L49">	}</span>
+	public abstract Object getValue();
+	public abstract Type getType();
+	public abstract String getDescription();
 	 
 	
 }

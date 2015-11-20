@@ -60,7 +60,7 @@ public class ArgsParserTests{
 		}
 		catch(RuntimeException ex){
 			assertEquals("usage: java VolumeCalculator length width height \nCalculate the volume of a box\npositional arguments:\nlength the length of the box\nwidth the width of the box\nheight the height of the box\n",
-			ap.getHelpMessage());
+			ap.getErrorMessage());
 		}
 	}
 	
@@ -76,19 +76,8 @@ public class ArgsParserTests{
 		}
 		catch(RuntimeException ex){
 			assertEquals("usage: java VolumeCalculator length width height \nCalculate the volume of a box\npositional arguments:\nlength the length of the box\nwidth the width of the box\nheight the height of the box\n",
-			ap.getHelpMessage());
+			ap.getErrorMessage());
 		}
-	}
-	
-	@Test
-	public void checkHelpMessage(){
-		String[] args = new String[] {"h","5","2"};
-		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
-		ap.addPositionalArgument("length","the length of the box",Argument.Type.STRING);
-		ap.addPositionalArgument("width","the width of the box",Argument.Type.STRING);
-		ap.addPositionalArgument("height","the height of the box",Argument.Type.STRING);
-		assertEquals("usage: java VolumeCalculator length width height \nCalculate the volume of a box\npositional arguments:\nlength the length of the box\nwidth the width of the box\nheight the height of the box\n",
-		ap.getHelpMessage());
 	}
 		
 	@Test
@@ -498,8 +487,7 @@ public void testXMLparserwithDOUBLES(){
 		}
 		catch(RuntimeException ex){
 			assertEquals("usage: java VolumeCalculator length width height \nCalculate the volume of a box\npositional arguments:\nlength the length of the box\nwidth the width of the box\nheight the height of the box\nNamed arguments:\ntype prints help message\ndigits prints help message\n",
-			ap.getHelpMessage());
-			assertTrue(ap.getHelp());
+			ap.getErrorMessage());
 		}
 	}
 }

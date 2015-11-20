@@ -16,13 +16,11 @@ public class ArgsParser{
 	private List<String> namedArgumentsNames;
 	private Map<String,Argument> arguments;
 	private String premessage;
-	private String helpMessage;
 	private String programName;
 	private String XMLData;
 	private String programDescription;
 	private String errorMessage;
 	private boolean error;
-	private boolean help;
 	private int numofNamedArgValues;
 	private int positionalvaluesparsed;
 	private Map<String,String> shorthand;
@@ -33,14 +31,11 @@ public class ArgsParser{
 		positionalargumentNames= new ArrayList<String>();
 		programName = "";
 		programDescription = "";
-		helpMessage = "";
 		premessage = "";
 		XMLData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"+
-					"<program>\n";
-				  
+					"<program>\n";  
 		errorMessage = "";
 		error = false;
-		help = false;
 		numofNamedArgValues = 0;
 		positionalvaluesparsed = 0;
 	}
@@ -119,15 +114,15 @@ public class ArgsParser{
 	 *This method sets the help message of the program.
 	 */
 	private void setHelpMessage(){
-		helpMessage = premessage;
-		helpMessage += "\n"+programDescription+"\npositional arguments:\n";
+		errorMessage = premessage;
+		errorMessage += "\n"+programDescription+"\npositional arguments:\n";
 		for(int i =0; i<positionalargumentNames.size();i++){
-			helpMessage += positionalargumentNames.get(i)+" "+arguments.get(positionalargumentNames.get(i)).getDescription()+"\n";
+			errorMessage += positionalargumentNames.get(i)+" "+arguments.get(positionalargumentNames.get(i)).getDescription()+"\n";
 		}
 		if(namedArgumentsNames.size()!=0){
-			helpMessage += "Named arguments:\n";
+			errorMessage += "Named arguments:\n";
 			for(int i =0; i<namedArgumentsNames.size();i++){
-				helpMessage += namedArgumentsNames.get(i)+" "+arguments.get("--"+namedArgumentsNames.get(i)).getDescription()+"\n";
+				errorMessage += namedArgumentsNames.get(i)+" "+arguments.get("--"+namedArgumentsNames.get(i)).getDescription()+"\n";
 			}
 		}
 	}
@@ -140,16 +135,6 @@ public class ArgsParser{
 		for (int i=0; i<positionalargumentNames.size();i++){
 			premessage += positionalargumentNames.get(i)+" ";
 		}
-	}
-	
-	/**
-	 *This method returns the help message.
-	 *
-	 *@return The help message.
-	 */
-	public String getHelpMessage(){
-		setHelpMessage();
-		return helpMessage;
 	}
 	
 	/**
@@ -234,8 +219,8 @@ public class ArgsParser{
 			if(arg.startsWith("-")) {
 				if (arg.equals("--help")||arg.equals("-h")){
 					setHelpMessage();
-					help = true;
-					throw new HelpMessageException(helpMessage);
+					error = true;
+					throw new HelpMessageException(errorMessage);
 				}
 				Argument a = arguments.get(arg);
 				if(a == null) a = arguments.get(shorthand.get(arg));
@@ -305,13 +290,5 @@ public class ArgsParser{
 							error=true;
 							throw new TooFewArgumentsException(errorMessage);
 						}
-	}
-	
-	/**
-	 *This method returns true if the HelpMessageException has been thrown.
-	 *@return Help is true or false.
-	 */
-	public boolean getHelp(){
-		return help;
 	}
 }
