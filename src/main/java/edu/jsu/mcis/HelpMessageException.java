@@ -1,6 +1,3 @@
-package edu.jsu.mcis;
-import java.util.*;
-
 /**
 *<p>
 *This creates HelpMessageException class to handle Help Message Exception 
@@ -12,6 +9,9 @@ import java.util.*;
  *@author James Thomas
  *@author Whitney Wood
 */
+package edu.jsu.mcis;
+import java.util.*;
+
 public class HelpMessageException extends RuntimeException{
 
 	public HelpMessageException(String errorMessage){

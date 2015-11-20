@@ -1,6 +1,3 @@
-package edu.jsu.mcis;
-import java.util.*;
-
 /**
 *<p>
 *This creates NoSuchArgumentException class to handle a case where 
@@ -12,6 +9,9 @@ import java.util.*;
  *@author James Thomas
  *@author Whitney Wood
 */
+package edu.jsu.mcis;
+import java.util.*;
+
 public class NoSuchArgumentException extends RuntimeException{
 
 	public NoSuchArgumentException(String errorMessage){

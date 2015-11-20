@@ -1,7 +1,3 @@
-package edu.jsu.mcis;
-import java.util.*;
-
-
 /**
 *<p>
 *This creates TooFewArgumentsException class to handle a case where 
@@ -13,6 +9,9 @@ import java.util.*;
  *@author James Thomas
  *@author Whitney Wood
 */
+package edu.jsu.mcis;
+import java.util.*;
+
 public class TooFewArgumentsException extends RuntimeException{
 	
 	public TooFewArgumentsException(String errorMessage){
