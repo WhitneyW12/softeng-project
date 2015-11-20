@@ -55,9 +55,6 @@ public class ArgsParserKeywords{
 	
 	public String getProgramOutput(){
 		
-		if(ap.getHelp()){
-			return ap.getHelpMessage();
-		}
 		if(ap.getError()){
 			return ap.getErrorMessage();
 		}
