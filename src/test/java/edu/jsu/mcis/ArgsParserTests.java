@@ -486,7 +486,7 @@ public void testXMLparserwithDOUBLES(){
 		assertTrue(false);
 		}
 		catch(RuntimeException ex){
-			assertEquals("usage: java VolumeCalculator length width height \nCalculate the volume of a box\npositional arguments:\nlength the length of the box\nwidth the width of the box\nheight the height of the box\nNamed arguments:\ntype prints help message\ndigits prints help message\n",
+			assertEquals("usage: java VolumeCalculator length width height \nCalculate the volume of a box\npositional arguments:\nlength the length of the box\nwidth the width of the box\nheight the height of the box\nNamed arguments:\ntype prints help message STRING\ndigits prints help message INTEGER\n",
 			ap.getErrorMessage());
 		}
 	}

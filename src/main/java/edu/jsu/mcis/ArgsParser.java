@@ -122,10 +122,10 @@ public class ArgsParser{
 		if(namedArgumentsNames.size()!=0){
 			errorMessage += "Named arguments:\n";
 			for(int i =0; i<namedArgumentsNames.size();i++){
-				errorMessage += namedArgumentsNames.get(i)+" "+arguments.get("--"+namedArgumentsNames.get(i)).getDescription()+"\n";
+				errorMessage += namedArgumentsNames.get(i)+" "+arguments.get("--"+namedArgumentsNames.get(i)).getDescription()+" "+arguments.get("--"+namedArgumentsNames.get(i)).getType()+"\n";
 			}
 		}
-	}
+	 }
 	
 	/**
 	 *This method sets the premessage for all of the exceptions.

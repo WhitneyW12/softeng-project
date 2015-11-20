@@ -122,10 +122,10 @@ public class ArgsParser{
 <span class="fc bfc" id="L122" title="All 2 branches covered.">		if(namedArgumentsNames.size()!=0){</span>
 <span class="fc" id="L123">			errorMessage += &quot;Named arguments:\n&quot;;</span>
 <span class="fc bfc" id="L124" title="All 2 branches covered.">			for(int i =0; i&lt;namedArgumentsNames.size();i++){</span>
-<span class="fc" id="L125">				errorMessage += namedArgumentsNames.get(i)+&quot; &quot;+arguments.get(&quot;--&quot;+namedArgumentsNames.get(i)).getDescription()+&quot;\n&quot;;</span>
+<span class="fc" id="L125">				errorMessage += namedArgumentsNames.get(i)+&quot; &quot;+arguments.get(&quot;--&quot;+namedArgumentsNames.get(i)).getDescription()+&quot; &quot;+arguments.get(&quot;--&quot;+namedArgumentsNames.get(i)).getType()+&quot;\n&quot;;</span>
 			}
 		}
-<span class="fc" id="L128">	}</span>
+<span class="fc" id="L128">	 }</span>
 	
 	/**
 	 *This method sets the premessage for all of the exceptions.
