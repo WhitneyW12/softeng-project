@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<program>
+<name>Calculator</name>
+<description>Calculate addition, subtraction or multiplication</description>
+<arguments>
+<positionalArgument>
+<name>number1</name>
+<type>INTEGER</type>
+<description>the first number</description>
+</positionalArgument>
+<positionalArgument>
+<name>number2</name>
+<type>INTEGER</type>
+<description>the second number</description>
+</positionalArgument>
+<namedArgument>
+<name>add</name>
+<type>BOOLEAN</type>
+<description>adds the two numbers</description>
+<default>false</default>
+<shorthand>a</shorthand>
+</namedArgument>
+<namedArgument>
+<name>subtract</name>
+<type>BOOLEAN</type>
+<description>subtracts the two numbers</description>
+<default>false</default>
+<shorthand>s</shorthand>
+</namedArgument>
+<namedArgument>
+<name>multiply</name>
+<type>BOOLEAN</type>
+<description>multiplies the two numbers</description>
+<default>false</default>
+<shorthand>m</shorthand>
+</namedArgument>
+</arguments>
+</program>

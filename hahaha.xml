@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<program>
+<name>VolumeCalculator</name>
+<description>Calculate the volume of a box</description>
+<arguments>
+<positionalArgument>
+<name>length</name>
+<type>STRING</type>
+<description>the length of the box</description>
+</positionalArgument>
+<positionalArgument>
+<name>width</name>
+<type>STRING</type>
+<description>the width of the box</description>
+</positionalArgument>
+<positionalArgument>
+<name>height</name>
+<type>BOOLEAN</type>
+<description>the height of the box</description>
+</positionalArgument>
+<positionalArgument>
+<name>number</name>
+<type>DOUBLE</type>
+<description>it is  number</description>
+</positionalArgument>
+<namedArgument>
+<name>type</name>
+<type>STRING</type>
+<description>prints help message</description>
+<default>box</default>
+<shorthand>t</shorthand>
+</namedArgument>
+<namedArgument>
+<name>digits</name>
+<type>INTEGER</type>
+<description>prints help message</description>
+<default>4</default>
+<shorthand>d</shorthand>
+</namedArgument>
+<namedArgument>
+<name>test</name>
+<type>BOOLEAN</type>
+<description>prints help message</description>
+<default>false</default>
+<shorthand>e</shorthand>
+</namedArgument>
+</arguments>
+</program>
