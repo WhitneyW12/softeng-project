@@ -77,11 +77,15 @@ public class ArgsParser{
 		XMLData += "<positionalArgument>\n" + "<name>" + name + "</name>\n" + 
 		"<type>" + t + "</type>\n" + "<description>" + description + "</description>\n</positionalArgument>\n";
 	}
-	
 	/**
-	 *This method calls parse to parse the values.
+	 *This method takes in the argument values from the user's program and assignes them to the appropriate argument.
 	 *
-	 *@param values The string array of values.
+	 *@param args A string array of the values.
+	 *@throws HelpMessageException
+	 *@throws WrongFormatException
+	 *@throws NoSuchArgumentException
+	 *@throws TooManyArgumentsException
+	 *@throws TooFewArgumentsException
 	 */
 	public void parseValues (String[] values){
 		parse(values);
@@ -195,17 +199,6 @@ public class ArgsParser{
 		
 		
 	}
-	
-	/**
-	 *This method takes in the argument values from the user's program and assignes them to the appropriate argument.
-	 *
-	 *@param args A string array of the values.
-	 *@throws HelpMessageException
-	 *@throws WrongFormatException
-	 *@throws NoSuchArgumentException
-	 *@throws TooManyArgumentsException
-	 *@throws TooFewArgumentsException
-	 */
 	private void parse(String[] args) {
 		Queue<String> queue = new LinkedList<String>();
 		for(int i = 0; i < args.length; i++) {
