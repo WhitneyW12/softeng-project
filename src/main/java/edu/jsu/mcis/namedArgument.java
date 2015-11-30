@@ -1,5 +1,7 @@
+package edu.jsu.mcis;
+
 /**
- *This program allows the user to add arguments and enter data values into them from the command line.
+ *This program creates a namedArgument class that extends Argument class.
  *
  *@author BabaTunde Idumu
  *@author Michael Quattrochi
@@ -7,32 +9,34 @@
  *@author James Thomas
  *@author Whitney Wood
  */
-package edu.jsu.mcis;
+ 
 public class namedArgument extends Argument{
-	
 
+	/**
+	 *This method returns the type and description of the argument.
+	 */
 	public namedArgument(Type type, String description){
 		 super(type,description);
 	 }
+
+	 /**
+	 *The getDescription method returns the argument description.
+	 */
 	 public String getDescription(){
-		 /**
-		*<p>
-		*The getDescription returns the argument description.
-		*/
 		 return argumentDescription;
 	 }
+
+	 /**
+	 *The getValue method returns the returns the argument value.
+	 */
 	 public Object getValue(){
-		 /**
-		*<p>
-		*The getValue returns the argument value.
-		*/
 		 return argumentValue;
 	 }
+
+	 /**
+	 *The getType method returns the returns the argument type.
+	 */
 	 public Type getType(){
-		 /**
-		*<p>
-		*The getType returns the argument type.
-		*/
 		 return argumentType;
 	 }
 }
