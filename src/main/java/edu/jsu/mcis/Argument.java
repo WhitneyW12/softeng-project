@@ -1,3 +1,5 @@
+
+package edu.jsu.mcis;
 /**
  *This is the abstract class that is the parent class for the namedArgument and positionalArgument classes.
  *
@@ -7,8 +9,6 @@
  *@author James Thomas
  *@author Whitney Wood
  */
-package edu.jsu.mcis;
-
 public abstract class Argument
 {   
 	public enum Type {DOUBLE, INTEGER, STRING, BOOLEAN};

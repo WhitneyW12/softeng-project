@@ -1,3 +1,8 @@
+
+package edu.jsu.mcis;
+import java.util.*;
+import java.lang.*;
+import java.io.*;
 /**
  *This program allows the user to add arguments and enter data values into them from the command line.
  *
@@ -7,10 +12,6 @@
  *@author James Thomas
  *@author Whitney Wood
  */
-package edu.jsu.mcis;
-import java.util.*;
-import java.lang.*;
-import java.io.*;
 public class ArgsParser{
 	private List<String> positionalargumentNames;
 	private List<String> namedArgumentsNames;
