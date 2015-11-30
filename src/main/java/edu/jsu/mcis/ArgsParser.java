@@ -80,7 +80,7 @@ public class ArgsParser{
 	/**
 	 *This method takes in the argument values from the user's program and assignes them to the appropriate argument.
 	 *
-	 *@param args A string array of the values.
+	 *@param  values string array of the values.
 	 *@throws HelpMessageException
 	 *@throws WrongFormatException
 	 *@throws NoSuchArgumentException
