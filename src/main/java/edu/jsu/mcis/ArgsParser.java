@@ -4,7 +4,19 @@ import java.util.*;
 import java.lang.*;
 import java.io.*;
 /**
- *This program allows the user to add arguments and enter data values into them from the command line.
+ * This program allows the user to add arguments and enter data values into them from the command line.
+ * this is an example of how to use this class 
+ * in the example the string array args would be replaced with th comandline arguments taken form the user
+ * 		private ArgsParser ap = new ArgsParser();
+ *		String[] args = new String[] {"7"};
+ *		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
+ *		ap.addPositionalArgument("length","the length of the box",Argument.Type.STRING);
+ *		ap.addNamedArgument("digits","prints help message",Argument.Type.INTEGER,"4","d");
+ *		ap.parseValues(args);
+ *	after the block of code excutes the value stored in the argument length would be  "7" and the value of digits would be 4.
+ * to obtain the values from this class use the getValue function like so 
+ * 		ap.getValue("length")
+ * this would return a 7 if using the above example
  *
  *@author BabaTunde Idumu
  *@author Michael Quattrochi
