@@ -16,6 +16,9 @@ public class namedArgument extends Argument{
 
 	/**
 	 *This method returns the type and description of the argument.
+	 *
+	 *@param type The type of the argument.
+	 *@param description The description of the argument.
 	 */
 	public namedArgument(Type type, String description){
 		 super(type,description);
@@ -23,6 +26,9 @@ public class namedArgument extends Argument{
 
 	 /**
 	 *The getDescription method returns the argument description.
+	 *
+	 *@param description The description of the argument.
+	 *@return The argumentDescription.
 	 */
 	 public String getDescription(){
 		 return argumentDescription;
@@ -30,6 +36,9 @@ public class namedArgument extends Argument{
 
 	 /**
 	 *The getValue method returns the returns the argument value.
+	 *
+	 *@param value The value of the argument.
+	 *@return The argumentValue.
 	 */
 	 public Object getValue(){
 		 return argumentValue;
@@ -37,6 +46,9 @@ public class namedArgument extends Argument{
 
 	 /**
 	 *The getType method returns the returns the argument type.
+	 *
+	 *@param type The type of the argument.
+	 *@return The argumentType.
 	 */
 	 public Type getType(){
 		 return argumentType;

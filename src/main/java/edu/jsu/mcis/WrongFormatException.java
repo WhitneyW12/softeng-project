@@ -19,6 +19,7 @@ public class WrongFormatException extends RuntimeException{
 		/**
 		*<p>
 		*The super constructor returns the errorMessage.
+		*@return The error message.
 		*/
 		super(errorMessage);
 	}
