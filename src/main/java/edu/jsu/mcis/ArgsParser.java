@@ -13,10 +13,13 @@ import java.io.*;
  *		ap.addPositionalArgument("length","the length of the box",Argument.Type.STRING);
  *		ap.addNamedArgument("digits","prints help message",Argument.Type.INTEGER,"4","d");
  *		ap.parseValues(args);
- *	after the block of code excutes the value stored in the argument length would be  "7" and the value of digits would be 4.
+ * after the block of code excutes the value stored in the argument length would be  "7" and the value of digits would be 4.
  * to obtain the values from this class use the getValue function like so 
  * 		ap.getValue("length")
  * this would return a 7 if using the above example
+ * the user can alos get the data type of any given argumnet by using getArgumentType
+ * for length it would return string use like so
+ *		ap.getArgumentType("length")
  *
  *@author BabaTunde Idumu
  *@author Michael Quattrochi
@@ -176,7 +179,7 @@ public class ArgsParser{
 	}
 	
 	/**
-	 *This method returns if an error has happened.
+	 *This method returns if true an error has happened.
 	 *@return The error.
 	 */
 	public boolean getError(){
@@ -184,7 +187,7 @@ public class ArgsParser{
 	}
 	
 	/**
-	 *This method returns the type of the argument.
+	 *This method returns the type of the argument {INTEGER,STRING,DOUBLE,BOOLEAN}.
 	 *@return The type.
 	 */
 	public Argument.Type getArgumentType(String name){
