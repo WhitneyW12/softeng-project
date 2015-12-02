@@ -8,28 +8,28 @@ import java.io.*;
  * this is an example of how to use this class 
  * in the example the string array args would be replaced with the comandline arguments taken form the user
  *<p>
- * 		private ArgsParser ap = new ArgsParser();
+ * 		&nbsp;&nbsp;&nbsp;&nbsp; private ArgsParser ap = new ArgsParser();
  *<br>
- *		String[] args = new String[] {"7","--digits","10"};
+ *		&nbsp;&nbsp;&nbsp;&nbsp; String[] args = new String[] {"7","--digits","10"};
  *<br>
- *		ap.addProgram("VolumeCalculator","Calculate the volume of a box");
+ *		&nbsp;&nbsp;&nbsp;&nbsp; ap.addProgram("VolumeCalculator","Calculate the volume of a box");
  *<br>
- *		ap.addPositionalArgument("length","the length of the box",Argument.Type.STRING);
+ *		&nbsp;&nbsp;&nbsp;&nbsp; ap.addPositionalArgument("length","the length of the box",Argument.Type.STRING);
  *<br>
- *		ap.addNamedArgument("digits","prints help message",Argument.Type.INTEGER,"4","d");
+ *		&nbsp;&nbsp;&nbsp;&nbsp; ap.addNamedArgument("digits","prints help message",Argument.Type.INTEGER,"4","d");
  *<br>
- *		ap.parseValues(args);
+ *		&nbsp;&nbsp;&nbsp;&nbsp; ap.parseValues(args);
  *<p>
  * after the block of code excutes the value stored in the argument length would be  "7" and the value of digits would be 10.
  * to obtain the values from this class use the getValue function like so 
  *<p>
- * 		ap.getValue("length")
+ * 		&nbsp;&nbsp;&nbsp;&nbsp; ap.getValue("length")
  *<p>
  * this would return a 7 if using the above example
  * the user can also get the data type of any given argument by using getArgumentType
  * for length it would return string use like so
  *<p>
- *		ap.getArgumentType("length")
+ *		&nbsp;&nbsp;&nbsp;&nbsp; ap.getArgumentType("length")
  *
  *@author BabaTunde Idumu
  *@author Michael Quattrochi
