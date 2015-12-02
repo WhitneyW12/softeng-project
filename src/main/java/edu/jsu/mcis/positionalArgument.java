@@ -14,13 +14,25 @@ public class positionalArgument extends Argument{
 		super(type, description);
 		
 	}
-	 public Object getValue(){
-		 return argumentValue;
-	 }
-	 public Type getType(){
-		 return argumentType;
-	 }
-	 public  String getDescription(){
-		 return argumentDescription;
-	 }
+	 public String getDescription(){
+		 /**
+		*<p>
+		*The getDescription returns the argument description.
+		*/
+ 		 return argumentDescription;
+ 	 }
+ 	 public Object getValue(){
+		 /**
+		*<p>
+		*The getValue returns the argument value.
+		*/
+ 		 return argumentValue;
+ 	 }
+ 	 public Type getType(){
+		 /**
+		*<p>
+		*The getType returns the argument type.
+		*/
+ 		 return argumentType;
+ 	 }
 }
