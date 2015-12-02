@@ -4,7 +4,7 @@ import java.util.*;
 /**
 *<p>
 *This creates InvalidNameException class to handle Invalid Name Exception 
-*and extends from RunTime Exception.
+*and extends from RunTime Exception.<br> It occurs when a name that does not corrispond to any argument is entered from the user program.
  *
  *@author BabaTunde Idumu
  *@author Michael Quattrochi

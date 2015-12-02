@@ -4,7 +4,7 @@ import java.util.*;
 /**
 *<p>
 *This creates NoSuchArgumentException class to handle a case where 
-*there is No Such Argument present, and it extends from RunTime Exception.
+*there is No Such Argument present, and it extends from RunTime Exception.<br> this occurs when a named argument is called in the command prompt but it does not exist in the program.
  *
  *@author BabaTunde Idumu
  *@author Michael Quattrochi

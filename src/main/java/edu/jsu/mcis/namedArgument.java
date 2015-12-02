@@ -1,9 +1,9 @@
 package edu.jsu.mcis;
 
 /**
- *This program creates a namedArgument class that extends Argument class.
- *It has methods that allow the user to get the description, the value and the data type of the argument.
- *Named arguments are not required arguments that have to be called in the comand prompt to change the value
+ *This program creates a namedArgument class that extends Argument class.<br>
+ *It has methods that allow the user to get the description, the value and the data type of the argument.<br>
+ *Named arguments are not required arguments that have to be called in the comand prompt to change the value 
  *
  *@author BabaTunde Idumu
  *@author Michael Quattrochi

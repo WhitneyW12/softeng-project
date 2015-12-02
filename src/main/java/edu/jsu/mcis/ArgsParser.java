@@ -6,7 +6,7 @@ import java.io.*;
 /**<p>
  * This program allows the user to add arguments and enter data values into them from the command line.
  * this is an example of how to use this class 
- * in the example the string array args would be replaced with th comandline arguments taken form the user
+ * in the example the string array args would be replaced with the comandline arguments taken form the user
  *<p>
  * 		private ArgsParser ap = new ArgsParser();
  *<br>

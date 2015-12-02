@@ -4,7 +4,7 @@ import java.util.*;
 /**
 *<p>
 *This creates TooFewArgumentsException class to handle a case where 
-*there are Too Few Arguments present, and it extends from RunTime Exception.
+*there are Too Few Arguments present, and it extends from RunTime Exception.<br> This occurs when not enough postional arguments are entered in the command prompt
  *
  *@author BabaTunde Idumu
  *@author Michael Quattrochi

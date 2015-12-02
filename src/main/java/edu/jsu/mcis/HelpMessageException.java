@@ -4,7 +4,7 @@ import java.util.*;
 /**
 *<p>
 *This creates HelpMessageException class to handle Help Message Exception 
-*and extends from RunTime Exception.
+*and extends from RunTime Exception.<br>It occurs when --help or -h is entered into the command prompt
  *
  *@author BabaTunde Idumu
  *@author Michael Quattrochi

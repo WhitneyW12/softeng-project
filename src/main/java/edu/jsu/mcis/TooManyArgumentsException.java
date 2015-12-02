@@ -4,7 +4,7 @@ import java.util.*;
 /**
 *<p>
 *This creates TooManyArgumentsException class to handle a case where there 
-*are Too Many Arguments present, and it extends from RunTime Exception.
+*are Too Many Arguments present, and it extends from RunTime Exception.<br> This occurs when too many postional arguments are entered in the command prompt
  *
  *@author BabaTunde Idumu
  *@author Michael Quattrochi
