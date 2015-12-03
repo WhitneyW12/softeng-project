@@ -1,4 +1,3 @@
-
 package edu.jsu.mcis;
 /**
  *This is the abstract class that is the parent class for the namedArgument and positionalArgument classes.
