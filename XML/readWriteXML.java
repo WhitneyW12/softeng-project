@@ -1,14 +1,3 @@
-/**
- * <p> 
- * Creates a new class to parse an XML file.
- * Class extends from DefaultHandler superclass.
- * @author BabaTunde Idumu
- * @author Michael Quattrochi
- * author Wesley Schultz
- * @author James Thomas
- * @author Whitney Wood
-*/
-
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.Attributes;
@@ -19,10 +8,18 @@ import java.io.*;
 import edu.jsu.mcis.*;
 
 /**
- * Creates a new class to parse an XML file.
+ * <p> 
+ * This class is used to parse the elements of an xml file.
  * Class extends from DefaultHandler superclass.
- */
-
+ * Methods are used to distinguish the file's elements and their respective tags describing them.
+ * Once the elements are read from the file, they can be used for program applications.
+ *
+ * @author BabaTunde Idumu
+ * @author Michael Quattrochi
+ * author Wesley Schultz
+ * @author James Thomas
+ * @author Whitney Wood
+*/
 public class readWriteXML extends DefaultHandler{
 	
 	private boolean name ;
@@ -43,7 +40,7 @@ public class readWriteXML extends DefaultHandler{
 	private Argument.Type atype;
 	
 	/**
-	 * public class constructor
+	 * public class constructor used to read through xml file.
 	 */
 	public readWriteXML(){
 		nameAttributes= new StringBuilder();
@@ -86,7 +83,7 @@ public class readWriteXML extends DefaultHandler{
 	 * @param attributes are attached to the xml elements. This parameter is treated as an empty
 	 * Attributes object, if no attributes are available.
 	 * 
-	 * @throws SAXException for any SAX exception.
+	 * @throws SAXException.
 	 */
 	public void startElement(String uri, String localName,String qName, 
                 Attributes attributes) throws SAXException {
@@ -215,6 +212,7 @@ public class readWriteXML extends DefaultHandler{
 	 * <p>
 	 * This is the main method of the public class.
 	 * Creates a new instance of the readWriteXML class.
+	 * @throws Exception
 	 */
     public static void main(String argv[]) {
 		readWriteXML rw = new readWriteXML();

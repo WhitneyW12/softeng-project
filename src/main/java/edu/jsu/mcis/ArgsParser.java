@@ -26,7 +26,7 @@ import java.io.*;
  * 		ap.getValue("length")
  *<p>
  * this would return a 7 if using the above example
- * the user can alos get the data type of any given argumnet by using getArgumentType
+ * the user can also get the data type of any given argument by using getArgumentType
  * for length it would return string use like so
  *<p>
  *		ap.getArgumentType("length")
@@ -104,7 +104,7 @@ public class ArgsParser{
 		"<type>" + t + "</type>\n" + "<description>" + description + "</description>\n</positionalArgument>\n";
 	}
 	/**
-	 *This method takes in the argument values from the user's program and assignes them to the appropriate argument.
+	 *This method takes in the argument values from the user's program and assigns them to the appropriate argument.
 	 *
 	 *@param  values string array of the values.
 	 *@throws HelpMessageException
